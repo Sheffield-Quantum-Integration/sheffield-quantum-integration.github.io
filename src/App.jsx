@@ -342,14 +342,16 @@ const PeopleView = ({ people }) => {
             <div className="flex flex-col items-center text-center md:w-1/3">
               <div
                 className="mb-6 w-56 overflow-hidden rounded-3xl border border-white/10 bg-slate-900/40 shadow-[0_0_25px_rgba(0,0,0,0.45)]"
-                style={{ aspectRatio: '4 / 5' }}
+                style={{ aspectRatio: '4 / 5', minHeight: '280px' }}
               >
                 <img
                   src={pi.photo}
                   alt={pi.name}
                   className="h-full w-full object-cover object-top"
-                  loading="lazy"
-                  decoding="async"
+                  loading="eager"
+                  decoding="sync"
+                  width="224"
+                  height="280"
                 />
               </div>
               <h2 className="text-2xl font-bold text-white">{pi.name}</h2>
