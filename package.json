@@ -1,0 +1,30 @@
+{
+  "name": "sqi-lab-website",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "predev": "node scripts/prepare-react.mjs",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "scrape:publications": "node scripts/scrape-publications.mjs",
+    "sync:news": "node scripts/sync-linkedin-news.mjs",
+    "sync:news:manual": "node scripts/sync-linkedin-news.mjs --manual"
+  },
+  "dependencies": {
+    "lucide-react": "^0.294.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.16",
+    "esbuild": "0.19.12",
+    "postcss": "^8.4.32",
+    "tailwindcss": "^3.3.6",
+    "vite": "5.0.11"
+  }
+}

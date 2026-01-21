@@ -1,0 +1,107 @@
+{
+  "source": "https://joesmio.github.io/papers.html",
+  "scrapedAt": "2026-01-21T14:04:06.156Z",
+  "count": 8,
+  "items": [
+    {
+      "id": "crosstalk-mitigated-microelectronic-control-for-optically-active-spins",
+      "title": "Crosstalk-mitigated microelectronic control for optically-active spins",
+      "authors": "Hao-Cheng Weng, John G. Rarity, Krishna C. Balram, Joe A. Smith",
+      "venue": "arXiv:2404.04075",
+      "abstract": "To exploit the sub-nanometre dimensions of qubits for large-scale quantum information processing, corresponding control architectures require both energy and space efficiency, with the on-chip footprint of unit-cell electronics ideally micron-scale. However, the spin coherence of qubits in close packing is severely deteriorated by microwave crosstalk from neighbouring control sites. Here, we present a crosstalk-mitigation scheme using foundry microelectronics, to address solid-state spins at sub-100 um spacing without the need for qubit-detuning. Using nitrogen-vacancy centres in nanodiamonds as qubit prototypes, we first demonstrate 10 MHz Rabi oscillation at milliwatts of microwave power. Implementing the active cancellation, we then prove that the crosstalk field from neighbouring lattice sites can be reduced to undetectable levels. We finally extend the scheme to show increased qubit control, tripling the spin coherence under crosstalk mitigation. Compatible with integrated optics, our results present a step towards scalable control across quantum platforms using silicon microelectronics.",
+      "primaryLink": "https://arxiv.org/abs/2404.04075"
+    },
+    {
+      "id": "robotic-vectorial-field-alignment-for-spin-based-quantum-sensors",
+      "title": "Robotic vectorial field alignment for spin-based quantum sensors",
+      "authors": "Joe A Smith, Dandan Zhang, Krishna C. Balram",
+      "venue": "Advanced Science 11.2 (2024): 2304449",
+      "abstract": "Developing practical quantum technologies will require the exquisite manipulation of fragile systems in a robust and repeatable way. As quantum technologies move towards real world applications, from biological sensing to communication in space, increasing experimental complexity introduces constraints that can be alleviated by the introduction of new technologies. Robotics has shown tremendous technological progress by realising increasingly smart, autonomous and highly dexterous machines. Here, we show that a robot can sensitise an NV centre quantum magnetometer. We demonstrate that a robotic arm equipped with a magnet can traverse a highly complex experimental setting to provide a vector magnetic field with up to 1 ∘ angular accuracy and below 0.1 mT amplitude error, and determine the orientation of a single stochastically-aligned spin-based sensor. Our work opens up the prospect of integrating robotics across many quantum degrees of freedom in constrained environments, allowing for increased prototyping speed, control, and robustness in quantum technology applications.",
+      "primaryLink": "https://onlinelibrary.wiley.com/doi/full/10.1002/advs.202304449",
+      "links": [
+        {
+          "label": "Press release",
+          "url": "https://bristol.ac.uk/news/2023/november/quantum-robot.html"
+        },
+        {
+          "label": "arXiv",
+          "url": "https://arxiv.org/abs/2305.17027"
+        }
+      ]
+    },
+    {
+      "id": "heterogeneous-integration-of-solid-state-quantum-systems-with-a-foundry-photonics-platform",
+      "title": "Heterogeneous integration of solid state quantum systems with a foundry photonics platform",
+      "authors": "Hao-Cheng Weng, Jorge Monroy-Ruz, Jonathan C. F. Matthews, John G. Rarity, Krishna C. Balram, Joe A Smith",
+      "venue": "ACS Photonics 10.9 (2023):3302–3309",
+      "abstract": "Diamond colour centres are promising optically-addressable solid state spins that can be matter-qubits, mediate deterministic interaction between photons and act as single photon emitters. Useful quantum computers will comprise millions of logical qubits. To become useful in constructing quantum computers, spin-photon interfaces must therefore become scalable and be compatible with mass-manufacturable photonics and electronics. Here we demonstrate heterogeneous integration of NV centres in nanodiamond with low-fluorescence silicon nitride photonics from a standard 180 nm CMOS foundry process. Nanodiamonds are positioned over pre-defined sites in a regular array on a waveguide, in a single post-processing step. Using an array of optical fibres, we excite NV centres selectively from an array of six integrated nanodiamond sites, and collect the photoluminescence (PL) in each case into waveguide circuitry on-chip. We verify single photon emission by an on-chip Hanbury Brown and Twiss cross-correlation measurement, which is a key characterisation experiment otherwise typically performed routinely with discrete optics. Our work opens up a simple and effective route to simultaneously address large arrays of individual optically-active spins at scale, without requiring discrete bulk optical setups. This is enabled by the heterogeneous integration of NV centre nanodiamonds with CMOS photonics.",
+      "primaryLink": "https://pubs.acs.org/doi/10.1021/acsphotonics.3c00713",
+      "links": [
+        {
+          "label": "arXiv",
+          "url": "https://arxiv.org/abs/2304.1022"
+        }
+      ]
+    },
+    {
+      "id": "towards-compact-high-efficiency-grating-couplers-for-visible-wavelength-photonics",
+      "title": "Towards compact high-efficiency grating couplers for visible wavelength photonics",
+      "authors": "Joe A Smith, Jorge Monroy-Ruz, Pisu Jiang, John G. Rarity, Krishna C. Balram",
+      "venue": "Optics Letters 47.15 (2022): 3868-3871.",
+      "abstract": "Although grating couplers have become the de-facto standard for optical access to integrated silicon photonics platforms, their performance at visible wavelengths, in moderate index contrast platforms such as silicon nitride, leaves significant room for improvement. In particular, the index contrast governs the diffraction efficiency per grating tooth and the resulting overall coupler length. In this work, we develop two approaches to address this problem: a dielectric grating that sums multiple optical modes to increase the overall output intensity; and an embedded metal grating that enhances the attainable refractive index contrast, and therefore reduces the on-chip footprint. We present experimental results that can be developed to realize compact efficient visible wavelength photonic interconnects, with a view toward cryogenic deployment for quantum photonics, where space is constrained and efficiency is critical.",
+      "primaryLink": "https://doi.org/10.1364/OL.468275",
+      "links": [
+        {
+          "label": "arXiv",
+          "url": "https://arxiv.org/abs/2109.15309"
+        }
+      ]
+    },
+    {
+      "id": "nitrogen-vacancy-center-coupled-to-an-ultrasmall-mode-volume-cavity-a-high-efficiency-source-of-indistinguishable-photons-at-200-k",
+      "title": "Nitrogen-Vacancy Center Coupled to an Ultrasmall-Mode-Volume Cavity: A High-Efficiency Source of Indistinguishable Photons at 200 K",
+      "authors": "Joe A Smith, Chloe Clear, Krishna C Balram, Dara PS McCutcheon, John G Rarity",
+      "venue": "Physical Review Applied 15.3 (2021): 034029",
+      "abstract": "Solid state atom-like systems have great promise for linear optic quantum computing and quantum communication but are burdened by phonon sidebands and broadening due to surface charges. Nevertheless, coupling to a small mode volume cavity would allow high rates of extraction from even highly dephased emitters. We consider the nitrogen vacancy centre in diamond, a system understood to have a poor quantum optics interface with highly distinguishable photons, and design a silicon nitride cavity that allows 99 % efficient extraction of photons at 200 K with an indistinguishability of > 50%, improvable by external filtering. We analyse our design using FDTD simulations, and treat optical emission using a cavity QED master equation valid at and beyond strong coupling and which includes both ZPL broadening and sideband emission. The simulated design is compact (< 10 um), and owing to its planar geometry, can be fabricated using standard silicon processes. Our work therefore points towards scalable fabrication of non-cryogenic atom-like efficient sources of indistinguishable photons.",
+      "primaryLink": "https://journals.aps.org/prapplied/abstract/10.1103/PhysRevApplied.15.034029",
+      "links": [
+        {
+          "label": "arXiv",
+          "url": "https://arxiv.org/abs/2005.13478"
+        }
+      ]
+    },
+    {
+      "id": "single-photon-emission-and-single-spin-coherence-of-a-nitrogen-vacancy-center-encapsulated-in-silicon-nitride",
+      "title": "Single photon emission and single spin coherence of a nitrogen vacancy center encapsulated in silicon nitride",
+      "authors": "Joe A Smith, Jorge Monroy-Ruz, John G Rarity, Krishna C Balram",
+      "venue": "Applied Physics Letters 116.13 (2020):134001",
+      "abstract": "Finding the right material platform for engineering efficient photonic interfaces to solid state emitters has been a long-standing bottleneck for scaling up solid state quantum systems. In this work, we demonstrate that nitrogen-rich silicon nitride, with its low background auto-fluorescence at visible wavelengths, is a viable quantum photonics platform by showing that nitrogen vacancy centres embedded in nanodiamonds preserve both their quantum optical and spin properties post-encapsulation. Given the variety of high-performance photonic components already demonstrated in silicon nitride, our work opens up a new avenue for building integrated photonic circuits using solid state emitters.",
+      "primaryLink": "https://aip.scitation.org/doi/full/10.1063/5.0002709",
+      "links": [
+        {
+          "label": "Scilight",
+          "url": "https://pubs.aip.org/aip/sci/article/2020/14/141105/364389/Nitrogen-rich-silicon-nitride-proves-viable-for"
+        },
+        {
+          "label": "arXiv",
+          "url": "https://arxiv.org/abs/1909.09383"
+        }
+      ]
+    },
+    {
+      "id": "charge-transfer-properties-through-graphene-for-applications-in-gaseous-detectors",
+      "title": "Charge transfer properties through graphene for applications in gaseous detectors",
+      "authors": "S Franchino, D Gonzalez-Diaz, R Hall-Wilton, RB Jackman, H Muller, TT Nguyen, R de Oliveira, E Oliveri, D Pfeiffer, F Resnati, L Ropelewski, J Smith, M van Stenis, C Streli, P Thuiner, R Veenhof",
+      "venue": "Nuclear Instruments and Methods in Physics Research Section A: Accelerators, Spectrometers, Detectors and Associated Equipment 824 (2016): 571-574.",
+      "abstract": "Graphene is a single layer of carbon atoms arranged in a honeycomb lattice with remarkable mechanical and electrical properties. Regarded as the thinnest and narrowest conductive mesh, it has drastically different transmission behaviours when bombarded with electrons and ions in vacuum. This property, if confirmed in gas, may be a definitive solution for the ion back-flow problem in gaseous detectors. In order to ascertain this aspect, graphene layers of dimensions of about 2×2 cm2, grown on a copper substrate, are transferred onto a flat metal surface with holes, so that the graphene layer is freely suspended. The graphene and the support are installed into a gaseous detector equipped with a triple Gaseous Electron Multiplier (GEM), and the transparency properties to electrons and ions are studied in gas as a function of the electric fields. The techniques to produce the graphene samples are described, and we report on preliminary tests of graphene-coated GEMs.",
+      "primaryLink": "https://www.sciencedirect.com/science/article/pii/S0168900215014515",
+      "links": [
+        {
+          "label": "arXiv",
+          "url": "https://arxiv.org/abs/1503.06596"
+        }
+      ]
+    }
+  ]
+}

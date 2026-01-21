@@ -1,0 +1,152 @@
+{
+  "hero": {
+    "title": "Sheffield Quantum",
+    "highlight": "Integration Lab",
+    "subtitle": "From Atom-like Systems to Scalable Devices.",
+    "badge": "Stage 9",
+    "backgroundImage": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2000&auto=format&fit=crop",
+    "primaryCta": { "label": "Explore Our Research", "target": "research" },
+    "secondaryCta": { "label": "Join The Team", "target": "opportunities" }
+  },
+  "home": {
+    "introHeading": "Engineering scalable quantum technologies.",
+    "introParagraphs": [
+      "Welcome to the SQI Lab at the University of Sheffield. We are a new research group focused on creating useful applications from physics experiments by injecting advanced engineering technologies.",
+      "Our core mission is to answer whether single atom-like defects in solids can be controlled at scale. We borrow tools from existing semiconductor processing, combining silicon photonics, microwave electronics, and robotics to build robust scalable quantum systems."
+    ],
+    "pillarsTitle": "Research Pillars"
+  },
+  "pillars": [
+    { "id": "photonics", "title": "Silicon Photonics", "icon": "zap", "desc": "Embedding atom-like systems in photonic nanocavities." },
+    { "id": "electronics", "title": "Microwave Electronics", "icon": "cpu", "desc": "Scalable control using multi-layer silicon electronics." },
+    { "id": "quantum", "title": "Spin Physics", "icon": "atom", "desc": "Spin-photon interfaces for quantum computing networks." },
+    { "id": "robotics", "title": "Robotics & Sensing", "icon": "bot", "desc": "High-resolution sensing aligning large vector fields." }
+  ],
+  "stats": [
+    { "label": "Active prototypes", "value": "6" },
+    { "label": "Industry partners", "value": "8" },
+    { "label": "Journal features", "value": "34" }
+  ],
+  "researchPage": {
+    "intro": "We put photonics and electronics front and centre: with useful applications in adding spins to photonic quantum computing and networks, but also for more near-term implications for high resolution quantum sensing.",
+    "sections": [
+      {
+        "title": "Integrated Photonics",
+        "icon": "zap",
+        "image": "/assets/photonic%20_chip.jpg",
+        "body": "We design new photonic nanocavities and demonstrate compatibility with silicon photonics. Recent work has looked at embedding atom-like systems directly into these scalable photonic circuits.",
+        "direction": "default"
+      },
+      {
+        "title": "Scalable Electronics",
+        "icon": "cpu",
+        "image": "https://images.unsplash.com/photo-1592659762303-90081d34b277?q=80&w=2000&auto=format&fit=crop",
+        "body": "Engineering applied to spins through scalable microwave control using multi-layer silicon electronics. We borrow techniques from classical semiconductor processing to control quantum defects at scale.",
+        "direction": "reverse"
+      },
+      {
+        "title": "Robotics & Sensing",
+        "icon": "bot",
+        "image": "/assets/robot.jpg",
+        "body": "Advancing quantum sensing by aligning large vector fields with custom-built robotics. We build large-scale confocal microscopes to automate the characterization of quantum devices.",
+        "direction": "default"
+      }
+    ]
+  },
+  "facilitiesPage": {
+    "intro": "Explore our shared fabrication and characterization facilities, including the National Epitaxy Facility cleanroom.",
+    "tour": {
+      "title": "Cleanroom Virtual Tour",
+      "url": "https://my.matterport.com/show/?m=hQUAs2chnds&hl=1",
+      "caption": "Drag to look around, scroll to move, and use fullscreen for the best experience."
+    }
+  },
+  "peoplePage": {
+    "pi": {
+      "name": "Dr. Joe Smith",
+      "role": "Principal Investigator",
+      "photo": "/assets/JoeSmith_headshot_Oct2025.jpg",
+      "bio": "Joe joined the University of Sheffield as a Lecturer in 2025. He leads the SQI Lab, focusing on scalable control of solid-state quantum defects.",
+      "timeline": [
+        "2025 - Present: Lecturer, University of Sheffield",
+        "2020 - 2025: Postdoctoral Researcher, University of Bristol",
+        "2020: PhD in Quantum Engineering, University of Bristol",
+        "2015: Kennedy Scholar, MIT",
+        "2014: MEng Electronic Engineering with Nanotechnology, UCL"
+      ],
+      "socials": {
+        "twitter": "#",
+        "linkedin": "https://www.linkedin.com/in/joesmio/"
+      }
+    },
+    "members": [
+      {
+        "name": "Maxim Makhonin",
+        "role": "Research Fellow",
+        "group": "Research Fellow"
+      },
+      {
+        "name": "Anatoliy Antill",
+        "role": "Graduate Student",
+        "group": "Graduate Students",
+        "photo": "/assets/anatoliy.jpg"
+      },
+      {
+        "name": "Hao-Cheng Weng",
+        "role": "Graduate Student",
+        "group": "Graduate Students",
+        "note": "With Krishna Balram (University of Bristol)"
+      },
+      {
+        "name": "Kimy Jaimes",
+        "group": "Visitors",
+        "note": "University of New Brunswick"
+      },
+      {
+        "name": "Agnethe Seim Olsen",
+        "group": "Visitors",
+        "note": "RobQuant"
+      }
+    ],
+    "alumni": [
+      {
+        "name": "Sophia Komrakova",
+        "destination": "National Graphene Centre"
+      },
+      {
+        "name": "Angela Stephen",
+        "destination": "Seagate"
+      },
+      {
+        "name": "Molly Thomas",
+        "destination": "UCL"
+      },
+      {
+        "name": "Vivek Tiwari"
+      }
+    ],
+    "placeholders": []
+  },
+  "opportunitiesPage": {
+    "intro": "We post PhD studentships and postdoctoral roles here when available. If nothing is listed, please get in touch.",
+    "items": []
+  },
+  "contactPage": {
+    "intro": "We are always looking for motivated students and collaborators. Reach out if you are interested in joining the lab or discussing research.",
+    "address": "Department of EEE\nUniversity of Sheffield\nMappin Street, Sheffield, S1 3JD, UK",
+    "linkedin": "https://www.linkedin.com/in/joesmio/"
+  },
+  "footer": {
+    "blurb": "Sheffield Quantum Integration Lab.\nDepartment of Electronic and Electrical Engineering.",
+    "logo": "/assets/logo-white.png",
+    "links": [
+      { "label": "Research Projects", "target": "research" },
+      { "label": "Publications", "target": "publications" },
+      { "label": "Join the Lab (PhD/Postdoc)", "target": "opportunities" }
+    ],
+    "socials": {
+      "twitter": "#",
+      "linkedin": "https://www.linkedin.com/in/joesmio/"
+    }
+  }
+}
