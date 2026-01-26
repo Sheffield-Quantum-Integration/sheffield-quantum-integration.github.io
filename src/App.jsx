@@ -790,7 +790,14 @@ export default function App() {
     let cancelled = false
     const loadContent = async () => {
       try {
-        const response = await fetch(`/data/site-content.json?ts=${Date.now()}`, { cache: 'no-store' })
+        const response = await fetch(`/data/site-content.json?v=${Date.now()}`, {
+          cache: 'no-store',
+          headers: {
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache',
+            'Expires': '0'
+          }
+        })
         if (!response.ok) throw new Error('Failed to load content JSON')
         const data = await response.json()
         if (!cancelled) {
