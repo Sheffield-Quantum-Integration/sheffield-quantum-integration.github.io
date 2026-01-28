@@ -2,12 +2,62 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/png" href="/assets/sqi-logo.png" />
+    <link rel="apple-touch-icon" href="/assets/sqi-logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sheffield Quantum Integration Lab</title>
+    <meta
+      name="description"
+      content="Sheffield Quantum Integration Lab (SQI Lab) at the University of Sheffield: scalable quantum technologies using silicon photonics, microwave electronics, spin physics, and robotics."
+    />
+    <link rel="canonical" href="https://sheffield-quantum-integration.github.io/" />
+    <meta name="robots" content="index,follow" />
+    <meta name="theme-color" content="#050a14" />
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Sheffield Quantum Integration Lab" />
+    <meta property="og:title" content="Sheffield Quantum Integration Lab" />
+    <meta
+      property="og:description"
+      content="SQI Lab at the University of Sheffield: scalable quantum technologies using silicon photonics, microwave electronics, spin physics, and robotics."
+    />
+    <meta property="og:url" content="https://sheffield-quantum-integration.github.io/" />
+    <meta property="og:image" content="https://sheffield-quantum-integration.github.io/assets/sqi-logo.png" />
+    <meta name="twitter:card" content="summary" />
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ResearchOrganization",
+        "name": "Sheffield Quantum Integration Lab",
+        "alternateName": "SQI Lab",
+        "url": "https://sheffield-quantum-integration.github.io/",
+        "logo": "https://sheffield-quantum-integration.github.io/assets/sqi-logo.png",
+        "parentOrganization": {
+          "@type": "CollegeOrUniversity",
+          "name": "University of Sheffield",
+          "url": "https://www.sheffield.ac.uk/"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Mappin Street",
+          "addressLocality": "Sheffield",
+          "postalCode": "S1 3JD",
+          "addressCountry": "GB"
+        },
+        "sameAs": ["https://www.linkedin.com/in/joesmio/"]
+      }
+    </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <noscript>
+        Sheffield Quantum Integration Lab (SQI Lab), University of Sheffield. Research areas include silicon photonics,
+        microwave electronics, spin physics, and robotics for scalable quantum technologies.
+      </noscript>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
