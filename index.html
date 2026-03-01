@@ -51,12 +51,33 @@
         "sameAs": ["https://www.linkedin.com/in/joesmio/"]
       }
     </script>
+    <script>
+      ;(function (location) {
+        if (location.search[1] === '/') {
+          const decoded = location.search
+            .slice(1)
+            .split('&')
+            .map((segment) => segment.replace(/~and~/g, '&'))
+            .join('?')
+
+          window.history.replaceState(null, '', location.pathname.slice(0, -1) + decoded + location.hash)
+        }
+      })(window.location)
+    </script>
   </head>
   <body>
     <div id="root">
       <noscript>
-        Sheffield Quantum Integration Lab (SQI Lab), University of Sheffield. Research areas include silicon photonics,
-        microwave electronics, spin physics, and robotics for scalable quantum technologies.
+        <p>
+          Sheffield Quantum Integration Lab (SQI Lab), University of Sheffield. Research areas include silicon
+          photonics, microwave electronics, spin physics, and robotics for scalable quantum technologies.
+        </p>
+        <p>
+          Browse:
+          <a href="/">Home</a> | <a href="/research">Research</a> | <a href="/people">People</a> |
+          <a href="/publications">Publications</a> | <a href="/facilities">Facilities</a> |
+          <a href="/news">News</a> | <a href="/opportunities">Opportunities</a> | <a href="/contact">Contact</a>
+        </p>
       </noscript>
     </div>
     <script type="module" src="/src/main.jsx"></script>
