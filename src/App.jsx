@@ -23,6 +23,108 @@ const iconMap = {
   bot: Bot
 }
 
+const SITE_ORIGIN =
+  typeof window !== 'undefined' ? window.location.origin : 'https://sheffield-quantum-integration.github.io'
+
+const NAV_LINKS = [
+  { id: 'home', label: 'Home', path: '/' },
+  { id: 'research', label: 'Research', path: '/research' },
+  { id: 'people', label: 'People', path: '/people' },
+  { id: 'publications', label: 'Publications', path: '/publications' },
+  { id: 'facilities', label: 'Facilities', path: '/facilities' },
+  { id: 'news', label: 'News & Events', path: '/news' },
+  { id: 'opportunities', label: 'Opportunities', path: '/opportunities' },
+  { id: 'contact', label: 'Contact', path: '/contact' }
+]
+
+const PAGE_META = {
+  home: {
+    title: 'Sheffield Quantum Integration Lab',
+    description:
+      'SQI Lab at the University of Sheffield: scalable quantum technologies using silicon photonics, microwave electronics, spin physics, and robotics.'
+  },
+  research: {
+    title: 'Research | Sheffield Quantum Integration Lab',
+    description:
+      'Research at SQI Lab spans silicon photonics, scalable microwave electronics, spin-photon interfaces, and robotics for quantum sensing.'
+  },
+  people: {
+    title: 'People | Sheffield Quantum Integration Lab',
+    description:
+      'Meet the Sheffield Quantum Integration Lab team: principal investigator, researchers, students, visitors, and alumni.'
+  },
+  publications: {
+    title: 'Publications | Sheffield Quantum Integration Lab',
+    description:
+      'Publications and preprints from the Sheffield Quantum Integration Lab, including work on quantum photonics, electronics, and sensing.'
+  },
+  facilities: {
+    title: 'Facilities | Sheffield Quantum Integration Lab',
+    description:
+      'Explore facilities used by the Sheffield Quantum Integration Lab, including fabrication and characterisation infrastructure.'
+  },
+  news: {
+    title: 'News & Events | Sheffield Quantum Integration Lab',
+    description:
+      'Latest news, events, and announcements from the Sheffield Quantum Integration Lab.'
+  },
+  opportunities: {
+    title: 'Opportunities | Sheffield Quantum Integration Lab',
+    description:
+      'Current PhD studentship and postdoctoral opportunities at the Sheffield Quantum Integration Lab.'
+  },
+  contact: {
+    title: 'Contact | Sheffield Quantum Integration Lab',
+    description:
+      'Contact the Sheffield Quantum Integration Lab at the University of Sheffield for collaborations and student opportunities.'
+  }
+}
+
+const normalizePathname = (pathname = '/') => {
+  const withoutTrailingSlash = pathname.replace(/\/+$/, '')
+  return withoutTrailingSlash || '/'
+}
+
+const pageIdForPathname = (pathname = '/') => {
+  const normalized = normalizePathname(pathname)
+  return NAV_LINKS.find((link) => link.path === normalized)?.id || 'home'
+}
+
+const pathForPageId = (pageId = 'home') => NAV_LINKS.find((link) => link.id === pageId)?.path || '/'
+
+const upsertMetaByName = (name, content) => {
+  let tag = document.querySelector(`meta[name="${name}"]`)
+  if (!tag) {
+    tag = document.createElement('meta')
+    tag.setAttribute('name', name)
+    document.head.appendChild(tag)
+  }
+  tag.setAttribute('content', content)
+}
+
+const upsertMetaByProperty = (property, content) => {
+  let tag = document.querySelector(`meta[property="${property}"]`)
+  if (!tag) {
+    tag = document.createElement('meta')
+    tag.setAttribute('property', property)
+    document.head.appendChild(tag)
+  }
+  tag.setAttribute('content', content)
+}
+
+const upsertCanonical = (href) => {
+  let canonical = document.querySelector('link[rel="canonical"]')
+  if (!canonical) {
+    canonical = document.createElement('link')
+    canonical.setAttribute('rel', 'canonical')
+    document.head.appendChild(canonical)
+  }
+  canonical.setAttribute('href', href)
+}
+
+const isPlainLeftClick = (event) =>
+  event.button === 0 && !event.metaKey && !event.altKey && !event.ctrlKey && !event.shiftKey
+
 const PillarIcon = ({ type, className }) => {
   const Icon = iconMap[type?.toLowerCase()] || Atom
   return <Icon className={className} />
@@ -43,7 +145,7 @@ const HeroBackground = ({ image }) => (
   </div>
 )
 
-const HomeView = ({ hero, home, pillars, navigateTo, joinTeamTarget }) => (
+const HomeView = ({ hero, home, pillars, joinTeamTarget, getPathForPage, onInternalLinkClick }) => (
   <div className="animate-fadeIn">
     <section className="relative flex min-h-[90vh] items-center justify-center overflow-hidden bg-[#050a14] pb-20">
       <HeroBackground image={hero?.backgroundImage} />
@@ -60,21 +162,25 @@ const HomeView = ({ hero, home, pillars, navigateTo, joinTeamTarget }) => (
           </p>
           <div className="flex flex-col gap-4 sm:flex-row">
             {hero?.primaryCta && (
-              <button
-                onClick={() => navigateTo(hero.primaryCta.target || 'research')}
+              <a
+                href={getPathForPage(hero.primaryCta.target || 'research')}
+                onClick={(event) => onInternalLinkClick(event, hero.primaryCta.target || 'research')}
                 className="flex items-center justify-center rounded-full bg-amber-500 px-8 py-4 font-bold text-black shadow-[0_0_25px_rgba(251,191,36,0.4)] transition-all duration-300 hover:bg-amber-400 hover:shadow-[0_0_35px_rgba(251,191,36,0.6)]"
               >
                 {hero.primaryCta.label}
                 <ChevronRight className="ml-2 h-5 w-5" />
-              </button>
+              </a>
             )}
             {hero?.secondaryCta && (
-              <button
-                onClick={() => navigateTo(joinTeamTarget || hero.secondaryCta.target || 'opportunities')}
-                className="rounded-full border-2 border-purple-500 bg-slate-900/50 px-8 py-4 font-bold text-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.2)] backdrop-blur-sm transition-all duration-300 hover:bg-purple-500/20 hover:text-purple-200 hover:shadow-[0_0_25px_rgba(168,85,247,0.4)]"
+              <a
+                href={getPathForPage(joinTeamTarget || hero.secondaryCta.target || 'opportunities')}
+                onClick={(event) =>
+                  onInternalLinkClick(event, joinTeamTarget || hero.secondaryCta.target || 'opportunities')
+                }
+                className="rounded-full border-2 border-purple-500 bg-slate-900/50 px-8 py-4 text-center font-bold text-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.2)] backdrop-blur-sm transition-all duration-300 hover:bg-purple-500/20 hover:text-purple-200 hover:shadow-[0_0_25px_rgba(168,85,247,0.4)]"
               >
                 {hero.secondaryCta.label}
-              </button>
+              </a>
             )}
           </div>
         </div>
@@ -113,10 +219,11 @@ const HomeView = ({ hero, home, pillars, navigateTo, joinTeamTarget }) => (
         <h2 className="mb-16 text-center text-3xl font-bold text-white">{home?.pillarsTitle}</h2>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {pillars?.map((pillar) => (
-            <div
+            <a
               key={pillar.id}
-              onClick={() => navigateTo('research')}
-              className="group relative cursor-pointer overflow-hidden rounded-2xl border border-slate-800 bg-[#0a0e17] p-8 shadow-[0_0_15px_rgba(0,0,0,0.5)] transition-all duration-300 hover:border-amber-500/50 hover:shadow-[0_0_25px_rgba(251,191,36,0.3)]"
+              href={getPathForPage('research')}
+              onClick={(event) => onInternalLinkClick(event, 'research')}
+              className="group relative block cursor-pointer overflow-hidden rounded-2xl border border-slate-800 bg-[#0a0e17] p-8 shadow-[0_0_15px_rgba(0,0,0,0.5)] transition-all duration-300 hover:border-amber-500/50 hover:shadow-[0_0_25px_rgba(251,191,36,0.3)]"
             >
               <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                 <div className="h-full w-full bg-gradient-to-br from-amber-500/10 to-purple-600/10" />
@@ -131,7 +238,7 @@ const HomeView = ({ hero, home, pillars, navigateTo, joinTeamTarget }) => (
                 <h3 className="mb-3 text-xl font-bold text-white">{pillar.title}</h3>
                 <p className="text-slate-400">{pillar.desc}</p>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>
@@ -492,7 +599,7 @@ const ContactView = ({ contact }) => (
   </div>
 )
 
-const OpportunitiesView = ({ opportunities, contact, navigateTo }) => {
+const OpportunitiesView = ({ opportunities, contact, getPathForPage, onInternalLinkClick }) => {
   const items = Array.isArray(opportunities?.items) ? opportunities.items : []
   const intro =
     opportunities?.intro ||
@@ -512,13 +619,14 @@ const OpportunitiesView = ({ opportunities, contact, navigateTo }) => {
             </p>
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <button
-                onClick={() => navigateTo('contact')}
+              <a
+                href={getPathForPage('contact')}
+                onClick={(event) => onInternalLinkClick(event, 'contact')}
                 className="inline-flex items-center justify-center rounded-lg bg-amber-500 px-5 py-3 font-bold text-black shadow-[0_0_15px_rgba(251,191,36,0.3)] transition-all duration-300 hover:bg-amber-400 hover:shadow-[0_0_25px_rgba(251,191,36,0.5)]"
               >
                 Contact the lab
                 <ChevronRight className="ml-2 h-5 w-5" />
-              </button>
+              </a>
 
               {contact?.linkedin && (
                 <a
@@ -770,16 +878,57 @@ const PlaceholderView = ({ title }) => (
 )
 
 export default function App() {
-  const [activePage, setActivePage] = useState('home')
+  const [activePage, setActivePage] = useState(() =>
+    typeof window === 'undefined' ? 'home' : pageIdForPathname(window.location.pathname)
+  )
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [logoError, setLogoError] = useState(false)
   const [content, setContent] = useState(fallbackContent)
 
+  const navigateTo = (pageId) => {
+    const nextPageId = NAV_LINKS.some((link) => link.id === pageId) ? pageId : 'home'
+    const nextPath = pathForPageId(nextPageId)
+
+    if (typeof window !== 'undefined') {
+      const currentPath = normalizePathname(window.location.pathname)
+      if (currentPath !== nextPath) {
+        window.history.pushState({}, '', nextPath)
+      }
+    }
+
+    setActivePage(nextPageId)
+    setMobileMenuOpen(false)
+  }
+
+  const onInternalLinkClick = (event, pageId) => {
+    if (!isPlainLeftClick(event)) return
+    event.preventDefault()
+    navigateTo(pageId)
+  }
+
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    const syncRouteFromLocation = () => {
+      const nextPageId = pageIdForPathname(window.location.pathname)
+      const normalizedPath = pathForPageId(nextPageId)
+
+      if (window.location.pathname !== normalizedPath) {
+        window.history.replaceState({}, '', normalizedPath)
+      }
+
+      setActivePage(nextPageId)
+      setMobileMenuOpen(false)
+    }
+
+    syncRouteFromLocation()
+    window.addEventListener('popstate', syncRouteFromLocation)
+    return () => window.removeEventListener('popstate', syncRouteFromLocation)
   }, [])
 
   useEffect(() => {
@@ -817,17 +966,6 @@ export default function App() {
     }
   }, [])
 
-  const navLinks = [
-    { id: 'home', label: 'Home' },
-    { id: 'research', label: 'Research' },
-    { id: 'people', label: 'People' },
-    { id: 'publications', label: 'Publications' },
-    { id: 'facilities', label: 'Facilities' },
-    { id: 'news', label: 'News & Events' },
-    { id: 'opportunities', label: 'Opportunities' },
-    { id: 'contact', label: 'Contact' }
-  ]
-
   const hero = content.hero
   const home = content.home
   const pillars = content.pillars
@@ -843,6 +981,22 @@ export default function App() {
 
   const rawJoinTeamTarget = hero?.secondaryCta?.target || 'opportunities'
   const joinTeamTarget = rawJoinTeamTarget === 'opportunities' && !hasOpportunities ? 'contact' : rawJoinTeamTarget
+  const getPathForPage = (pageId) => pathForPageId(pageId)
+
+  useEffect(() => {
+    const currentMeta = PAGE_META[activePage] || PAGE_META.home
+    const pagePath = pathForPageId(activePage)
+    const absoluteUrl = `${SITE_ORIGIN}${pagePath}`
+
+    document.title = currentMeta.title
+    upsertMetaByName('description', currentMeta.description)
+    upsertMetaByName('twitter:title', currentMeta.title)
+    upsertMetaByName('twitter:description', currentMeta.description)
+    upsertMetaByProperty('og:title', currentMeta.title)
+    upsertMetaByProperty('og:description', currentMeta.description)
+    upsertMetaByProperty('og:url', absoluteUrl)
+    upsertCanonical(absoluteUrl)
+  }, [activePage])
 
   const renderPage = () => {
     switch (activePage) {
@@ -852,8 +1006,9 @@ export default function App() {
             hero={hero}
             home={home}
             pillars={pillars}
-            navigateTo={setActivePage}
             joinTeamTarget={joinTeamTarget}
+            getPathForPage={getPathForPage}
+            onInternalLinkClick={onInternalLinkClick}
           />
         )
       case 'research':
@@ -867,11 +1022,18 @@ export default function App() {
       case 'news':
         return <NewsView />
       case 'opportunities':
-        return <OpportunitiesView opportunities={opportunities} contact={contact} navigateTo={setActivePage} />
+        return (
+          <OpportunitiesView
+            opportunities={opportunities}
+            contact={contact}
+            getPathForPage={getPathForPage}
+            onInternalLinkClick={onInternalLinkClick}
+          />
+        )
       case 'contact':
         return <ContactView contact={contact} />
       default:
-        return <PlaceholderView title={navLinks.find((link) => link.id === activePage)?.label || 'Coming Soon'} />
+        return <PlaceholderView title={NAV_LINKS.find((link) => link.id === activePage)?.label || 'Coming Soon'} />
     }
   }
 
@@ -883,7 +1045,7 @@ export default function App() {
         }`}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
-          <div className="flex cursor-pointer items-center" onClick={() => setActivePage('home')}>
+          <a href={pathForPageId('home')} onClick={(event) => onInternalLinkClick(event, 'home')} className="flex items-center">
             <div className="mr-3 flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/15 bg-[#0a0e17] shadow-[0_0_10px_rgba(0,0,0,0.35)] md:h-14 md:w-14">
               {!logoError ? (
                 <img
@@ -899,13 +1061,15 @@ export default function App() {
             <span className="text-xl font-extrabold tracking-tight text-white drop-shadow-[0_0_6px_rgba(0,0,0,0.4)]">
               <span className="text-white">SQI</span> <span className="text-purple-500">Lab</span>
             </span>
-          </div>
+          </a>
 
           <div className="hidden items-center space-x-1 lg:flex">
-            {navLinks.map((link) => (
-              <button
+            {NAV_LINKS.map((link) => (
+              <a
                 key={link.id}
-                onClick={() => setActivePage(link.id)}
+                href={link.path}
+                onClick={(event) => onInternalLinkClick(event, link.id)}
+                aria-current={activePage === link.id ? 'page' : undefined}
                 className={`rounded-md px-3 py-2 text-sm font-medium transition-all duration-200 ${
                   activePage === link.id
                     ? 'bg-white/5 text-amber-400 shadow-[0_0_10px_rgba(251,191,36,0.2)]'
@@ -913,7 +1077,7 @@ export default function App() {
                 }`}
               >
                 {link.label}
-              </button>
+              </a>
             ))}
           </div>
 
@@ -927,19 +1091,18 @@ export default function App() {
         {mobileMenuOpen && (
           <div className="absolute left-0 right-0 top-full border-b border-white/10 bg-[#0a0e17] px-6 py-4 shadow-2xl animate-fadeIn lg:hidden">
             <div className="flex flex-col space-y-2">
-              {navLinks.map((link) => (
-                <button
+              {NAV_LINKS.map((link) => (
+                <a
                   key={link.id}
-                  onClick={() => {
-                    setActivePage(link.id)
-                    setMobileMenuOpen(false)
-                  }}
+                  href={link.path}
+                  onClick={(event) => onInternalLinkClick(event, link.id)}
+                  aria-current={activePage === link.id ? 'page' : undefined}
                   className={`border-b border-white/5 py-3 text-left text-base font-medium last:border-0 ${
                     activePage === link.id ? 'text-amber-400' : 'text-slate-300'
                   }`}
                 >
                   {link.label}
-                </button>
+                </a>
               ))}
             </div>
           </div>
@@ -970,18 +1133,15 @@ export default function App() {
             <ul className="space-y-2 text-sm">
               {footer?.links?.map((link) => (
                 <li key={link.label}>
-                  <button
-                    onClick={() => {
-                      if (link.target === 'opportunities' && !hasOpportunities) {
-                        setActivePage('contact')
-                        return
-                      }
-                      setActivePage(link.target)
-                    }}
+                  <a
+                    href={pathForPageId(link.target === 'opportunities' && !hasOpportunities ? 'contact' : link.target)}
+                    onClick={(event) =>
+                      onInternalLinkClick(event, link.target === 'opportunities' && !hasOpportunities ? 'contact' : link.target)
+                    }
                     className="transition-colors hover:text-amber-400"
                   >
                     {link.label}
-                  </button>
+                  </a>
                 </li>
               ))}
             </ul>
