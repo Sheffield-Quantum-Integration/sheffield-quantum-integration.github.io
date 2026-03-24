@@ -83,7 +83,9 @@
       {
         "name": "Maxim Makhonin",
         "role": "Research Fellow",
-        "group": "Research Fellow"
+        "group": "Research Fellow",
+        "photo": "/assets/maxim.jpg",
+        "photoPosition": "62% 30%"
       },
       {
         "name": "Anatoliy Antill",

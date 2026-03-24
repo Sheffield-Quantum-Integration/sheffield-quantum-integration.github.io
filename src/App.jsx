@@ -424,7 +424,12 @@ const PeopleView = ({ people }) => {
       <div className="flex items-start gap-4">
         <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-full border border-slate-700 bg-slate-800 shadow-inner sm:h-24 sm:w-24">
           {member.photo ? (
-            <img src={member.photo} alt={member.name} className="h-full w-full object-cover object-center" />
+            <img
+              src={member.photo}
+              alt={member.name}
+              className="h-full w-full object-cover"
+              style={{ objectPosition: member.photoPosition || 'center' }}
+            />
           ) : (
             <div className="flex h-full w-full items-center justify-center bg-gradient-to-tr from-slate-800 to-slate-700 text-base font-bold text-amber-300">
               {getInitials(member.name)}
