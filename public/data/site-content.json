@@ -105,13 +105,17 @@
         "name": "Jack Wall",
         "role": "Graduate Student",
         "group": "Graduate Students",
-        "note": "with Matthew Hobbs"
+        "note": "with Matthew Hobbs",
+        "photo": "/assets/jack.jpeg",
+        "photoPosition": "72% 38%"
       },
       {
         "name": "Kimy Jaimes",
         "role": "Visiting Researcher",
         "group": "Visitors",
-        "note": "University of New Brunswick"
+        "note": "University of New Brunswick",
+        "photo": "/assets/kimy.jpeg",
+        "photoPosition": "50% 30%"
       },
       {
         "name": "Dr Agnethe Seim Olsen",
