@@ -11,7 +11,7 @@
   "home": {
     "introHeading": "Engineering scalable quantum technologies.",
     "introParagraphs": [
-      "Welcome to the SQI Lab at the University of Sheffield. We are a new research group focused on creating useful applications from physics experiments by injecting advanced engineering technologies.",
+      "Welcome to SQIL at the University of Sheffield. We are a new research group focused on creating useful applications from physics experiments by injecting advanced engineering technologies.",
       "Our core mission is to answer whether single atom-like defects in solids can be controlled at scale. We borrow tools from existing semiconductor processing, combining silicon photonics, microwave electronics, and robotics to build custom, large-scale quantum systems."
     ],
     "pillarsTitle": "Research Pillars"
@@ -66,7 +66,7 @@
       "name": "Dr. Joe A. Smith",
       "role": "Principal Investigator",
       "photo": "/assets/JoeSmith_headshot_Oct2025.jpg",
-      "bio": "Joe joined the University of Sheffield in 2025. He leads the SQI Lab, focusing on scalable control of solid-state quantum defects.",
+      "bio": "Joe joined the University of Sheffield in 2025. He leads SQIL, focusing on scalable control of solid-state quantum defects.",
       "timeline": [
         "2025 - Present: Lecturer in Quantum Technologies and EPSRC Quantum Technology Career Acceleration Fellow, University of Sheffield",
         "2020 - 2025: Postdoctoral Researcher, University of Bristol",
@@ -151,11 +151,11 @@
   },
   "contactPage": {
     "intro": "We are always looking for motivated students and collaborators. Reach out if you are interested in joining the lab or discussing research.",
-    "address": "Department of EEE\nUniversity of Sheffield\nMappin Street, Sheffield, S1 3JD, UK",
+    "address": "School of Electronic and Electrical Engineering\nUniversity of Sheffield\nMappin Street, Sheffield, S1 3JD, UK",
     "linkedin": "https://www.linkedin.com/in/joesmio/"
   },
   "footer": {
-    "blurb": "Sheffield Quantum Integration Lab.\nDepartment of Electronic and Electrical Engineering.",
+    "blurb": "Sheffield Quantum Integration Lab (SQIL).\nSchool of Electronic and Electrical Engineering.",
     "logo": "/assets/logo-white.png",
     "links": [
       { "label": "Research Projects", "target": "research" },

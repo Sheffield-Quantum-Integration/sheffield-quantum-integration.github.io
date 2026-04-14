@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sheffield-quantum-integration.github.io/sitemap.xml
+Sitemap: https://sqil.shef.ac.uk/sitemap.xml

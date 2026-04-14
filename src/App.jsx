@@ -24,7 +24,7 @@ const iconMap = {
 }
 
 const SITE_ORIGIN =
-  typeof window !== 'undefined' ? window.location.origin : 'https://sheffield-quantum-integration.github.io'
+  typeof window !== 'undefined' ? window.location.origin : 'https://sqil.shef.ac.uk'
 
 const NAV_LINKS = [
   { id: 'home', label: 'Home', path: '/' },
@@ -39,44 +39,44 @@ const NAV_LINKS = [
 
 const PAGE_META = {
   home: {
-    title: 'Sheffield Quantum Integration Lab',
+    title: 'Sheffield Quantum Integration Lab (SQIL)',
     description:
-      'SQI Lab at the University of Sheffield: scalable quantum technologies using silicon photonics, microwave electronics, spin physics, and robotics.'
+      'SQIL at the University of Sheffield: scalable quantum technologies using silicon photonics, microwave electronics, spin physics, and robotics.'
   },
   research: {
-    title: 'Research | Sheffield Quantum Integration Lab',
+    title: 'Research | SQIL',
     description:
-      'Research at SQI Lab spans silicon photonics, scalable microwave electronics, spin-photon interfaces, and robotics for quantum sensing.'
+      'Research at SQIL spans silicon photonics, scalable microwave electronics, spin-photon interfaces, and robotics for quantum sensing.'
   },
   people: {
-    title: 'People | Sheffield Quantum Integration Lab',
+    title: 'People | SQIL',
     description:
-      'Meet the Sheffield Quantum Integration Lab team: principal investigator, researchers, students, visitors, and alumni.'
+      'Meet the SQIL team: principal investigator, researchers, students, visitors, and alumni.'
   },
   publications: {
-    title: 'Publications | Sheffield Quantum Integration Lab',
+    title: 'Publications | SQIL',
     description:
-      'Publications and preprints from the Sheffield Quantum Integration Lab, including work on quantum photonics, electronics, and sensing.'
+      'Publications and preprints from SQIL, including work on quantum photonics, electronics, and sensing.'
   },
   facilities: {
-    title: 'Facilities | Sheffield Quantum Integration Lab',
+    title: 'Facilities | SQIL',
     description:
-      'Explore facilities used by the Sheffield Quantum Integration Lab, including fabrication and characterisation infrastructure.'
+      'Explore facilities used by SQIL, including fabrication and characterisation infrastructure.'
   },
   news: {
-    title: 'News & Events | Sheffield Quantum Integration Lab',
+    title: 'News & Events | SQIL',
     description:
-      'Latest news, events, and announcements from the Sheffield Quantum Integration Lab.'
+      'Latest news, events, and announcements from SQIL.'
   },
   opportunities: {
-    title: 'Opportunities | Sheffield Quantum Integration Lab',
+    title: 'Opportunities | SQIL',
     description:
-      'Current PhD studentship and postdoctoral opportunities at the Sheffield Quantum Integration Lab.'
+      'Current PhD studentship and postdoctoral opportunities at SQIL.'
   },
   contact: {
-    title: 'Contact | Sheffield Quantum Integration Lab',
+    title: 'Contact | SQIL',
     description:
-      'Contact the Sheffield Quantum Integration Lab at the University of Sheffield for collaborations and student opportunities.'
+      'Contact SQIL at the University of Sheffield for collaborations and student opportunities.'
   }
 }
 
@@ -192,7 +192,7 @@ const HomeView = ({ hero, home, pillars, joinTeamTarget, getPathForPage, onInter
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(251,191,36,0.12),_transparent_60%)]" />
               <img
                 src="/assets/sqi-logo.png"
-                alt="SQI Lab logo"
+                alt="SQIL logo"
                 className="relative mx-auto h-auto w-full object-contain drop-shadow-[0_0_35px_rgba(168,85,247,0.25)]"
                 loading="eager"
                 decoding="async"
@@ -782,7 +782,7 @@ const NewsView = () => {
       <div className="mx-auto max-w-5xl px-6 py-12">
         <h1 className="mb-6 text-4xl font-bold text-white">News & Events</h1>
         <p className="mb-10 max-w-3xl text-lg leading-relaxed text-slate-300">
-          Latest updates, announcements, and events from the SQI Lab.
+          Latest updates, announcements, and events from SQIL.
         </p>
 
         {error && (
@@ -878,7 +878,7 @@ const PlaceholderView = ({ title }) => (
   <div className="animate-fadeIn flex min-h-screen flex-col items-center bg-[#0a0e17] px-6 pt-32 text-slate-100">
     <Construction className="mb-6 h-24 w-24 text-amber-500 drop-shadow-[0_0_10px_rgba(251,191,36,0.4)]" />
     <h1 className="mb-4 text-4xl font-bold text-white">{title}</h1>
-    <p className="max-w-md text-center text-xl text-slate-400">This section is currently under construction. Check back soon for updates from the SQI Lab.</p>
+    <p className="max-w-md text-center text-xl text-slate-400">This section is currently under construction. Check back soon for updates from SQIL.</p>
   </div>
 )
 
@@ -1000,6 +1000,7 @@ export default function App() {
     upsertMetaByProperty('og:title', currentMeta.title)
     upsertMetaByProperty('og:description', currentMeta.description)
     upsertMetaByProperty('og:url', absoluteUrl)
+    upsertMetaByProperty('og:image', `${SITE_ORIGIN}/assets/sqi-logo.png`)
     upsertCanonical(absoluteUrl)
   }, [activePage])
 
@@ -1055,7 +1056,7 @@ export default function App() {
               {!logoError ? (
                 <img
                   src="/assets/sqi-logo.png"
-                  alt="SQI Lab Logo"
+                  alt="SQIL logo"
                   className="h-full w-full object-contain"
                   onError={() => setLogoError(true)}
                 />
@@ -1063,8 +1064,8 @@ export default function App() {
                 <Atom className="h-6 w-6 text-amber-400 drop-shadow-[0_0_5px_rgba(251,191,36,0.6)]" />
               )}
             </div>
-            <span className="text-xl font-extrabold tracking-tight text-white drop-shadow-[0_0_6px_rgba(0,0,0,0.4)]">
-              <span className="text-white">SQI</span> <span className="text-purple-500">Lab</span>
+            <span className="bg-gradient-to-r from-amber-400 to-purple-500 bg-clip-text text-xl font-extrabold tracking-tight text-transparent drop-shadow-[0_0_6px_rgba(0,0,0,0.4)]">
+              SQIL
             </span>
           </a>
 
@@ -1119,8 +1120,8 @@ export default function App() {
       <footer className="border-t border-slate-800 bg-[#050a14] py-12 text-slate-400">
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-6 md:grid-cols-3">
           <div>
-            <span className="block text-2xl font-extrabold tracking-tight text-white drop-shadow-[0_0_5px_rgba(251,191,36,0.4)]">
-              <span className="text-amber-400">SQI</span> <span className="font-light text-purple-500">Lab</span>
+            <span className="block bg-gradient-to-r from-amber-400 to-purple-500 bg-clip-text text-2xl font-extrabold tracking-tight text-transparent drop-shadow-[0_0_5px_rgba(251,191,36,0.4)]">
+              SQIL
             </span>
             <p className="mt-4 whitespace-pre-line text-sm leading-relaxed">{footer?.blurb}</p>
             {footer?.logo && (
@@ -1165,7 +1166,7 @@ export default function App() {
                 </a>
               )}
             </div>
-            <p className="text-sm">&copy; {new Date().getFullYear()} SQI Lab. All rights reserved.</p>
+            <p className="text-sm">&copy; {new Date().getFullYear()} SQIL. All rights reserved.</p>
           </div>
         </div>
         <style>{`
