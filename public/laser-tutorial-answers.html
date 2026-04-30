@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Semiconductor Lasers — Tutorial 4 + Quiz 7 Answers</title>
+<style>
+  :root {
+    --bg:        #12121a;
+    --bg-act:    #16142a;
+    --card:      #1c1c28;
+    --card-lt:   #24242e;
+    --card-good: #182d22;
+    --card-bad:  #321a20;
+    --text:      #e6e6ea;
+    --muted:     #9a9aa8;
+    --accent:    #00b4d8;
+    --warm:      #e8a838;
+    --good:      #58d68d;
+    --bad:       #ff6b6b;
+    --rule:      #2c2c3a;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.55 -apple-system, "Helvetica Neue", "Segoe UI",
+          Roboto, Calibri, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  main {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 56px 28px 96px;
+  }
+  header {
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 24px;
+    margin-bottom: 40px;
+  }
+  header .eyebrow {
+    color: var(--warm);
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font-size: 13px;
+    margin: 0 0 8px;
+  }
+  header h1 {
+    margin: 0 0 6px;
+    font-size: 42px;
+    line-height: 1.1;
+    letter-spacing: -.01em;
+  }
+  header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 17px;
+  }
+  nav.toc {
+    background: var(--card);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin: 32px 0 48px;
+  }
+  nav.toc h2 {
+    margin: 0 0 10px;
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+  }
+  nav.toc ol {
+    margin: 0;
+    padding-left: 20px;
+    columns: 2;
+    column-gap: 32px;
+  }
+  nav.toc li { margin: 4px 0; }
+  nav.toc a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  nav.toc a:hover { text-decoration: underline; }
+
+  section.section {
+    margin: 64px 0 0;
+  }
+  section.section > h2 {
+    color: var(--accent);
+    font-size: 13px;
+    margin: 0 0 6px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  section.section > h3 {
+    margin: 0 0 24px;
+    font-size: 28px;
+    line-height: 1.2;
+  }
+
+  article.q {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 28px 32px 24px;
+    margin: 24px 0;
+    scroll-margin-top: 24px;
+  }
+  article.q .qhead {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 6px;
+  }
+  article.q .qhead .qid {
+    color: var(--warm);
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    font-size: 13px;
+  }
+  article.q .qhead .qkind {
+    color: var(--muted);
+    font-size: 13px;
+  }
+  article.q .qstem {
+    margin: 4px 0 18px;
+    font-size: 19px;
+    line-height: 1.4;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  ol.opts {
+    list-style: none;
+    margin: 0 0 18px;
+    padding: 0;
+    counter-reset: opt;
+  }
+  ol.opts li {
+    counter-increment: opt;
+    display: grid;
+    grid-template-columns: 28px 28px 1fr;
+    gap: 12px;
+    align-items: start;
+    padding: 10px 14px;
+    margin: 6px 0;
+    border-radius: 8px;
+    background: var(--card-lt);
+    border-left: 3px solid transparent;
+  }
+  ol.opts li.correct {
+    background: var(--card-good);
+    border-left-color: var(--good);
+  }
+  ol.opts li.wrong {
+    background: var(--card-bad);
+    border-left-color: var(--bad);
+  }
+  ol.opts li .lab {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  ol.opts li.correct .lab { color: var(--good); }
+  ol.opts li.wrong .lab { color: var(--bad); }
+  ol.opts li .mark {
+    font-weight: 700;
+    text-align: center;
+  }
+  ol.opts li .mark.tick { color: var(--good); }
+  ol.opts li .mark.cross { color: var(--bad); }
+  ol.opts li .body {
+    color: var(--text);
+    line-height: 1.45;
+  }
+  ol.opts li.wrong .body { color: #d8c8cc; }
+
+  .why {
+    background: var(--bg-act);
+    border-left: 3px solid var(--accent);
+    padding: 14px 18px;
+    border-radius: 6px;
+    margin: 14px 0 0;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .why h4 {
+    margin: 0 0 6px;
+    font-size: 12px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    font-weight: 700;
+  }
+  .answer-pill {
+    display: inline-block;
+    background: var(--card-good);
+    color: var(--good);
+    border-radius: 999px;
+    padding: 3px 12px;
+    font-weight: 700;
+    font-size: 14px;
+    margin-left: 8px;
+  }
+
+  /* Tutorial-question style: open-ended */
+  article.tut .qstem {
+    font-size: 20px;
+    color: var(--text);
+  }
+  article.tut .answer {
+    margin-top: 12px;
+  }
+  article.tut .answer h4 {
+    margin: 0 0 8px;
+    font-size: 13px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    font-weight: 700;
+  }
+  article.tut ul {
+    margin: 0 0 0;
+    padding-left: 22px;
+  }
+  article.tut ul li { margin: 6px 0; }
+
+  /* Math typography */
+  var, .var {
+    font-style: italic;
+    font-family: "Cambria Math", "Cambria", Georgia, serif;
+  }
+  sub, sup {
+    font-style: normal;
+    font-size: .72em;
+  }
+
+  footer {
+    margin-top: 80px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  /* Print */
+  @media print {
+    :root {
+      --bg: #ffffff;
+      --bg-act: #f3f8fc;
+      --card: #ffffff;
+      --card-lt: #f4f4f6;
+      --card-good: #eaf7ee;
+      --card-bad: #fceaea;
+      --text: #1a1a22;
+      --muted: #555562;
+      --accent: #0067a6;
+      --warm: #b87100;
+      --good: #1f7a3a;
+      --bad: #9a2727;
+      --rule: #d6d6dd;
+    }
+    body { font-size: 11pt; }
+    main { padding: 16px 0; max-width: none; }
+    article.q, nav.toc { box-shadow: none; }
+    article.q { page-break-inside: avoid; }
+    nav.toc { display: none; }
+    a { color: inherit; text-decoration: none; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <p class="eyebrow">ELE345 / ELE309 / ELE314 — Electronics &amp; Devices</p>
+  <h1>Semiconductor Lasers</h1>
+  <p>Tutorial 4 and Quiz 7 — questions, answers and the reasoning behind each one.</p>
+</header>
+
+<nav class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#tut1">Tutorial Q1 — reducing threshold current</a></li>
+    <li><a href="#tut2">Tutorial Q2 — multi-quantum-well advantages</a></li>
+    <li><a href="#tut3">Tutorial Q3 — infrared lasers at room temperature</a></li>
+    <li><a href="#q1">Quiz Q1 — Fabry–Pérot features</a></li>
+    <li><a href="#q2">Quiz Q2 — false statements about VCSELs</a></li>
+    <li><a href="#q3">Quiz Q3 — quantum-dot advantages</a></li>
+    <li><a href="#q4">Quiz Q4 — materials for 1550 nm</a></li>
+    <li><a href="#q5">Quiz Q5 — InAs / InSb at room temperature</a></li>
+    <li><a href="#q6">Quiz Q6 — changing cladding refractive index</a></li>
+    <li><a href="#q7">Quiz Q7 — narrowing the emission spectrum</a></li>
+  </ol>
+</nav>
+
+<!-- ─── Tutorial 4 ────────────────────────────────────────────────── -->
+<section class="section">
+  <h2>Tutorial 4</h2>
+  <h3>Three open-ended questions on laser design</h3>
+
+  <article class="q tut" id="tut1">
+    <div class="qhead">
+      <span class="qid">Tutorial Q1</span>
+      <span class="qkind">Open-ended</span>
+    </div>
+    <p class="qstem">
+      To get high radiative recombination, you need population inversion.
+      Discuss strategies to reduce the threshold current required to
+      achieve population inversion.
+    </p>
+
+    <div class="answer">
+      <h4>Model answer</h4>
+      <p>
+        For an edge-emitting double-heterojunction laser the threshold
+        current density is
+        <span class="var">J</span><sub>th</sub> =
+        <span class="var">q</span> 
+        <span class="var">d</span><sub>las</sub> 
+        <span class="var">n</span><sub>th</sub> /
+        <span class="var">τ</span><sub>r</sub>,
+        where <span class="var">d</span><sub>las</sub> is the active-region
+        thickness, <span class="var">n</span><sub>th</sub> the threshold
+        carrier density and <span class="var">τ</span><sub>r</sub> the
+        radiative lifetime. A strong answer should attack each term:
+      </p>
+      <ul>
+        <li><strong>Make the active region thinner</strong> — directly
+          reduces <span class="var">d</span><sub>las</sub>. Use a quantum
+          well or multi-quantum-well design.</li>
+        <li><strong>Improve light confinement</strong> — a double
+          heterojunction increases the optical overlap factor Γ, so a
+          smaller carrier density is needed for the same gain.</li>
+        <li><strong>Improve carrier confinement</strong> — wide-bandgap
+          cladding stops carriers leaking out of the active region, again
+          lowering <span class="var">n</span><sub>th</sub>.</li>
+        <li><strong>Reduce cavity losses</strong> — better mirrors and
+          lower internal absorption mean less gain is needed to lase, so
+          <span class="var">n</span><sub>th</sub> drops.</li>
+        <li><strong>Improve material quality</strong> — fewer defects
+          means less non-radiative recombination, so more of the injected
+          carriers contribute to gain.</li>
+        <li><strong>Manage temperature</strong> —
+          <span class="var">J</span><sub>th</sub> ∝
+          exp(<span class="var">T</span> / <span class="var">T</span><sub>0</sub>),
+          so good heat-sinking matters.</li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="q tut" id="tut2">
+    <div class="qhead">
+      <span class="qid">Tutorial Q2</span>
+      <span class="qkind">Open-ended</span>
+    </div>
+    <p class="qstem">
+      List the advantages of multiple-quantum-well (MQW) lasers over
+      bulk lasers.
+    </p>
+
+    <div class="answer">
+      <h4>Model answer</h4>
+      <ul>
+        <li><strong>Lower threshold current.</strong> The 2-D density of
+          states in a thin well is step-like, so optical gain saturates
+          more slowly with carrier density and threshold drops.</li>
+        <li><strong>Narrower emission spectrum.</strong> Confined
+          transitions give a sharper gain peak.</li>
+        <li><strong>Wavelength control by design.</strong> Both the
+          well width and the alloy composition set the emission
+          wavelength, so the same material system can cover a useful
+          range.</li>
+        <li><strong>Multi-wavelength operation.</strong> Combined with
+          the right cavity, the different sub-band transitions in the
+          well can be used to emit at more than one wavelength.</li>
+        <li><strong>Strained quantum wells.</strong> Deliberately
+          straining the well lets you grow lattice-mismatched
+          combinations (e.g. InGaN / GaN) and can suppress
+          non-radiative Auger recombination.</li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="q tut" id="tut3">
+    <div class="qhead">
+      <span class="qid">Tutorial Q3</span>
+      <span class="qkind">Open-ended</span>
+    </div>
+    <p class="qstem">
+      Explain why fabricating a room-temperature laser becomes
+      increasingly difficult at infrared wavelengths. Propose how a
+      semiconductor infrared laser can be fabricated.
+    </p>
+
+    <div class="answer">
+      <h4>Why it gets harder at long wavelength</h4>
+      <p>
+        Longer wavelength means smaller bandgap. Smaller bandgap makes
+        Auger recombination dramatically more likely — a band-to-band
+        transition can transfer its energy to a third carrier as kinetic
+        energy instead of producing a photon, and the rate scales like
+        <span class="var">n</span>³ in narrow-gap material. At room
+        temperature, thermal energy <span class="var">kT</span> also
+        becomes comparable to the band offsets, so carriers leak out of
+        the active region. Together these non-radiative loss channels
+        push the threshold up and the efficiency down.
+      </p>
+
+      <h4>Routes to a working IR laser</h4>
+      <ul>
+        <li><strong>1.3 – 1.55 μm telecom lasers:</strong>
+          In<sub>0.53</sub>Ga<sub>0.47</sub>As active layer on InP
+          cladding, in a double-heterojunction structure.</li>
+        <li><strong>Quantum-well or MQW active region:</strong> better
+          confinement of light and carriers, lower threshold.</li>
+        <li><strong>Strained quantum wells:</strong> tune wavelength
+          and reduce Auger losses, where crystal growth allows it.</li>
+        <li><strong>Quantum-cascade lasers</strong> for the mid-IR:
+          lasing comes from intersubband transitions inside one well
+          rather than across the bandgap, sidestepping Auger
+          completely.</li>
+        <li><strong>Heat-sinking and high-quality epitaxy</strong>:
+          reduces thermal and defect-related losses.</li>
+        <li><strong>Active cooling</strong> (Peltier or cryogenic) when
+          the application allows it: relaxes Auger and leakage limits.</li>
+      </ul>
+    </div>
+  </article>
+</section>
+
+<!-- ─── Quiz 7 ────────────────────────────────────────────────────── -->
+<section class="section">
+  <h2>Quiz 7</h2>
+  <h3>Seven multiple-choice questions on laser design</h3>
+
+  <!-- Q1 -->
+  <article class="q" id="q1">
+    <div class="qhead">
+      <span class="qid">Quiz Q1</span>
+      <span class="qkind">Select all correct</span>
+      <span class="answer-pill">A, B</span>
+    </div>
+    <p class="qstem">
+      A Fabry–Pérot laser has the following design features.
+    </p>
+    <ol class="opts">
+      <li class="correct">
+        <span class="lab">A</span><span class="mark tick">✓</span>
+        <span class="body">The refractive indices of the p- and n-layers
+          are lower than the refractive index of the active region.</span>
+      </li>
+      <li class="correct">
+        <span class="lab">B</span><span class="mark tick">✓</span>
+        <span class="body">The surface from which light is emitted is
+          polished.</span>
+      </li>
+      <li class="wrong">
+        <span class="lab">C</span><span class="mark cross">✗</span>
+        <span class="body">The cavity length is designed so that
+          <span class="var">L</span> =
+          <span class="var">N</span> λ / 3.</span>
+      </li>
+      <li class="wrong">
+        <span class="lab">D</span><span class="mark cross">✗</span>
+        <span class="body">All Fabry–Pérot lasers produce single-mode
+          emission.</span>
+      </li>
+      <li class="wrong">
+        <span class="lab">E</span><span class="mark cross">✗</span>
+        <span class="body">The threshold current is reduced when a
+          thick active region is used.</span>
+      </li>
+    </ol>
+    <div class="why">
+      <h4>Why</h4>
+      <p>
+        A. Lower-index cladding makes the active region act as a slab
+        waveguide and traps the optical mode — the higher refractive
+        index of the active layer is exactly what gives the index
+        contrast. B. Polishing (or cleaving along a crystal plane)
+        forms a partially-reflecting mirror — the only feedback
+        mechanism in a Fabry–Pérot cavity. The resonance condition is
+        <span class="var">L</span> = <span class="var">N</span> λ / 2,
+        not λ / 3, which kills option C. Because many integer
+        <span class="var">N</span> can satisfy this for a typical bar
+        length, FP lasers are usually multi-mode (D is wrong). A thicker
+        active region <em>increases</em>
+        <span class="var">d</span><sub>las</sub> in
+        <span class="var">J</span><sub>th</sub> =
+        <span class="var">q</span>
+        <span class="var">d</span><sub>las</sub>
+        <span class="var">n</span><sub>th</sub>
+        / <span class="var">τ</span><sub>r</sub>, so it raises threshold
+        (E is wrong).
+      </p>
+    </div>
+  </article>
+
+  <!-- Q2 -->
+  <article class="q" id="q2">
+    <div class="qhead">
+      <span class="qid">Quiz Q2</span>
+      <span class="qkind">Select all that are FALSE</span>
+      <span class="answer-pill">B, C</span>
+    </div>
+    <p class="qstem">
+      Which of the following statements are <strong>false</strong> for
+      the vertical-cavity surface-emitting laser (VCSEL)?
+    </p>
+    <ol class="opts">
+      <li>
+        <span class="lab">A</span><span class="mark">·</span>
+        <span class="body">Optical power produced by a single VCSEL is
+          lower than that of a Fabry–Pérot laser. <em>(true)</em></span>
+      </li>
+      <li class="correct">
+        <span class="lab">B</span><span class="mark tick">false</span>
+        <span class="body">A thick layer of active region is used
+          without increasing the threshold current.</span>
+      </li>
+      <li class="correct">
+        <span class="lab">C</span><span class="mark tick">false</span>
+        <span class="body">Charge injection is more efficient than the
+          Fabry–Pérot laser.</span>
+      </li>
+      <li>
+        <span class="lab">D</span><span class="mark">·</span>
+        <span class="body">The distributed Bragg reflector (DBR)
+          reduces the emission spectral width. <em>(true)</em></span>
+      </li>
+      <li>
+        <span class="lab">E</span><span class="mark">·</span>
+        <span class="body">At high injection current, lasing efficiency
+          reduces. <em>(true)</em></span>
+      </li>
+    </ol>
+    <div class="why">
+      <h4>Why these two are false</h4>
+      <p>
+        <strong>B is false</strong> because a VCSEL deliberately uses a
+        very <em>thin</em> active region — its low threshold comes from
+        the short cavity combined with very reflective DBR mirrors
+        (&gt; 90 %). A thicker active region would raise the threshold,
+        not leave it unchanged.
+      </p>
+      <p>
+        <strong>C is false</strong> because the thick DBR stacks and the
+        ring-shaped contact (needed to let light out of the top surface)
+        actually make charge injection <em>harder</em>. Current bunches
+        at the edges and the device heats up at high drive.
+      </p>
+      <p>
+        A, D and E are all genuinely true: a single VCSEL gives less
+        power than an edge-emitter; the DBR's narrow reflectivity peak
+        helps select a single longitudinal mode; and at high drive,
+        Auger recombination and carrier leakage drag efficiency down.
+      </p>
+    </div>
+  </article>
+
+  <!-- Q3 -->
+  <article class="q" id="q3">
+    <div class="qhead">
+      <span class="qid">Quiz Q3</span>
+      <span class="qkind">Select all correct</span>
+      <span class="answer-pill">D, E</span>
+    </div>
+    <p class="qstem">
+      A quantum-dot laser offers the following advantages over a bulk
+      laser.
+    </p>
+    <ol class="opts">
+      <li class="wrong">
+        <span class="lab">A</span><span class="mark cross">✗</span>
+        <span class="body">Better heat dissipation.</span>
+      </li>
+      <li class="wrong">
+        <span class="lab">B</span><span class="mark cross">✗</span>
+        <span class="body">Lower crystal defects.</span>
+      </li>
+      <li class="wrong">
+        <span class="lab">C</span><span class="mark cross">✗</span>
+        <span class="body">Wider emission linewidth.</span>
+      </li>
+      <li class="correct">
+        <span class="lab">D</span><span class="mark tick">✓</span>
+        <span class="body">Narrower emission linewidth.</span>
+      </li>
+      <li class="correct">
+        <span class="lab">E</span><span class="mark tick">✓</span>
+        <span class="body">Lower threshold current.</span>
+      </li>
+    </ol>
+    <div class="why">
+      <h4>Why</h4>
+      <p>
+        Quantum dots confine carriers in all three spatial directions,
+        producing atom-like discrete energy levels. The density of
+        states becomes a set of narrow peaks instead of a continuous
+        band, so the gain spectrum is sharp (option D) and only a
+        small carrier density is needed to reach threshold (option E).
+        Heat dissipation, crystal-defect density and emission linewidth
+        broadening are not directly improved by going to dots — defect
+        density is set by growth, and bulk lasers can have very narrow
+        linewidth too if they use a DFB cavity.
+      </p>
+    </div>
+  </article>
+
+  <!-- Q4 -->
+  <article class="q" id="q4">
+    <div class="qhead">
+      <span class="qid">Quiz Q4</span>
+      <span class="qkind">Single answer</span>
+      <span class="answer-pill">D</span>
+    </div>
+    <p class="qstem">
+      Recommend the combination of narrow- and wide-bandgap materials
+      that you would use to create a double-heterojunction laser
+      emitting at 1550 nm.
+    </p>
+    <ol class="opts">
+      <li class="wrong">
+        <span class="lab">A</span><span class="mark cross">✗</span>
+        <span class="body">Ge and GaAs.</span>
+      </li>
+      <li class="wrong">
+        <span class="lab">B</span><span class="mark cross">✗</span>
+        <span class="body">In<sub>0.53</sub>Ga<sub>0.47</sub>As and
+          GaAs.</span>
+      </li>
+      <li class="wrong">
+        <span class="lab">C</span><span class="mark cross">✗</span>
+        <span class="body">In<sub>0.1</sub>Ga<sub>0.9</sub>As and
+          GaAs.</span>
+      </li>
+      <li class="correct">
+        <span class="lab">D</span><span class="mark tick">✓</span>
+        <span class="body">In<sub>0.53</sub>Ga<sub>0.47</sub>As and
+          InP.</span>
+      </li>
+      <li class="wrong">
+        <span class="lab">E</span><span class="mark cross">✗</span>
+        <span class="body">Ge and Si.</span>
+      </li>
+    </ol>
+    <div class="why">
+      <h4>Why</h4>
+      <p>
+        1550 nm corresponds to a photon energy
+        <span class="var">E</span><sub>g</sub> =
+        <span class="var">hc</span> / λ ≈ 0.80 eV.
+        In<sub>0.53</sub>Ga<sub>0.47</sub>As has a bandgap close to
+        0.75 eV, so it works as the active layer. InP has a wider
+        bandgap (about 1.35 eV) and — crucially — its lattice constant
+        matches In<sub>0.53</sub>Ga<sub>0.47</sub>As exactly at
+        <span class="var">x</span> = 0.53, so it can be grown as
+        cladding and substrate without strain.
+      </p>
+      <p>
+        The other options fail on either bandgap or lattice match.
+        Ge / Si, Ge / GaAs and the InGaAs / GaAs combinations either
+        emit at the wrong wavelength or are not lattice-matched.
+        Indirect-bandgap materials (Si, Ge) do not lase efficiently
+        at all.
+      </p>
+    </div>
+  </article>
+
+  <!-- Q5 -->
+  <article class="q" id="q5">
+    <div class="qhead">
+      <span class="qid">Quiz Q5</span>
+      <span class="qkind">Single answer</span>
+      <span class="answer-pill">B</span>
+    </div>
+    <p class="qstem">
+      Semiconductors such as InAs and InSb do not make efficient lasers
+      at room temperature because…
+    </p>
+    <ol class="opts">
+      <li class="wrong">
+        <span class="lab">A</span><span class="mark cross">✗</span>
+        <span class="body">they have direct bandgaps.</span>
+      </li>
+      <li class="correct">
+        <span class="lab">B</span><span class="mark tick">✓</span>
+        <span class="body">their Auger recombination is dominant at
+          room temperature.</span>
+      </li>
+      <li class="wrong">
+        <span class="lab">C</span><span class="mark cross">✗</span>
+        <span class="body">they have high electron mobilities.</span>
+      </li>
+      <li class="wrong">
+        <span class="lab">D</span><span class="mark cross">✗</span>
+        <span class="body">their lattice constants are large.</span>
+      </li>
+      <li class="wrong">
+        <span class="lab">E</span><span class="mark cross">✗</span>
+        <span class="body">they have small electron effective
+          masses.</span>
+      </li>
+    </ol>
+    <div class="why">
+      <h4>Why</h4>
+      <p>
+        InAs and InSb are direct-bandgap, narrow-gap semiconductors —
+        good radiative materials in principle. The problem is that
+        their bandgaps are so small (≈ 0.36 eV and 0.17 eV) that an
+        electron–hole pair can recombine non-radiatively by giving its
+        energy to a third carrier (Auger recombination). The Auger rate
+        scales roughly as <span class="var">n</span>³ and grows fast
+        with temperature, so at room temperature it dominates the
+        radiative channel.
+      </p>
+      <p>
+        A direct bandgap is actually <em>helpful</em> for lasing
+        (rules out A); high mobility and small effective mass are not
+        the limiting factor (C, E); lattice constant has no direct
+        bearing on whether the device lases (D).
+      </p>
+    </div>
+  </article>
+
+  <!-- Q6 -->
+  <article class="q" id="q6">
+    <div class="qhead">
+      <span class="qid">Quiz Q6</span>
+      <span class="qkind">Select all correct</span>
+      <span class="answer-pill">B, D</span>
+    </div>
+    <p class="qstem">
+      The refractive indices of the p- and n-cladding layers of a
+      Fabry–Pérot laser with a GaAs active layer can be changed by…
+    </p>
+    <ol class="opts">
+      <li class="wrong">
+        <span class="lab">A</span><span class="mark cross">✗</span>
+        <span class="body">reducing the width of the Fabry–Pérot
+          laser.</span>
+      </li>
+      <li class="correct">
+        <span class="lab">B</span><span class="mark tick">✓</span>
+        <span class="body">increasing the doping concentrations in the
+          p- and n-layers.</span>
+      </li>
+      <li class="wrong">
+        <span class="lab">C</span><span class="mark cross">✗</span>
+        <span class="body">increasing the thickness of the p- and n-
+          Al<sub><span class="var">x</span></sub>Ga<sub>1−<span class="var">x</span></sub>As
+          layers.</span>
+      </li>
+      <li class="correct">
+        <span class="lab">D</span><span class="mark tick">✓</span>
+        <span class="body">using p- and n-
+          Al<sub><span class="var">x</span></sub>Ga<sub>1−<span class="var">x</span></sub>As
+          layers with higher Al composition.</span>
+      </li>
+    </ol>
+    <div class="why">
+      <h4>Why</h4>
+      <p>
+        Refractive index is a material property — to change it you have
+        to change the material itself or the carrier population inside
+        it. <strong>D</strong> works because adding Al to GaAs widens
+        the bandgap and lowers the refractive index, increasing the
+        index contrast with the active region (this also improves
+        carrier confinement). <strong>B</strong> works through the
+        plasma effect: heavily doping the cladding adds free carriers
+        whose contribution to the dielectric function lowers the
+        refractive index slightly. <strong>A</strong> changes the
+        device geometry, not the material, so it doesn't change the
+        index. <strong>C</strong> changes the layer <em>thickness</em>
+        — that affects the transverse mode profile but not the
+        material refractive index.
+      </p>
+    </div>
+  </article>
+
+  <!-- Q7 -->
+  <article class="q" id="q7">
+    <div class="qhead">
+      <span class="qid">Quiz Q7</span>
+      <span class="qkind">Select all correct</span>
+      <span class="answer-pill">B, C</span>
+    </div>
+    <p class="qstem">
+      Select all design options that reduce the emission spectral width
+      of a laser.
+    </p>
+    <ol class="opts">
+      <li class="wrong">
+        <span class="lab">A</span><span class="mark cross">✗</span>
+        <span class="body">Use a double-heterojunction laser.</span>
+      </li>
+      <li class="correct">
+        <span class="lab">B</span><span class="mark tick">✓</span>
+        <span class="body">Use a distributed-feedback (DFB) laser.</span>
+      </li>
+      <li class="correct">
+        <span class="lab">C</span><span class="mark tick">✓</span>
+        <span class="body">Adopt a quantum-well design.</span>
+      </li>
+      <li class="wrong">
+        <span class="lab">D</span><span class="mark cross">✗</span>
+        <span class="body">Incorporate a wider bandgap in the active
+          region.</span>
+      </li>
+      <li class="wrong">
+        <span class="lab">E</span><span class="mark cross">✗</span>
+        <span class="body">Include a metallic reflection layer at the
+          surface of the laser.</span>
+      </li>
+    </ol>
+    <div class="why">
+      <h4>Why</h4>
+      <p>
+        Spectral width is set by which wavelengths can simultaneously
+        satisfy the gain condition and the cavity feedback condition.
+        <strong>B</strong> works because a DFB grating only resonates
+        for one wavelength satisfying the Bragg condition — all other
+        modes are filtered out, giving very narrow linewidth.
+        <strong>C</strong> works because the discrete sub-band
+        transitions in a quantum well give a narrower gain peak than a
+        bulk semiconductor, so fewer longitudinal modes have enough
+        gain to lase.
+      </p>
+      <p>
+        A double heterojunction (A) mainly improves carrier confinement
+        and threshold, not linewidth. A wider bandgap in the active
+        region (D) just shifts the wavelength shorter; it doesn't
+        narrow it. A metal reflector (E) is broadband — it cannot
+        select a single wavelength.
+      </p>
+    </div>
+  </article>
+</section>
+
+<footer>
+  <p>
+    Companion to the live tutorial / quiz clinic deck
+    <em>Semiconductor Lasers — Tutorial and Quiz Clinic</em>.
+    Print-friendly: print this page from your browser to get a clean
+    light-mode handout.
+  </p>
+</footer>
+
+</main>
+</body>
+</html>
