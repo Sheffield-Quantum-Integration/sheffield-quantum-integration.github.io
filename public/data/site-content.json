@@ -146,8 +146,17 @@
     "placeholders": []
   },
   "opportunitiesPage": {
-    "intro": "We post PhD studentships and postdoctoral roles here when available. If nothing is listed, please get in touch.",
-    "items": []
+    "intro": "We post PhD studentships and postdoctoral roles here when available. For other enquiries, please get in touch.",
+    "items": [
+      {
+        "id": "drq573-quantum-sensor-nanofabrication",
+        "title": "Research Associate in Quantum Sensor Nanofabrication",
+        "type": "Postdoctoral Research Associate",
+        "location": "University of Sheffield",
+        "description": "We are seeking a Research Associate to take ownership of fabrication-focused work on an ARIA-funded magnetobiotics platform, developing chip-scale quantum magnetometers for environmental and ecosystem intervention.\n\nYou will design and fabricate photonic sensor arrays using e-beam lithography, thin-film deposition, photolithography, and etching in world-class cleanroom facilities; package sensors for ecological samples; and characterise performance against magnetic backgrounds in water, soil, and sand. The role combines chip-integrated quantum magnetometry with magnetically labelled microbes, collaborating with Queen Mary University of London on microbial tracking experiments.\n\nWe are looking for a candidate with a PhD (or close to completion, or equivalent experience) and strong hands-on cleanroom fabrication experience, with a track record designing and fabricating micro/nanophotonic or microelectronic devices. Experience with quantum sensing or NV-centre magnetometry is advantageous.",
+        "url": "https://www.jobs.ac.uk/job/DRQ573/research-associate-in-quantum-sensor-nanofabrication"
+      }
+    ]
   },
   "contactPage": {
     "intro": "We are always looking for motivated students and collaborators. Reach out if you are interested in joining the lab or discussing research.",
