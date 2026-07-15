@@ -37,6 +37,21 @@ const NAV_LINKS = [
   { id: 'contact', label: 'Contact', path: '/contact' }
 ]
 
+/** Routes kept out of the main nav (e.g. event microsites). */
+const EXTRA_ROUTES = [
+  { id: 'quantum-dot-day', label: 'Quantum Dot Day', path: '/qdd' }
+]
+
+/** Old paths that should resolve to an existing page id (canonical path comes from EXTRA_ROUTES / NAV_LINKS). */
+const PATH_ALIASES = {
+  '/quantum-dot-day': 'quantum-dot-day'
+}
+
+const ALL_ROUTES = [...NAV_LINKS, ...EXTRA_ROUTES]
+
+const QDD_REGISTER_MAILTO =
+  'mailto:joe.a.smith@sheffield.ac.uk?subject=' + encodeURIComponent('Quantum Dot Day')
+
 const PAGE_META = {
   home: {
     title: 'Sheffield Quantum Integration Lab (SQIL)',
@@ -77,6 +92,12 @@ const PAGE_META = {
     title: 'Contact | SQIL',
     description:
       'Contact SQIL at the University of Sheffield for collaborations and student opportunities.'
+  },
+  'quantum-dot-day': {
+    title: 'Quantum Dot Day | 26 November 2026',
+    description:
+      'Save the date for Quantum Dot Day on 26 November 2026 at Sheffield Town Hall — connect, collaborate, and discover breakthroughs in semiconductors and quantum dots.',
+    image: '/assets/quantum-dot-day.jpg'
   }
 }
 
@@ -87,10 +108,11 @@ const normalizePathname = (pathname = '/') => {
 
 const pageIdForPathname = (pathname = '/') => {
   const normalized = normalizePathname(pathname)
-  return NAV_LINKS.find((link) => link.path === normalized)?.id || 'home'
+  if (PATH_ALIASES[normalized]) return PATH_ALIASES[normalized]
+  return ALL_ROUTES.find((link) => link.path === normalized)?.id || 'home'
 }
 
-const pathForPageId = (pageId = 'home') => NAV_LINKS.find((link) => link.id === pageId)?.path || '/'
+const pathForPageId = (pageId = 'home') => ALL_ROUTES.find((link) => link.id === pageId)?.path || '/'
 
 const upsertMetaByName = (name, content) => {
   let tag = document.querySelector(`meta[name="${name}"]`)
@@ -882,6 +904,145 @@ const PlaceholderView = ({ title }) => (
   </div>
 )
 
+const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
+  <div className="qdd-page min-h-screen bg-[#0B1629] text-white selection:bg-cyan-400/30 selection:text-white">
+    <header className="border-b border-white/5">
+      <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+        <a
+          href={getPathForPage('home')}
+          onClick={(event) => onInternalLinkClick(event, 'home')}
+          className="text-[11px] font-semibold uppercase tracking-[0.28em] text-white/35 transition-colors hover:text-cyan-300"
+        >
+          SQIL
+        </a>
+        <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-cyan-400/80">
+          Save the date
+        </span>
+      </div>
+    </header>
+
+    <section className="relative overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 qdd-atmosphere" aria-hidden="true" />
+      <div className="relative mx-auto grid min-h-[calc(100svh-3.25rem)] max-w-6xl items-stretch lg:grid-cols-2">
+        <div className="flex flex-col justify-center px-6 py-14 qdd-hero-copy sm:px-10 lg:py-20 lg:pr-8 lg:pl-12">
+          <p className="mb-5 text-sm font-bold uppercase tracking-[0.32em] text-cyan-400">
+            Save the date
+          </p>
+          <div className="mb-6 flex flex-wrap items-end gap-x-5 gap-y-2">
+            <p className="text-[7.5rem] font-extrabold leading-none tracking-tight text-cyan-400 md:text-[9rem]">
+              26
+            </p>
+            <div className="pb-3">
+              <p className="text-2xl font-bold uppercase tracking-[0.18em] text-white md:text-3xl">
+                November
+              </p>
+              <p className="mt-1 text-sm font-medium text-white/50">2026</p>
+            </div>
+          </div>
+          <h1 className="mb-5 text-4xl font-extrabold tracking-tight text-white md:text-5xl">
+            Quantum Dot Day
+          </h1>
+          <p className="mb-8 max-w-md text-base font-light leading-relaxed text-white/70 md:text-lg">
+            Connect, collaborate, and discover the latest breakthroughs in the semiconductor and
+            quantum dot landscape.
+          </p>
+          <div className="mb-10 flex items-start gap-3 text-white/80">
+            <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-cyan-400" aria-hidden="true" />
+            <p className="text-base">Sheffield Town Hall, Sheffield</p>
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <a
+              href={QDD_REGISTER_MAILTO}
+              className="inline-flex items-center justify-center rounded-sm bg-cyan-500 px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-[#0B1629] transition-all duration-300 hover:bg-cyan-300 hover:shadow-[0_0_28px_rgba(34,211,238,0.35)]"
+            >
+              Register interest
+            </a>
+            <a
+              href={getPathForPage('home')}
+              onClick={(event) => onInternalLinkClick(event, 'home')}
+              className="inline-flex items-center justify-center rounded-sm border border-white/15 px-7 py-3.5 text-sm font-semibold uppercase tracking-wider text-white/65 transition-colors duration-300 hover:border-cyan-400/40 hover:text-cyan-200"
+            >
+              About SQIL
+            </a>
+          </div>
+        </div>
+
+        <div className="relative min-h-[42vh] overflow-hidden lg:min-h-full">
+          <img
+            src="/assets/quantum-dot-day.jpg"
+            alt="Quantum Dot Day — Sheffield Town Hall with a quantum network overlay"
+            className="absolute inset-0 h-full w-full object-cover object-[center_35%] qdd-hero-image"
+            width={2050}
+            height={890}
+            decoding="async"
+            fetchPriority="high"
+          />
+          <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#0B1629] to-transparent lg:w-32" />
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#0B1629] to-transparent lg:hidden" />
+        </div>
+      </div>
+    </section>
+
+    <section className="border-t border-white/10 px-6 py-14 md:py-16">
+      <div className="mx-auto max-w-2xl text-center">
+        <h2 className="mb-3 text-xl font-bold tracking-tight text-white md:text-2xl">
+          A day for the quantum dot community
+        </h2>
+        <p className="text-sm leading-relaxed text-white/55 md:text-base">
+          Join researchers, students, and industry partners in Sheffield for talks and conversations
+          spanning semiconductor nanotechnology and quantum dots. Programme details will be shared
+          closer to the date.
+        </p>
+      </div>
+    </section>
+
+    <footer className="border-t border-white/10 bg-[#08101f] px-6 py-7">
+      <div className="mx-auto flex max-w-5xl flex-col items-start justify-between gap-3 text-xs text-white/40 sm:flex-row sm:items-center">
+        <p>
+          University of Sheffield
+          <span className="mx-2 text-white/20">·</span>
+          <a
+            href={getPathForPage('home')}
+            onClick={(event) => onInternalLinkClick(event, 'home')}
+            className="text-white/50 transition-colors hover:text-cyan-300"
+          >
+            SQIL
+          </a>
+        </p>
+        <p className="text-white/30">Quantum Dot Day · 26 November 2026</p>
+      </div>
+    </footer>
+
+    <style>{`
+      .qdd-atmosphere {
+        background:
+          radial-gradient(ellipse 50% 40% at 15% 30%, rgba(34, 211, 238, 0.08), transparent 60%),
+          radial-gradient(ellipse 40% 35% at 85% 70%, rgba(34, 211, 238, 0.05), transparent 55%);
+      }
+      .qdd-hero-image {
+        animation: qddKenBurns 22s ease-out forwards;
+      }
+      .qdd-hero-copy {
+        animation: qddRise 0.85s ease-out both;
+      }
+      @keyframes qddKenBurns {
+        from { transform: scale(1.02); }
+        to { transform: scale(1); }
+      }
+      @keyframes qddRise {
+        from { opacity: 0; transform: translateY(16px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .qdd-hero-image,
+        .qdd-hero-copy {
+          animation: none;
+        }
+      }
+    `}</style>
+  </div>
+)
+
 export default function App() {
   const [activePage, setActivePage] = useState(() =>
     typeof window === 'undefined' ? 'home' : pageIdForPathname(window.location.pathname)
@@ -892,7 +1053,7 @@ export default function App() {
   const [content, setContent] = useState(fallbackContent)
 
   const navigateTo = (pageId) => {
-    const nextPageId = NAV_LINKS.some((link) => link.id === pageId) ? pageId : 'home'
+    const nextPageId = ALL_ROUTES.some((link) => link.id === pageId) ? pageId : 'home'
     const nextPath = pathForPageId(nextPageId)
 
     if (typeof window !== 'undefined') {
@@ -992,6 +1153,9 @@ export default function App() {
     const currentMeta = PAGE_META[activePage] || PAGE_META.home
     const pagePath = pathForPageId(activePage)
     const absoluteUrl = `${SITE_ORIGIN}${pagePath}`
+    const ogImage = currentMeta.image
+      ? `${SITE_ORIGIN}${currentMeta.image}`
+      : `${SITE_ORIGIN}/assets/sqi-logo.png`
 
     document.title = currentMeta.title
     upsertMetaByName('description', currentMeta.description)
@@ -1000,7 +1164,7 @@ export default function App() {
     upsertMetaByProperty('og:title', currentMeta.title)
     upsertMetaByProperty('og:description', currentMeta.description)
     upsertMetaByProperty('og:url', absoluteUrl)
-    upsertMetaByProperty('og:image', `${SITE_ORIGIN}/assets/sqi-logo.png`)
+    upsertMetaByProperty('og:image', ogImage)
     upsertCanonical(absoluteUrl)
   }, [activePage])
 
@@ -1038,13 +1202,29 @@ export default function App() {
         )
       case 'contact':
         return <ContactView contact={contact} />
+      case 'quantum-dot-day':
+        return (
+          <QuantumDotDayView
+            getPathForPage={getPathForPage}
+            onInternalLinkClick={onInternalLinkClick}
+          />
+        )
       default:
         return <PlaceholderView title={NAV_LINKS.find((link) => link.id === activePage)?.label || 'Coming Soon'} />
     }
   }
 
+  const isEventMicrosite = activePage === 'quantum-dot-day'
+
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[#050a14] font-sans text-slate-100 selection:bg-amber-500/30 selection:text-white">
+    <div
+      className={`min-h-screen overflow-x-hidden font-sans ${
+        isEventMicrosite
+          ? 'bg-[#0B1629] text-white'
+          : 'bg-[#050a14] text-slate-100 selection:bg-amber-500/30 selection:text-white'
+      }`}
+    >
+      {!isEventMicrosite && (
       <nav
         className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
           isScrolled || activePage !== 'home' ? 'border-b border-white/5 bg-[#050a14]/90 py-3 shadow-lg backdrop-blur-md' : 'bg-transparent py-5'
@@ -1114,9 +1294,11 @@ export default function App() {
           </div>
         )}
       </nav>
+      )}
 
       <main>{renderPage()}</main>
 
+      {!isEventMicrosite && (
       <footer className="border-t border-slate-800 bg-[#050a14] py-12 text-slate-400">
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-6 md:grid-cols-3">
           <div>
@@ -1169,16 +1351,18 @@ export default function App() {
             <p className="text-sm">&copy; {new Date().getFullYear()} SQIL. All rights reserved.</p>
           </div>
         </div>
-        <style>{`
-          @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-          }
-          .animate-fadeIn {
-            animation: fadeIn 0.5s ease-out forwards;
-          }
-        `}</style>
       </footer>
+      )}
+
+      <style>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.5s ease-out forwards;
+        }
+      `}</style>
     </div>
   )
 }
