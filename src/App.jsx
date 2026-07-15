@@ -759,7 +759,7 @@ const FacilitiesView = ({ facilities }) => (
   </div>
 )
 
-const NewsView = () => {
+const NewsView = ({ onInternalLinkClick }) => {
   const [data, setData] = useState(null)
   const [error, setError] = useState('')
 
@@ -820,7 +820,12 @@ const NewsView = () => {
         )}
 
         <div className="space-y-6">
-          {items.map((item) => (
+          {items.map((item) => {
+            const internalPageId = item.pageId
+            const href = item.url || item.linkedinUrl
+            const isExternal = Boolean(item.linkedinUrl) || (item.url && /^https?:\/\//i.test(item.url))
+
+            return (
             <article
               key={item.id || item.title}
               className="rounded-3xl border border-slate-800 bg-[#050a14] p-7 shadow-[0_0_15px_rgba(0,0,0,0.5)] transition-all hover:border-amber-500/30"
@@ -828,11 +833,16 @@ const NewsView = () => {
               <div className="flex flex-col gap-4">
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0 flex-1">
-                    {item.linkedinUrl ? (
+                    {href ? (
                       <a
-                        href={item.linkedinUrl}
-                        target="_blank"
-                        rel="noreferrer"
+                        href={href}
+                        target={isExternal ? '_blank' : undefined}
+                        rel={isExternal ? 'noreferrer' : undefined}
+                        onClick={
+                          internalPageId
+                            ? (event) => onInternalLinkClick?.(event, internalPageId)
+                            : undefined
+                        }
                         className="group inline-flex items-start gap-2 text-xl font-bold text-white hover:text-amber-300"
                       >
                         <span className="min-w-0">{item.title}</span>
@@ -866,17 +876,56 @@ const NewsView = () => {
 
                 {item.image && (
                   <div className="mt-4 overflow-hidden rounded-xl border border-slate-800">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full h-auto object-cover"
-                      loading="lazy"
-                    />
+                    {href ? (
+                      <a
+                        href={href}
+                        target={isExternal ? '_blank' : undefined}
+                        rel={isExternal ? 'noreferrer' : undefined}
+                        onClick={
+                          internalPageId
+                            ? (event) => onInternalLinkClick?.(event, internalPageId)
+                            : undefined
+                        }
+                      >
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="w-full h-auto object-cover transition-opacity hover:opacity-90"
+                          loading="lazy"
+                        />
+                      </a>
+                    ) : (
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="w-full h-auto object-cover"
+                        loading="lazy"
+                      />
+                    )}
+                  </div>
+                )}
+
+                {href && (
+                  <div>
+                    <a
+                      href={href}
+                      target={isExternal ? '_blank' : undefined}
+                      rel={isExternal ? 'noreferrer' : undefined}
+                      onClick={
+                        internalPageId
+                          ? (event) => onInternalLinkClick?.(event, internalPageId)
+                          : undefined
+                      }
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-amber-400 transition-colors hover:text-amber-300"
+                    >
+                      {item.linkLabel || (internalPageId ? 'View event' : 'Read more')}
+                      <ChevronRight className="h-4 w-4" />
+                    </a>
                   </div>
                 )}
 
                 {item.tags && item.tags.length > 0 && (
-                  <div className="mt-4 flex flex-wrap gap-2">
+                  <div className="mt-2 flex flex-wrap gap-2">
                     {item.tags.map((tag) => (
                       <span
                         key={tag}
@@ -889,7 +938,8 @@ const NewsView = () => {
                 )}
               </div>
             </article>
-          ))}
+            )
+          })}
         </div>
       </div>
     </div>
@@ -1192,7 +1242,7 @@ export default function App() {
       case 'facilities':
         return <FacilitiesView facilities={facilities} />
       case 'news':
-        return <NewsView />
+        return <NewsView onInternalLinkClick={onInternalLinkClick} />
       case 'opportunities':
         return (
           <OpportunitiesView

@@ -1,6 +1,17 @@
 {
-  "source": "linkedin",
-  "lastSyncedAt": null,
-  "count": 0,
-  "items": []
+  "source": "manual",
+  "lastSyncedAt": "2026-07-15T00:00:00.000Z",
+  "count": 1,
+  "items": [
+    {
+      "id": "quantum-dot-day-2026",
+      "title": "Quantum Dot Day — 26 November 2026",
+      "content": "Save the date for Quantum Dot Day at Sheffield Town Hall. Connect, collaborate, and discover the latest breakthroughs in the semiconductor and quantum dot landscape. Register interest on the event page.",
+      "date": "2026-07-15",
+      "url": "/qdd",
+      "pageId": "quantum-dot-day",
+      "image": "/assets/quantum-dot-day.jpg",
+      "tags": ["Event", "Quantum Dot Day"]
+    }
+  ]
 }
