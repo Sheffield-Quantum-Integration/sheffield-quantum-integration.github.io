@@ -49,8 +49,8 @@ const PATH_ALIASES = {
 
 const ALL_ROUTES = [...NAV_LINKS, ...EXTRA_ROUTES]
 
-const QDD_REGISTER_MAILTO =
-  'mailto:joe.a.smith@sheffield.ac.uk?subject=' + encodeURIComponent('Quantum Dot Day')
+const QDD_REGISTER_FORM_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLSdTm2wRqOoPqcdbOg5bcXDN9eU3bgNP61kCot0ukSE5FBayog/viewform'
 
 const PAGE_META = {
   home: {
@@ -952,7 +952,9 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
           </div>
           <div className="flex flex-col gap-3 sm:flex-row">
             <a
-              href={QDD_REGISTER_MAILTO}
+              href={QDD_REGISTER_FORM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-sm bg-cyan-500 px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-[#0B1629] transition-all duration-300 hover:bg-cyan-300 hover:shadow-[0_0_28px_rgba(34,211,238,0.35)]"
             >
               Register interest
