@@ -1000,7 +1000,7 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
             <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-cyan-400" aria-hidden="true" />
             <p className="text-base">Sheffield Town Hall, Sheffield</p>
           </div>
-          <div className="flex flex-col gap-3 sm:flex-row">
+          <div>
             <a
               href={QDD_REGISTER_FORM_URL}
               target="_blank"
@@ -1008,13 +1008,6 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
               className="inline-flex items-center justify-center rounded-sm bg-cyan-500 px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-[#0B1629] transition-all duration-300 hover:bg-cyan-300 hover:shadow-[0_0_28px_rgba(34,211,238,0.35)]"
             >
               Register interest
-            </a>
-            <a
-              href={getPathForPage('home')}
-              onClick={(event) => onInternalLinkClick(event, 'home')}
-              className="inline-flex items-center justify-center rounded-sm border border-white/15 px-7 py-3.5 text-sm font-semibold uppercase tracking-wider text-white/65 transition-colors duration-300 hover:border-cyan-400/40 hover:text-cyan-200"
-            >
-              About SQIL
             </a>
           </div>
         </div>
