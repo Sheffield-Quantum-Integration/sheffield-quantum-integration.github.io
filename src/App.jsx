@@ -52,6 +52,32 @@ const ALL_ROUTES = [...NAV_LINKS, ...EXTRA_ROUTES]
 const QDD_REGISTER_FORM_URL =
   'https://docs.google.com/forms/d/e/1FAIpQLSdTm2wRqOoPqcdbOg5bcXDN9eU3bgNP61kCot0ukSE5FBayog/viewform'
 
+const QDD_SESSIONS = [
+  'Epitaxy / III–V emitters',
+  'Colour centres / defects',
+  'Colloidal / soft-matter',
+  'Optics / integration / devices'
+]
+
+const QDD_COMMITTEE = [
+  { name: 'Anthony Bennett', institution: 'Cardiff University' },
+  { name: 'Alistair J. Brash', institution: 'University of Sheffield' },
+  { name: 'Edmund Clarke', institution: 'University of Sheffield' },
+  { name: 'Mark Fox', institution: 'University of Sheffield' },
+  { name: 'J.P. Hadden', institution: 'Cardiff University' },
+  { name: 'Edmund Harbord', institution: 'University of Bristol' },
+  { name: 'Bo Hou', institution: 'Cardiff University' },
+  { name: 'Jake Iles-Smith', institution: 'University of Sheffield' },
+  { name: 'Elyahou Kapon', institution: 'EPFL' },
+  { name: 'Rachel A. Oliver', institution: 'University of Cambridge' }
+]
+
+const QDD_SECTION_NAV = [
+  { href: '#about', label: 'About' },
+  { href: '#sessions', label: 'Sessions' },
+  { href: '#committee', label: 'Committee' }
+]
+
 const PAGE_META = {
   home: {
     title: 'Sheffield Quantum Integration Lab (SQIL)',
@@ -96,7 +122,7 @@ const PAGE_META = {
   'quantum-dot-day': {
     title: 'Quantum Dot Day | 26 November 2026',
     description:
-      'Save the date for Quantum Dot Day on 26 November 2026 at Sheffield Town Hall — connect, collaborate, and discover breakthroughs in semiconductors and quantum dots.',
+      'Thursday 26 November 2026 at Sheffield Town Hall. Quantum Dot Day brings together researchers working on quantum optics, spectroscopy, spin physics, transport, devices and applications, synthesis and growth of semiconductor quantum dots, and defect-centre quantum emitters in diamond, silicon carbide, III-nitrides and other materials.',
     image: '/assets/quantum-dot-day.jpg'
   }
 }
@@ -965,19 +991,24 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
         >
           SQIL
         </a>
-        <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-cyan-400/80">
-          Save the date
-        </span>
+        <nav aria-label="On this page" className="flex flex-wrap items-center justify-end gap-x-4 gap-y-1">
+          {QDD_SECTION_NAV.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/40 transition-colors hover:text-cyan-300"
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
       </div>
     </header>
 
     <section className="relative overflow-hidden">
       <div className="pointer-events-none absolute inset-0 qdd-atmosphere" aria-hidden="true" />
-      <div className="relative mx-auto grid min-h-[calc(100svh-3.25rem)] max-w-6xl items-stretch lg:grid-cols-2">
+      <div className="relative mx-auto grid min-h-0 max-w-6xl items-stretch lg:min-h-[calc(100svh-10rem)] lg:grid-cols-2">
         <div className="flex flex-col justify-center px-6 py-14 qdd-hero-copy sm:px-10 lg:py-20 lg:pr-8 lg:pl-12">
-          <p className="mb-5 text-sm font-bold uppercase tracking-[0.32em] text-cyan-400">
-            Save the date
-          </p>
           <div className="mb-6 flex flex-wrap items-end gap-x-5 gap-y-2">
             <p className="text-[7.5rem] font-extrabold leading-none tracking-tight text-cyan-400 md:text-[9rem]">
               26
@@ -986,7 +1017,7 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
               <p className="text-2xl font-bold uppercase tracking-[0.18em] text-white md:text-3xl">
                 November
               </p>
-              <p className="mt-1 text-sm font-medium text-white/50">2026</p>
+              <p className="mt-1 text-sm font-medium text-white/50">Thursday · 2026</p>
             </div>
           </div>
           <h1 className="mb-5 text-4xl font-extrabold tracking-tight text-white md:text-5xl">
@@ -1028,16 +1059,97 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
       </div>
     </section>
 
-    <section className="border-t border-white/10 px-6 py-14 md:py-16">
-      <div className="mx-auto max-w-2xl text-center">
-        <h2 className="mb-3 text-xl font-bold tracking-tight text-white md:text-2xl">
-          A day for the quantum dot community
+    <section id="about" className="scroll-mt-6 border-t border-white/10 px-6 py-14 md:py-16">
+      <div className="mx-auto max-w-3xl">
+        <h2 className="mb-6 text-xl font-bold tracking-tight text-white md:text-2xl">
+          About the series
         </h2>
-        <p className="text-sm leading-relaxed text-white/55 md:text-base">
-          Join researchers, students, and industry partners in Sheffield for talks and conversations
-          spanning semiconductor nanotechnology and quantum dots. Programme details will be shared
-          closer to the date.
+        <div className="space-y-5 text-sm leading-relaxed text-white/60 md:text-base">
+          <p>
+            Quantum Dot Day brings together researchers working on quantum optics, spectroscopy,
+            spin physics, transport, devices and applications, synthesis and growth of semiconductor
+            quantum dots, and defect-centre quantum emitters in diamond, silicon carbide,
+            III-nitrides and other materials.
+          </p>
+          <p>
+            The 2026 meeting, hosted by the University of Sheffield, keeps the broader scope of
+            Cardiff 2025 — colour centres and related emitters as well as epitaxial dots — with four
+            invited talks plus contributed talks and posters.
+          </p>
+          <p>
+            This is the latest in a series of one-day workshops previously held in Bristol,
+            Lancaster, Sheffield, Edinburgh, Cambridge, Imperial College, Nottingham, Manchester,
+            University College London, and Cardiff.
+          </p>
+          <p>
+            Supported by the IOP Optical Group and the IOP Quantum Electronics &amp; Photonics
+            Group.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="sessions" className="scroll-mt-6 border-t border-white/10 px-6 py-14 md:py-16">
+      <div className="mx-auto max-w-3xl">
+        <h2 className="mb-6 text-xl font-bold tracking-tight text-white md:text-2xl">Sessions</h2>
+        <ol className="mb-6 grid gap-3 sm:grid-cols-2">
+          {QDD_SESSIONS.map((session, index) => (
+            <li
+              key={session}
+              className="flex gap-3 border border-white/10 bg-white/[0.03] px-4 py-3.5"
+            >
+              <span className="text-xs font-bold tabular-nums text-cyan-400/80">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <span className="text-sm font-medium text-white/80 md:text-base">{session}</span>
+            </li>
+          ))}
+        </ol>
+        <p className="text-sm leading-relaxed text-white/50 md:text-base">
+          Invited speakers will be announced once confirmed.
         </p>
+      </div>
+    </section>
+
+    <section id="committee" className="scroll-mt-6 border-t border-white/10 px-6 py-14 md:py-16">
+      <div className="mx-auto max-w-3xl">
+        <h2 className="mb-6 text-xl font-bold tracking-tight text-white md:text-2xl">
+          Organising committee
+        </h2>
+        <p className="mb-6 border-l-2 border-cyan-400/70 pl-4 text-sm text-white/80 md:text-base">
+          <span className="block text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan-400/80">
+            Chair / local host
+          </span>
+          <span className="mt-1 block font-medium text-white">Joe A. Smith</span>
+          <span className="text-white/50">University of Sheffield</span>
+        </p>
+        <ul className="grid gap-x-10 gap-y-4 sm:grid-cols-2">
+          {QDD_COMMITTEE.map((member) => (
+            <li key={member.name}>
+              <p className="text-sm font-medium text-white md:text-base">{member.name}</p>
+              <p className="text-sm text-white/45">{member.institution}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section className="border-t border-white/10 px-6 py-14 md:py-16">
+      <div className="mx-auto flex max-w-3xl flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex items-start gap-3">
+          <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-cyan-400" aria-hidden="true" />
+          <p className="text-sm leading-relaxed text-white/70 md:text-base">
+            Sheffield Town Hall reception suite, city centre, next to Sheffield station.
+          </p>
+        </div>
+        <a
+          href={QDD_REGISTER_FORM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex shrink-0 items-center justify-center rounded-sm bg-cyan-500 px-6 py-3 text-sm font-bold uppercase tracking-wider text-[#0B1629] transition-all duration-300 hover:bg-cyan-300 hover:shadow-[0_0_28px_rgba(34,211,238,0.35)]"
+        >
+          Register interest
+        </a>
       </div>
     </section>
 
@@ -1059,6 +1171,9 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
     </footer>
 
     <style>{`
+      html {
+        scroll-behavior: smooth;
+      }
       .qdd-atmosphere {
         background:
           radial-gradient(ellipse 50% 40% at 15% 30%, rgba(34, 211, 238, 0.08), transparent 60%),
