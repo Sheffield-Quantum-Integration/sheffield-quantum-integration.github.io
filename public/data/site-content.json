@@ -88,6 +88,11 @@
         "photoPosition": "62% 30%"
       },
       {
+        "name": "Dr Teymour Talha-Dean",
+        "role": "Postdoctoral Researcher",
+        "group": "Postdoctoral Researchers"
+      },
+      {
         "name": "Anatoliy Antill",
         "role": "Graduate Student",
         "group": "Graduate Students",
@@ -124,6 +129,12 @@
         "note": "RobQuant",
         "photo": "/assets/agnethe.jpg"
 
+      },
+      {
+        "name": "Hazem Zied",
+        "role": "Summer Researcher",
+        "group": "Summer Researchers",
+        "note": "MEng student"
       }
     ],
     "alumni": [
