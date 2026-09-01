@@ -83,14 +83,14 @@
       {
         "name": "Maxim Makhonin",
         "role": "Research Fellow",
-        "group": "Research Fellow",
+        "group": "Research Fellows",
         "photo": "/assets/maxim.jpg",
         "photoPosition": "62% 30%"
       },
       {
         "name": "Dr Teymour Talha-Dean",
-        "role": "Postdoctoral Researcher",
-        "group": "Postdoctoral Researchers"
+        "role": "Research Fellow",
+        "group": "Research Fellows"
       },
       {
         "name": "Anatoliy Antill",
@@ -126,9 +126,8 @@
       },
       {
         "name": "Hazem Zied",
-        "role": "Visiting Student",
-        "group": "Visitors",
-        "note": "MEng"
+        "role": "Master's Student",
+        "group": "Master's Students"
       }
     ],
     "alumni": [
