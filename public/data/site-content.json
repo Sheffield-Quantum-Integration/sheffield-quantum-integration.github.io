@@ -82,15 +82,15 @@
     "members": [
       {
         "name": "Dr Maxim Makhonin",
-        "role": "Research Fellow",
-        "group": "Research Fellows",
+        "role": "Postdoctoral Researcher",
+        "group": "Postdocs",
         "photo": "/assets/maxim.jpg",
         "photoPosition": "62% 30%"
       },
       {
         "name": "Dr Teymour Talha-Dean",
-        "role": "Research Fellow",
-        "group": "Research Fellows"
+        "role": "Postdoctoral Researcher",
+        "group": "Postdocs"
       },
       {
         "name": "Anatoliy Antill",
@@ -115,6 +115,11 @@
         "photoPosition": "72% 38%"
       },
       {
+        "name": "Hazem Zied",
+        "role": "Summer Researcher",
+        "group": "Summer Researchers"
+      },
+      {
         "name": "Kimy Jaimes",
         "role": "Visiting Researcher",
         "group": "Visitors",
@@ -129,11 +134,6 @@
         "note": "RobQuant",
         "photo": "/assets/agnethe.jpg"
 
-      },
-      {
-        "name": "Hazem Zied",
-        "role": "Summer Researcher",
-        "group": "Summer Researchers"
       }
     ],
     "alumni": [

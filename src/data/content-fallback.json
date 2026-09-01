@@ -82,15 +82,15 @@
     "members": [
       {
         "name": "Maxim Makhonin",
-        "role": "Research Fellow",
-        "group": "Research Fellows",
+        "role": "Postdoctoral Researcher",
+        "group": "Postdocs",
         "photo": "/assets/maxim.jpg",
         "photoPosition": "62% 30%"
       },
       {
         "name": "Dr Teymour Talha-Dean",
-        "role": "Research Fellow",
-        "group": "Research Fellows"
+        "role": "Postdoctoral Researcher",
+        "group": "Postdocs"
       },
       {
         "name": "Anatoliy Antill",
@@ -113,6 +113,11 @@
         "photoPosition": "72% 38%"
       },
       {
+        "name": "Hazem Zied",
+        "role": "Summer Researcher",
+        "group": "Summer Researchers"
+      },
+      {
         "name": "Kimy Jaimes",
         "group": "Visitors",
         "note": "University of New Brunswick",
@@ -123,11 +128,6 @@
         "name": "Agnethe Seim Olsen",
         "group": "Visitors",
         "note": "RobQuant"
-      },
-      {
-        "name": "Hazem Zied",
-        "role": "Summer Researcher",
-        "group": "Summer Researchers"
       }
     ],
     "alumni": [
