@@ -460,7 +460,7 @@ const PeopleView = ({ people }) => {
     return acc
   }, {})
 
-  const orderedGroups = ['Research Fellow', 'Graduate Students', 'Visitors']
+  const orderedGroups = ['Research Fellows', 'Graduate Students', 'Summer Researchers', 'Visitors']
   const groupNames = Object.keys(membersByGroup)
   const sortedGroupNames = [
     ...orderedGroups.filter((group) => groupNames.includes(group)),
