@@ -49,14 +49,48 @@ const PATH_ALIASES = {
 
 const ALL_ROUTES = [...NAV_LINKS, ...EXTRA_ROUTES]
 
-const QDD_REGISTER_FORM_URL =
+const QDD_MAILING_LIST_URL =
   'https://docs.google.com/forms/d/e/1FAIpQLSdTm2wRqOoPqcdbOg5bcXDN9eU3bgNP61kCot0ukSE5FBayog/viewform'
+
+const QDD_ABSTRACT_FORM_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLSclsqLGQUJE-EVDyP3EuD5-Me3Ugsh1aJFXHTZCbYJpS5pErA/viewform'
+
+const QDD_DELEGATE_SHOP_URL =
+  'https://onlineshop.shef.ac.uk/conferences-and-events/faculty-of-engineering/electronic-electrical-engineering/quantum-dot-day-2026'
+
+const QDD_EXHIBITOR_SHOP_URL =
+  'https://onlineshop.shef.ac.uk/conferences-and-events/faculty-of-engineering/electronic-electrical-engineering/quantum-dot-day-26th-november-2026-sponsorship-packages'
+
+// Official WPM URLs from Sarah (2 Sep) and Joe’s 8 Sep committee mail.
+// Joe confirmed both pages were public again on 14 Sep afternoon.
+const QDD_SHOP_LIVE = true
 
 const QDD_SESSIONS = [
   'Epitaxy / III–V emitters',
   'Colour centres / defects',
   'Colloidal / soft-matter',
   'Optics / integration / devices'
+]
+
+const QDD_CONFIRMED_INVITEDS = [
+  {
+    name: 'Fei Ding',
+    institution: 'Leibniz University Hannover',
+    session: 'Epitaxy / III–V emitters',
+    url: 'https://www.fkp.uni-hannover.de/en/research-groups/group-ding'
+  },
+  {
+    name: 'Helena Knowles',
+    institution: 'University of Cambridge',
+    session: 'Colour centres / defects',
+    url: 'https://www.phy.cam.ac.uk/profile/dr-helena-knowles/'
+  },
+  {
+    name: 'Tim Schröder',
+    institution: 'Humboldt-Universität zu Berlin',
+    session: 'Optics / integration / devices',
+    url: 'https://www.physik.hu-berlin.de/en/iqp'
+  }
 ]
 
 const QDD_COMMITTEE = [
@@ -73,8 +107,11 @@ const QDD_COMMITTEE = [
 ]
 
 const QDD_SECTION_NAV = [
+  { href: '#invited', label: 'Invited' },
   { href: '#about', label: 'About' },
   { href: '#sessions', label: 'Sessions' },
+  { href: '#abstracts', label: 'Abstracts' },
+  { href: '#register', label: 'Register' },
   { href: '#committee', label: 'Committee' }
 ]
 
@@ -122,7 +159,7 @@ const PAGE_META = {
   'quantum-dot-day': {
     title: 'Quantum Dot Day | 26 November 2026',
     description:
-      'Thursday 26 November 2026 at Sheffield Town Hall. Quantum Dot Day brings together researchers working on quantum optics, spectroscopy, spin physics, transport, devices and applications, synthesis and growth of semiconductor quantum dots, and defect-centre quantum emitters in diamond, silicon carbide, III-nitrides and other materials.',
+      'Thursday 26 November 2026 at Sheffield Town Hall. Abstracts close 8 October. Registration open. Invited speakers: Fei Ding, Helena Knowles and Tim Schröder.',
     image: '/assets/quantum-dot-day.jpg'
   }
 }
@@ -1023,22 +1060,66 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
           <h1 className="mb-5 text-4xl font-extrabold tracking-tight text-white md:text-5xl">
             Quantum Dot Day
           </h1>
-          <p className="mb-8 max-w-md text-base font-light leading-relaxed text-white/70 md:text-lg">
-            Connect, collaborate, and discover the latest breakthroughs in the semiconductor and
-            quantum dot landscape.
+          <p className="mb-6 max-w-md text-base font-light leading-relaxed text-white/70 md:text-lg">
+            One-day UK meeting on quantum dots and solid-state emitters. Invited talks, contributed
+            talks and posters. Sheffield Town Hall.
           </p>
+          <div className="mb-8">
+            <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan-400/80">
+              Invited speakers
+            </p>
+            <ul className="space-y-1.5">
+              {QDD_CONFIRMED_INVITEDS.map((speaker) => (
+                <li key={speaker.name} className="text-base text-white/80 md:text-lg">
+                  <a
+                    href={speaker.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-white underline-offset-4 transition-colors hover:text-cyan-300 hover:underline"
+                  >
+                    {speaker.name}
+                  </a>
+                  <span className="text-white/45"> — {speaker.institution}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
           <div className="mb-10 flex items-start gap-3 text-white/80">
             <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-cyan-400" aria-hidden="true" />
             <p className="text-base">Sheffield Town Hall, Sheffield</p>
           </div>
-          <div>
+          <div className="flex flex-col items-start gap-3">
+            <div className="flex flex-col gap-3 sm:flex-row">
+              {QDD_SHOP_LIVE ? (
+                <a
+                  href={QDD_DELEGATE_SHOP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center rounded-sm bg-cyan-500 px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-[#0B1629] transition-all duration-300 hover:bg-cyan-300 hover:shadow-[0_0_28px_rgba(34,211,238,0.35)]"
+                >
+                  Register
+                </a>
+              ) : null}
+              <a
+                href={QDD_ABSTRACT_FORM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={
+                  QDD_SHOP_LIVE
+                    ? 'inline-flex items-center justify-center rounded-sm border border-cyan-400/70 px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-cyan-200 transition-all duration-300 hover:border-cyan-300 hover:text-white'
+                    : 'inline-flex items-center justify-center rounded-sm bg-cyan-500 px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-[#0B1629] transition-all duration-300 hover:bg-cyan-300 hover:shadow-[0_0_28px_rgba(34,211,238,0.35)]'
+                }
+              >
+                Submit an abstract
+              </a>
+            </div>
             <a
-              href={QDD_REGISTER_FORM_URL}
+              href={QDD_MAILING_LIST_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-sm bg-cyan-500 px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-[#0B1629] transition-all duration-300 hover:bg-cyan-300 hover:shadow-[0_0_28px_rgba(34,211,238,0.35)]"
+              className="text-sm text-white/45 underline-offset-4 transition-colors hover:text-cyan-300 hover:underline"
             >
-              Register interest
+              Join the mailing list
             </a>
           </div>
         </div>
@@ -1056,6 +1137,42 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
           <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#0B1629] to-transparent lg:w-32" />
           <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#0B1629] to-transparent lg:hidden" />
         </div>
+      </div>
+    </section>
+
+    <section id="invited" className="scroll-mt-6 border-t border-white/10 px-6 py-14 md:py-16">
+      <div className="mx-auto max-w-5xl">
+        <h2 className="mb-3 text-xl font-bold tracking-tight text-white md:text-2xl">
+          Invited speakers
+        </h2>
+        <p className="mb-8 max-w-3xl text-sm leading-relaxed text-white/55 md:text-base">
+          Three committee-invited talks are confirmed. Further invited talks to be announced.
+        </p>
+        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:grid-rows-[auto_auto_auto] lg:gap-x-4 lg:gap-y-0">
+          {QDD_CONFIRMED_INVITEDS.map((speaker) => (
+            <li
+              key={speaker.name}
+              className="flex flex-col border border-white/10 bg-white/[0.03] px-5 py-5 lg:row-span-3 lg:grid lg:grid-rows-subgrid"
+            >
+              <p className="text-[11px] font-semibold uppercase leading-snug tracking-[0.08em] text-cyan-400/80">
+                {speaker.session}
+              </p>
+              <a
+                href={speaker.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group mt-3 inline-flex items-baseline gap-2 text-xl font-semibold tracking-tight text-white transition-colors hover:text-cyan-300 md:text-2xl"
+              >
+                <span>{speaker.name}</span>
+                <ArrowUpRight
+                  className="h-4 w-4 shrink-0 self-center text-cyan-400/80 transition-colors group-hover:text-cyan-300"
+                  aria-hidden="true"
+                />
+              </a>
+              <p className="mt-2 text-sm text-white/50 md:text-base">{speaker.institution}</p>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
 
@@ -1092,7 +1209,7 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
     <section id="sessions" className="scroll-mt-6 border-t border-white/10 px-6 py-14 md:py-16">
       <div className="mx-auto max-w-3xl">
         <h2 className="mb-6 text-xl font-bold tracking-tight text-white md:text-2xl">Sessions</h2>
-        <ol className="mb-6 grid gap-3 sm:grid-cols-2">
+        <ol className="grid gap-3 sm:grid-cols-2">
           {QDD_SESSIONS.map((session, index) => (
             <li
               key={session}
@@ -1105,9 +1222,83 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
             </li>
           ))}
         </ol>
-        <p className="text-sm leading-relaxed text-white/50 md:text-base">
-          Invited speakers will be announced once confirmed.
+      </div>
+    </section>
+
+    <section id="abstracts" className="scroll-mt-6 border-t border-white/10 px-6 py-14 md:py-16">
+      <div className="mx-auto max-w-3xl">
+        <h2 className="mb-6 text-xl font-bold tracking-tight text-white md:text-2xl">
+          Contributed talks and posters
+        </h2>
+        <p className="mb-6 text-sm leading-relaxed text-white/60 md:text-base">
+          Abstracts are open for contributed talks and posters. Deadline{' '}
+          <strong className="font-semibold text-white">Thursday 8 October 2026</strong>.
         </p>
+        <a
+          href={QDD_ABSTRACT_FORM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-center rounded-sm bg-cyan-500 px-6 py-3 text-sm font-bold uppercase tracking-wider text-[#0B1629] transition-all duration-300 hover:bg-cyan-300 hover:shadow-[0_0_28px_rgba(34,211,238,0.35)]"
+        >
+          Submit an abstract
+        </a>
+      </div>
+    </section>
+
+    <section id="register" className="scroll-mt-6 border-t border-white/10 px-6 py-14 md:py-16">
+      <div className="mx-auto max-w-3xl">
+        <h2 className="mb-6 text-xl font-bold tracking-tight text-white md:text-2xl">
+          Registration
+        </h2>
+        {QDD_SHOP_LIVE ? (
+          <>
+            <p className="mb-4 text-sm leading-relaxed text-white/60 md:text-base">
+              Delegate tickets (standard £80 / student £60) are on the University shop. Last booking
+              Friday 13 November.
+            </p>
+            <div className="flex flex-col items-start gap-3 sm:flex-row">
+              <a
+                href={QDD_DELEGATE_SHOP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-sm bg-cyan-500 px-6 py-3 text-sm font-bold uppercase tracking-wider text-[#0B1629] transition-all duration-300 hover:bg-cyan-300 hover:shadow-[0_0_28px_rgba(34,211,238,0.35)]"
+              >
+                Delegate tickets
+              </a>
+              <a
+                href={QDD_EXHIBITOR_SHOP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-sm border border-cyan-400/70 px-6 py-3 text-sm font-bold uppercase tracking-wider text-cyan-200 transition-all duration-300 hover:border-cyan-300 hover:text-white"
+              >
+                Exhibitors and sponsors
+              </a>
+            </div>
+          </>
+        ) : (
+          <>
+            <p className="mb-4 text-sm leading-relaxed text-white/60 md:text-base">
+              Delegate tickets (standard £80 / student £60) and exhibitor packages will be on the
+              University shop. Last booking Friday 13 November. The shop pages are temporarily
+              unavailable — email{' '}
+              <a
+                href="mailto:joe.a.smith@sheffield.ac.uk"
+                className="text-cyan-200 underline-offset-4 hover:underline"
+              >
+                joe.a.smith@sheffield.ac.uk
+              </a>{' '}
+              if you need to book, or join the mailing list.
+            </p>
+            <a
+              href={QDD_MAILING_LIST_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-sm bg-cyan-500 px-6 py-3 text-sm font-bold uppercase tracking-wider text-[#0B1629] transition-all duration-300 hover:bg-cyan-300 hover:shadow-[0_0_28px_rgba(34,211,238,0.35)]"
+            >
+              Join the mailing list
+            </a>
+          </>
+        )}
       </div>
     </section>
 
@@ -1135,20 +1326,32 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
     </section>
 
     <section className="border-t border-white/10 px-6 py-14 md:py-16">
-      <div className="mx-auto flex max-w-3xl flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mx-auto flex max-w-3xl flex-col gap-6">
         <div className="flex items-start gap-3">
           <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-cyan-400" aria-hidden="true" />
           <p className="text-sm leading-relaxed text-white/70 md:text-base">
             Sheffield Town Hall reception suite, city centre, next to Sheffield station.
           </p>
         </div>
+        <div className="flex items-start gap-3">
+          <Mail className="mt-0.5 h-5 w-5 shrink-0 text-cyan-400" aria-hidden="true" />
+          <p className="text-sm leading-relaxed text-white/70 md:text-base">
+            Joe A. Smith,{' '}
+            <a
+              href="mailto:joe.a.smith@sheffield.ac.uk"
+              className="text-cyan-200 underline-offset-4 hover:underline"
+            >
+              joe.a.smith@sheffield.ac.uk
+            </a>
+          </p>
+        </div>
         <a
-          href={QDD_REGISTER_FORM_URL}
+          href={QDD_MAILING_LIST_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex shrink-0 items-center justify-center rounded-sm bg-cyan-500 px-6 py-3 text-sm font-bold uppercase tracking-wider text-[#0B1629] transition-all duration-300 hover:bg-cyan-300 hover:shadow-[0_0_28px_rgba(34,211,238,0.35)]"
+          className="text-sm text-white/45 underline-offset-4 transition-colors hover:text-cyan-300 hover:underline"
         >
-          Register interest
+          Join the mailing list
         </a>
       </div>
     </section>
