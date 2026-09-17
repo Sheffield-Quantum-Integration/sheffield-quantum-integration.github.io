@@ -61,6 +61,12 @@ const QDD_DELEGATE_SHOP_URL =
 const QDD_EXHIBITOR_SHOP_URL =
   'https://onlineshop.shef.ac.uk/conferences-and-events/faculty-of-engineering/electronic-electrical-engineering/quantum-dot-day-26th-november-2026-sponsorship-packages'
 
+const QDD_IOP_OPTICAL_GROUP_URL =
+  'https://www.iop.org/physics-community/special-interest-groups/optical-group'
+
+const QDD_IOP_QEP_GROUP_URL =
+  'https://www.iop.org/physics-community/special-interest-groups/quantum-electronics-photonics-group'
+
 // Official WPM URLs from Sarah (2 Sep) and Joe’s 8 Sep committee mail.
 // Joe confirmed both pages were public again on 14 Sep afternoon.
 const QDD_SHOP_LIVE = true
@@ -84,6 +90,12 @@ const QDD_CONFIRMED_INVITEDS = [
     institution: 'University of Cambridge',
     session: 'Colour centres / defects',
     url: 'https://www.phy.cam.ac.uk/profile/dr-helena-knowles/'
+  },
+  {
+    name: 'Sandrine Ithurria',
+    institution: 'ESPCI Paris',
+    session: 'Colloidal / soft-matter',
+    url: 'https://blog.espci.fr/qdots/people/ithurria-2/'
   },
   {
     name: 'Tim Schröder',
@@ -159,7 +171,7 @@ const PAGE_META = {
   'quantum-dot-day': {
     title: 'Quantum Dot Day | 26 November 2026',
     description:
-      'Thursday 26 November 2026 at Sheffield Town Hall. Abstracts close 8 October. Registration open. Invited speakers: Fei Ding, Helena Knowles and Tim Schröder.',
+      'Thursday 26 November 2026 at Sheffield Town Hall. Abstracts close 8 October. Registration open. Invited speakers: Fei Ding, Helena Knowles, Sandrine Ithurria and Tim Schröder.',
     image: '/assets/quantum-dot-day.jpg'
   }
 }
@@ -1141,14 +1153,14 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
     </section>
 
     <section id="invited" className="scroll-mt-6 border-t border-white/10 px-6 py-14 md:py-16">
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-6xl">
         <h2 className="mb-3 text-xl font-bold tracking-tight text-white md:text-2xl">
           Invited speakers
         </h2>
         <p className="mb-8 max-w-3xl text-sm leading-relaxed text-white/55 md:text-base">
-          Three committee-invited talks are confirmed. Further invited talks to be announced.
+          Four committee-invited talks are confirmed.
         </p>
-        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:grid-rows-[auto_auto_auto] lg:gap-x-4 lg:gap-y-0">
+        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:grid-rows-[auto_auto_auto] lg:gap-x-4 lg:gap-y-0">
           {QDD_CONFIRMED_INVITEDS.map((speaker) => (
             <li
               key={speaker.name}
@@ -1199,8 +1211,25 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
             University College London, and Cardiff.
           </p>
           <p>
-            Supported by the IOP Optical Group and the IOP Quantum Electronics &amp; Photonics
-            Group.
+            Generously supported by the{' '}
+            <a
+              href={QDD_IOP_OPTICAL_GROUP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-cyan-200 underline-offset-4 hover:underline"
+            >
+              IOP Optical Group
+            </a>{' '}
+            and the{' '}
+            <a
+              href={QDD_IOP_QEP_GROUP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-cyan-200 underline-offset-4 hover:underline"
+            >
+              IOP Quantum, Electronics and Photonics Group
+            </a>
+            .
           </p>
         </div>
       </div>
