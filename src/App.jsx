@@ -67,6 +67,10 @@ const QDD_IOP_OPTICAL_GROUP_URL =
 const QDD_IOP_QEP_GROUP_URL =
   'https://www.iop.org/physics-community/special-interest-groups/quantum-electronics-photonics-group'
 
+const QDD_PI_KEM_URL = 'https://www.pi-kem.co.uk'
+
+const QDD_AEGIQ_URL = 'https://www.aegiq.com'
+
 // Official WPM URLs from Sarah (2 Sep) and Joe’s 8 Sep committee mail.
 // Joe confirmed both pages were public again on 14 Sep afternoon.
 const QDD_SHOP_LIVE = true
@@ -1350,6 +1354,38 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
               <p className="text-sm text-white/45">{member.institution}</p>
             </li>
           ))}
+        </ul>
+      </div>
+    </section>
+
+    <section aria-labelledby="qdd-sponsors" className="scroll-mt-6 border-t border-white/10 px-6 py-14 md:py-16">
+      <div className="mx-auto max-w-3xl">
+        <h2 id="qdd-sponsors" className="mb-8 text-xl font-bold tracking-tight text-white md:text-2xl">
+          Sponsors
+        </h2>
+        <ul className="flex flex-wrap items-center gap-4">
+          <li>
+            <a
+              href={QDD_PI_KEM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="PI-KEM"
+              className="flex h-28 items-center justify-center bg-white px-6"
+            >
+              <img src="/assets/pi-kem-logo.jpg" alt="PI-KEM" className="h-20 w-20 object-contain" />
+            </a>
+          </li>
+          <li>
+            <a
+              href={QDD_AEGIQ_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Aegiq"
+              className="flex h-28 items-center justify-center bg-white px-8"
+            >
+              <img src="/assets/aegiq-logo.svg" alt="Aegiq" className="h-12 w-auto" />
+            </a>
+          </li>
         </ul>
       </div>
     </section>
