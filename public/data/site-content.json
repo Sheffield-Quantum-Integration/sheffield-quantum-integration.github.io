@@ -115,11 +115,6 @@
         "photoPosition": "72% 38%"
       },
       {
-        "name": "Hazem Zied",
-        "role": "Summer Researcher",
-        "group": "Summer Researchers"
-      },
-      {
         "name": "Kimy Jaimes",
         "role": "Visiting Researcher",
         "group": "Visitors",
@@ -137,6 +132,10 @@
       }
     ],
     "alumni": [
+      {
+        "name": "Hazem Zied",
+        "destination": "NanoDTC at University of Cambridge"
+      },
       {
         "name": "Sophia Komrakova",
         "destination": "National Graphene Centre"
