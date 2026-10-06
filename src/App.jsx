@@ -71,6 +71,8 @@ const QDD_PI_KEM_URL = 'https://www.pi-kem.co.uk'
 
 const QDD_AEGIQ_URL = 'https://www.aegiq.com'
 
+const QDD_QUANTUM_DESIGN_URL = 'https://www.qd-uki.co.uk'
+
 // Official WPM URLs from Sarah (2 Sep) and Joe’s 8 Sep committee mail.
 // Joe confirmed both pages were public again on 14 Sep afternoon.
 const QDD_SHOP_LIVE = true
@@ -1384,6 +1386,21 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
               className="flex h-28 items-center justify-center bg-white px-8"
             >
               <img src="/assets/aegiq-logo.svg" alt="Aegiq" className="h-12 w-auto" />
+            </a>
+          </li>
+          <li>
+            <a
+              href={QDD_QUANTUM_DESIGN_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Quantum Design UK and Ireland"
+              className="flex h-28 items-center justify-center bg-white px-6"
+            >
+              <img
+                src="/assets/quantum-design-logo.jpg"
+                alt="Quantum Design"
+                className="h-16 w-auto object-contain"
+              />
             </a>
           </li>
         </ul>
