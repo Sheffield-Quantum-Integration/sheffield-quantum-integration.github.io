@@ -11,10 +11,16 @@ export const QDD_REVIEW_SCRIPT_URL = ''
 
 export const QDD_REVIEW_EMAIL = 'joe.a.smith@sheffield.ac.uk'
 
-/** Talk/either abstracts pre-placed away from the session the submitter chose. */
+/** Positional talk cut in every session. The page ignores per-session targets in the JSON. */
+export const TALK_TARGET = 3
+
+/** The only pre-placed move. Tag text is shown as written. */
 export const PROPOSED_MOVES = [
-  { id: 'A22', proposedSession: 'Colour centres / defects' },
-  { id: 'A07', proposedSession: 'Colour centres / defects' }
+  {
+    id: 'A22',
+    proposedSession: 'Colour centres / defects',
+    tag: 'Proposed move — submitted to Optics'
+  }
 ]
 
 /**

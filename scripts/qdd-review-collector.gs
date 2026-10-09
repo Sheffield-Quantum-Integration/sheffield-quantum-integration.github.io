@@ -13,10 +13,9 @@
 
 var HEADERS = [
   'Timestamp',
-  'Reviewer',
+  'Reviewer initials',
   'Ranked order',
   'Session moves',
-  'Conflicts',
   'Notes',
   'Proposed moves',
   'Poster decisions',
@@ -44,10 +43,9 @@ function doPost(e) {
     var sheet = rankingSheet_()
     sheet.appendRow([
       asText_(data.submittedAt || new Date().toISOString()),
-      asText_(data.reviewer || ''),
+      asText_(data.reviewerInitials || ''),
       asText_(rankedCell_(data)),
       asText_(movesCell_(data)),
-      asText_(conflictsCell_(data)),
       asText_(notesCell_(data)),
       asText_(proposalsCell_(data)),
       asText_(postersCell_(data)),
@@ -110,7 +108,7 @@ function rankedCell_(data) {
       var rows = block.ranked || []
       if (!rows.length) lines.push('(none)')
       rows.forEach(function (row) {
-        var mark = row.conflict ? 'SKIP' : row.aboveCut ? 'TALK ' + row.talkRank : 'below ' + row.talkRank
+        var mark = row.aboveCut ? 'TALK ' + row.position : 'below ' + row.position
         lines.push(mark + '  ' + row.id + '  ' + (row.presenter || '') + ' — ' + (row.title || ''))
       })
       return lines.join('\n')
@@ -124,16 +122,6 @@ function movesCell_(data) {
   return moves
     .map(function (move) {
       return move.id + ': ' + move.from + ' → ' + move.to
-    })
-    .join('\n')
-}
-
-function conflictsCell_(data) {
-  var conflicts = data.conflicts || []
-  if (!conflicts.length) return 'none'
-  return conflicts
-    .map(function (conflict) {
-      return conflict.id + ' (' + (conflict.session || '') + ')' + (conflict.note ? ' — ' + conflict.note : '')
     })
     .join('\n')
 }
@@ -183,9 +171,8 @@ function postersCell_(data) {
     .map(function (poster) {
       var verdict = poster.decision === 'reject' || poster.accept === false ? 'REJECT' : 'ACCEPT'
       var reason = verdict === 'REJECT' ? ' — reason: ' + (poster.reason || '(missing)') : ''
-      var conflict = poster.conflict ? ' — conflict' : ''
       var note = poster.note ? ' — note: ' + poster.note : ''
-      return verdict + '  ' + poster.id + '  ' + (poster.presenter || '') + reason + conflict + note
+      return verdict + '  ' + poster.id + '  ' + (poster.presenter || '') + reason + note
     })
     .join('\n')
 }

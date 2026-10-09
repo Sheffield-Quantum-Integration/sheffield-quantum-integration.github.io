@@ -1,11 +1,11 @@
 import { PROPOSED_MOVES } from './config.js'
 
-export const STORAGE_KEY = 'qdd-committee-ranking-v1'
+export const STORAGE_KEY = 'qdd-committee-ranking-v2'
 
 const NOTE_LIMIT = 240
 const COMMENT_LIMIT = 200
 const REASON_LIMIT = 200
-const NAME_LIMIT = 80
+const INITIALS_LIMIT = 40
 
 export function proposedMoveFor(id) {
   return PROPOSED_MOVES.find((item) => item.id === id) || null
@@ -35,7 +35,7 @@ export function createInitialState(data) {
   }
 
   for (const abs of data.abstracts) {
-    meta[abs.id] = { conflict: false, note: '' }
+    meta[abs.id] = { note: '' }
     if (abs.badge === 'POSTER') {
       posters[abs.id] = { accept: true, reason: '' }
       continue
@@ -51,7 +51,7 @@ export function createInitialState(data) {
     ranked[proposedMoveFor(abs.id).proposedSession].push(abs.id)
   }
 
-  return { reviewerName: '', ranked, meta, posters, proposals }
+  return { reviewerInitials: '', ranked, meta, posters, proposals }
 }
 
 export function sessionOf(ranked, id) {
@@ -95,7 +95,6 @@ export function reconcile(saved, data) {
   for (const abs of data.abstracts) {
     const prev = saved.meta && saved.meta[abs.id] ? saved.meta[abs.id] : {}
     meta[abs.id] = {
-      conflict: Boolean(prev.conflict),
       note: typeof prev.note === 'string' ? prev.note.slice(0, NOTE_LIMIT) : ''
     }
   }
@@ -128,7 +127,8 @@ export function reconcile(saved, data) {
   }
 
   return {
-    reviewerName: typeof saved.reviewerName === 'string' ? saved.reviewerName.slice(0, NAME_LIMIT) : '',
+    reviewerInitials:
+      typeof saved.reviewerInitials === 'string' ? saved.reviewerInitials.slice(0, INITIALS_LIMIT) : '',
     ranked,
     meta,
     posters,

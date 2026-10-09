@@ -1,4 +1,4 @@
-import { PROPOSED_MOVES, QDD_REVIEW_EMAIL, themeFor } from './config.js'
+import { PROPOSED_MOVES, QDD_REVIEW_EMAIL, TALK_TARGET, themeFor } from './config.js'
 import { proposedMoveFor } from './storage.js'
 
 const MAILTO_LIMIT = 1900
@@ -11,21 +11,13 @@ export function decisionLabel(decision) {
 
 export function buildRankingPayload(data, state, submittedAt = new Date().toISOString()) {
   const byId = Object.fromEntries(data.abstracts.map((abs) => [abs.id, abs]))
+  const talkSlotsTotal = data.sessions.length * TALK_TARGET
 
   const sessions = data.sessions.map((session) => {
-    const target = data.talkTargets[session] ?? 0
-    let eligible = 0
     const ranked = (state.ranked[session] || []).map((id, index) => {
       const abs = byId[id]
-      const conflict = Boolean(state.meta[id]?.conflict)
       const note = state.meta[id]?.note || ''
-      let talkRank = null
-      let aboveCut = false
-      if (!conflict) {
-        eligible += 1
-        talkRank = eligible
-        aboveCut = talkRank <= target
-      }
+      const position = index + 1
       const proposalMeta = proposedMoveFor(id)
       const savedProposal = state.proposals?.[id]
       const proposal = proposalMeta
@@ -37,11 +29,9 @@ export function buildRankingPayload(data, state, submittedAt = new Date().toISOS
           }
         : null
       return {
-        position: index + 1,
-        talkRank,
+        position,
         id,
-        aboveCut,
-        conflict,
+        aboveCut: position <= TALK_TARGET,
         badge: abs.badge,
         preference: abs.preference,
         title: abs.title,
@@ -54,7 +44,7 @@ export function buildRankingPayload(data, state, submittedAt = new Date().toISOS
         proposal
       }
     })
-    return { session, talkTarget: target, ranked }
+    return { session, talkTarget: TALK_TARGET, ranked }
   })
 
   const posters = data.abstracts
@@ -70,7 +60,6 @@ export function buildRankingPayload(data, state, submittedAt = new Date().toISOS
         presenter: abs.presenter,
         institution: abs.institution,
         theme: abs.session,
-        conflict: Boolean(state.meta[abs.id]?.conflict),
         note: state.meta[abs.id]?.note || '',
         accept,
         decision: accept ? 'accept' : 'reject',
@@ -79,17 +68,14 @@ export function buildRankingPayload(data, state, submittedAt = new Date().toISOS
     })
 
   const moves = []
-  const conflicts = []
   const notes = []
   for (const block of sessions) {
     for (const row of block.ranked) {
       if (row.moved) moves.push({ id: row.id, from: row.originalSession, to: row.session })
-      if (row.conflict) conflicts.push({ id: row.id, kind: 'talk', session: row.session, note: row.note })
       if (row.note) notes.push({ id: row.id, note: row.note })
     }
   }
   for (const row of posters) {
-    if (row.conflict) conflicts.push({ id: row.id, kind: 'poster', session: row.theme, note: row.note })
     if (row.note) notes.push({ id: row.id, note: row.note })
   }
 
@@ -112,14 +98,13 @@ export function buildRankingPayload(data, state, submittedAt = new Date().toISOS
 
   return {
     event: data.event,
-    reviewer: (state.reviewerName || '').trim(),
+    reviewerInitials: (state.reviewerInitials || '').trim(),
     submittedAt,
-    talkSlotsTotal: data.talkSlotsTotal,
+    talkSlotsTotal,
     sessions,
     posters,
     moves,
     proposals,
-    conflicts,
     notes
   }
 }
@@ -129,7 +114,7 @@ export function missingRejectReasons(payload) {
 }
 
 function lineForRanked(row) {
-  const mark = row.conflict ? 'SKIP' : String(row.talkRank).padStart(2, ' ')
+  const mark = String(row.position).padStart(2, ' ')
   const moved = row.moved ? ` [moved from ${row.originalSession}]` : ''
   const proposed = row.proposal ? ' [proposed move]' : ''
   const note = row.note ? ` — note: ${row.note}` : ''
@@ -139,14 +124,13 @@ function lineForRanked(row) {
 export function formatRankingText(payload) {
   const lines = [
     `${payload.event} — committee ranking`,
-    `Reviewer: ${payload.reviewer || '(no name)'}`,
+    `Reviewer initials: ${payload.reviewerInitials || '(not given)'}`,
     `Submitted: ${payload.submittedAt}`,
     ''
   ]
 
   for (const block of payload.sessions) {
     lines.push(`${block.session} (talk target ${block.talkTarget})`)
-    let eligible = 0
     let cutShown = false
     const showCut = () => {
       if (cutShown) return
@@ -158,8 +142,7 @@ export function formatRankingText(payload) {
       showCut()
     }
     for (const row of block.ranked) {
-      if (!row.conflict && eligible === block.talkTarget) showCut()
-      if (!row.conflict) eligible += 1
+      if (row.position === block.talkTarget + 1) showCut()
       lines.push(lineForRanked(row))
     }
     if (!cutShown) showCut()
@@ -183,14 +166,9 @@ export function formatRankingText(payload) {
   lines.push('Poster session')
   for (const row of payload.posters) {
     const verdict = row.decision === 'reject' ? 'REJECT' : 'ACCEPT'
-    const flags = [
-      row.conflict ? 'conflict' : null,
-      row.note ? `note: ${row.note}` : null
-    ].filter(Boolean)
+    const note = row.note ? ` (note: ${row.note})` : ''
     lines.push(
-      `${verdict}  ${row.id}  ${row.presenter} — ${row.title} · ${themeFor(row.theme).label}${
-        flags.length ? ` (${flags.join('; ')})` : ''
-      }`
+      `${verdict}  ${row.id}  ${row.presenter} — ${row.title} · ${themeFor(row.theme).label}${note}`
     )
     if (row.decision === 'reject') lines.push(`  reason: ${row.reason || '(missing)'}`)
   }
@@ -199,13 +177,6 @@ export function formatRankingText(payload) {
   lines.push('Session moves')
   if (!payload.moves.length) lines.push('none')
   for (const move of payload.moves) lines.push(`${move.id}: ${move.from} → ${move.to}`)
-  lines.push('')
-
-  lines.push('Conflicts')
-  if (!payload.conflicts.length) lines.push('none')
-  for (const conflict of payload.conflicts) {
-    lines.push(`${conflict.id} (${conflict.session})${conflict.note ? ` — ${conflict.note}` : ''}`)
-  }
   lines.push('')
 
   lines.push('Notes')
@@ -225,7 +196,8 @@ function fitsMailto(prefix, text) {
 }
 
 export function buildMailto({ email = QDD_REVIEW_EMAIL, payload }) {
-  const subject = `QDD 2026 ranking — ${payload.reviewer || 'reviewer'}`
+  const initials = (payload.reviewerInitials || '').trim()
+  const subject = initials ? `QDD 2026 ranking — ${initials}` : 'QDD 2026 ranking'
   const prefix = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=`
   const readable = formatRankingText(payload)
   const json = JSON.stringify(payload, null, 2)

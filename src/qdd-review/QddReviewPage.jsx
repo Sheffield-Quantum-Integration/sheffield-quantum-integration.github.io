@@ -21,7 +21,7 @@ import {
 import { CSS } from '@dnd-kit/utilities'
 import { ChevronDown, GripVertical } from 'lucide-react'
 import reviewData from '../data/qdd-abstracts-review.json'
-import { scriptUrl, themeFor } from './config.js'
+import { scriptUrl, themeFor, TALK_TARGET } from './config.js'
 import {
   buildMailto,
   buildRankingPayload,
@@ -50,7 +50,7 @@ function countsLabel(data) {
 }
 
 function guideLabel(data) {
-  return `About ${data.talkSlotsTotal} contributed talk slots (roughly 3 Epitaxy, 2 to 3 Colour centres, 3 Colloidal, 4 Optics).`
+  return `${data.sessions.length * TALK_TARGET} contributed talk slots, ${TALK_TARGET} in each session.`
 }
 
 function isContainerId(id) {
@@ -171,9 +171,8 @@ function choiceClass(active) {
 function RankCard({
   abstract,
   currentSession,
-  talkRank,
+  position,
   aboveCut,
-  conflict,
   note,
   expanded,
   proposal,
@@ -181,7 +180,6 @@ function RankCard({
   comment,
   onToggle,
   onSessionChange,
-  onConflict,
   onNote,
   onDecide,
   onComment
@@ -204,9 +202,9 @@ function RankCard({
       data-testid={`card-${abstract.id}`}
       data-above-cut={aboveCut ? 'true' : 'false'}
       data-decision={proposal ? decision || 'unanswered' : undefined}
-      className={`scroll-mb-56 border border-white/10 border-l-4 sm:scroll-mb-40 ${theme.border} ${
+      className={`scroll-mb-80 border border-white/10 border-l-4 sm:scroll-mb-52 ${theme.border} ${
         aboveCut ? 'bg-white/[0.06]' : 'bg-white/[0.03]'
-      } ${conflict ? 'opacity-60' : ''}`}
+      }`}
     >
       <div className="flex items-start gap-2 p-2.5 sm:p-3">
         <button
@@ -220,16 +218,11 @@ function RankCard({
         >
           <GripVertical className="h-4 w-4" aria-hidden="true" />
         </button>
-        <div className="w-7 shrink-0 pt-2 text-center text-sm font-bold tabular-nums text-white">
-          {conflict ? '–' : talkRank}
-        </div>
+        <div className="w-7 shrink-0 pt-2 text-center text-sm font-bold tabular-nums text-white">{position}</div>
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
             <span className="font-mono text-xs text-white/45">{abstract.id}</span>
             <Badge badge={abstract.badge} />
-            {conflict && (
-              <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-white/50">Skipped</span>
-            )}
           </div>
           <button
             type="button"
@@ -263,16 +256,6 @@ function RankCard({
             </option>
           ))}
         </select>
-        <button
-          type="button"
-          aria-pressed={conflict}
-          onClick={() => onConflict(abstract.id)}
-          className={`min-h-11 rounded-sm border px-3 text-xs font-semibold ${
-            conflict ? 'border-white bg-white/15 text-white' : 'border-white/20 text-white/70'
-          }`}
-        >
-          Conflict
-        </button>
         <input
           type="text"
           value={note}
@@ -287,7 +270,7 @@ function RankCard({
       {proposal && (
         <div className="mx-2.5 mb-2.5 border-t border-white/10 px-0.5 pt-2 sm:mx-3">
           <p className="inline-flex rounded-sm border border-white/25 bg-white/5 px-2 py-1 text-[11px] font-semibold text-white/80">
-            Proposed move — submitted to {abstract.session}
+            {proposal.tag}
           </p>
           <div className="mt-2 flex flex-col gap-2 md:flex-row">
             <button
@@ -327,20 +310,19 @@ function RankCard({
   )
 }
 
-function PosterCard({ abstract, accept, reason, conflict, note, expanded, showReasonError, onToggle, onConflict, onNote, onAccept, onReason }) {
+function PosterCard({ abstract, accept, reason, note, expanded, showReasonError, onToggle, onNote, onAccept, onReason }) {
   const reasonMissing = accept === false && !reason.trim()
   return (
     <article
       id={`card-${abstract.id}`}
       data-testid={`card-${abstract.id}`}
-      className={`scroll-mb-56 border border-white/10 bg-white/[0.03] sm:scroll-mb-40 ${conflict ? 'opacity-60' : ''}`}
+      className="scroll-mb-80 border border-white/10 bg-white/[0.03] sm:scroll-mb-52"
     >
       <div className="p-2.5 sm:p-3">
         <div className="flex flex-wrap items-center gap-2">
           <span className="font-mono text-xs text-white/45">{abstract.id}</span>
           <Badge badge="POSTER" />
           <ThemeDot session={abstract.session} />
-          {conflict && <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-white/50">Skipped</span>}
         </div>
         <button
           type="button"
@@ -375,16 +357,6 @@ function PosterCard({ abstract, accept, reason, conflict, note, expanded, showRe
             Reject
           </button>
         </div>
-        <button
-          type="button"
-          aria-pressed={conflict}
-          onClick={() => onConflict(abstract.id)}
-          className={`min-h-11 rounded-sm border px-3 text-xs font-semibold ${
-            conflict ? 'border-white bg-white/15 text-white' : 'border-white/20 text-white/70'
-          }`}
-        >
-          Conflict
-        </button>
         <input
           type="text"
           value={note}
@@ -457,7 +429,6 @@ function OverlayCard({ abstract, session }) {
 
 export default function QddReviewPage() {
   const [state, setState] = useState(() => loadState(reviewData))
-  const [entered, setEntered] = useState(() => Boolean(state.reviewerName.trim()))
   const [saveError, setSaveError] = useState(false)
   const [openPanels, setOpenPanels] = useState(() =>
     Object.fromEntries(reviewData.sessions.map((session) => [session, true]))
@@ -551,7 +522,7 @@ export default function QddReviewPage() {
   }
 
   const sendRanking = async () => {
-    if (!uploadUrl || !state.reviewerName.trim()) return
+    if (!uploadUrl) return
     if (!ensureReasons()) return
     setSubmitStatus('sending')
     setSubmitMessage('')
@@ -583,7 +554,6 @@ export default function QddReviewPage() {
   }
 
   const onCopy = async () => {
-    if (!state.reviewerName.trim()) return
     if (!ensureReasons()) return
     const ok = await copyText(formatSubmissionDocument(payload))
     setCopyStatus(ok ? 'copied' : 'failed')
@@ -603,18 +573,6 @@ export default function QddReviewPage() {
               </a>
               <h1 className="text-lg font-bold tracking-tight text-white">QDD 2026 committee ranking</h1>
             </div>
-            {entered && (
-              <label className="text-xs text-white/50">
-                Reviewing as
-                <input
-                  value={state.reviewerName}
-                  maxLength={80}
-                  aria-label="Your name"
-                  onChange={(event) => update((prev) => ({ ...prev, reviewerName: event.target.value }))}
-                  className="ml-2 min-h-11 rounded-sm border border-white/20 bg-[#0B1629] px-2 text-sm text-white"
-                />
-              </label>
-            )}
           </div>
           <p className="text-sm font-semibold text-white" data-testid="header-counts">
             {headerCounts}
@@ -640,45 +598,7 @@ export default function QddReviewPage() {
         </p>
       </div>
 
-      {!entered ? (
-        <div className="mx-auto max-w-md px-4 py-16">
-          <form
-            className="border border-white/10 bg-white/[0.03] p-6"
-            onSubmit={(event) => {
-              event.preventDefault()
-              const name = state.reviewerName.trim()
-              if (!name) return
-              update((prev) => ({ ...prev, reviewerName: name }))
-              setEntered(true)
-            }}
-          >
-            <h2 className="text-xl font-bold">Your name</h2>
-            <p className="mt-2 text-sm leading-relaxed text-white/60">
-              Rankings save on this device under your name. Enter it to begin.
-            </p>
-            <label className="mt-4 block text-[11px] font-semibold uppercase tracking-[0.14em] text-white/40" htmlFor="reviewer-name">
-              Name
-            </label>
-            <input
-              id="reviewer-name"
-              autoFocus
-              autoComplete="name"
-              maxLength={80}
-              value={state.reviewerName}
-              onChange={(event) => setState((prev) => ({ ...prev, reviewerName: event.target.value }))}
-              className="mt-1 min-h-11 w-full rounded-sm border border-white/20 bg-[#0B1629] px-3 text-base text-white"
-            />
-            <button
-              type="submit"
-              className="mt-4 min-h-11 rounded-sm bg-cyan-400 px-4 text-sm font-bold text-[#0B1629] hover:bg-cyan-300"
-            >
-              Continue
-            </button>
-          </form>
-        </div>
-      ) : (
-        <>
-          <main className="mx-auto flex max-w-3xl flex-col gap-4 px-4 py-4 pb-64 sm:pb-40">
+      <main className="mx-auto flex max-w-3xl flex-col gap-4 px-4 py-4 pb-80 sm:pb-52">
             <DndContext
               sensors={sensors}
               collisionDetection={collisionDetection}
@@ -689,9 +609,8 @@ export default function QddReviewPage() {
               {reviewData.sessions.map((session) => {
                 const theme = themeFor(session)
                 const ids = state.ranked[session] || []
-                const target = reviewData.talkTargets[session] ?? 0
+                const target = TALK_TARGET
                 const open = openPanels[session] !== false
-                let eligible = 0
                 let cutPlaced = false
                 const cards = []
                 const placeCut = () => {
@@ -699,11 +618,9 @@ export default function QddReviewPage() {
                   cards.push(<CutLine key={`${session}-cut`} target={target} session={session} />)
                   cutPlaced = true
                 }
-                for (const id of ids) {
-                  const conflict = Boolean(state.meta[id]?.conflict)
-                  if (!conflict && eligible === target) placeCut()
-                  const talkRank = conflict ? null : eligible + 1
-                  if (!conflict) eligible += 1
+                ids.forEach((id, index) => {
+                  if (index === target) placeCut()
+                  const position = index + 1
                   const abstract = byId[id]
                   const proposal = proposedMoveFor(id)
                   cards.push(
@@ -711,9 +628,8 @@ export default function QddReviewPage() {
                       key={id}
                       abstract={abstract}
                       currentSession={session}
-                      talkRank={talkRank}
-                      aboveCut={talkRank !== null && talkRank <= target}
-                      conflict={conflict}
+                      position={position}
+                      aboveCut={position <= target}
                       note={state.meta[id]?.note || ''}
                       expanded={Boolean(expanded[id])}
                       proposal={proposal}
@@ -725,12 +641,6 @@ export default function QddReviewPage() {
                         update((prev) => moveRankedCard(prev, cardId, next, reviewData.sessions, reviewData))
                         scrollCard(cardId)
                       }}
-                      onConflict={(cardId) =>
-                        update((prev) => ({
-                          ...prev,
-                          meta: { ...prev.meta, [cardId]: { ...prev.meta[cardId], conflict: !prev.meta[cardId].conflict } }
-                        }))
-                      }
                       onNote={(cardId, value) =>
                         update((prev) => ({
                           ...prev,
@@ -755,13 +665,9 @@ export default function QddReviewPage() {
                       }
                     />
                   )
-                }
+                })
                 placeCut()
-                const above = Math.min(
-                  ids.filter((id) => !state.meta[id]?.conflict).length,
-                  target
-                )
-                const guideNote = session === 'Colour centres / defects' ? ' · guide 2–3' : ''
+                const above = Math.min(ids.length, target)
 
                 return (
                   <section key={session} className="border border-white/10" data-testid={`session-${theme.label}`}>
@@ -774,8 +680,7 @@ export default function QddReviewPage() {
                       <span>
                         <span className="block text-sm font-bold text-white">{session}</span>
                         <span className="mt-0.5 block text-[11px] text-white/55">
-                          {ids.length} to rank · target {target}
-                          {guideNote} · {above} above cut
+                          {ids.length} to rank · target {target} · {above} above cut
                         </span>
                       </span>
                       <ChevronDown className={`h-4 w-4 shrink-0 text-white/50 transition-transform ${open ? 'rotate-180' : ''}`} />
@@ -820,17 +725,10 @@ export default function QddReviewPage() {
                         abstract={abstract}
                         accept={entry.accept !== false}
                         reason={entry.reason || ''}
-                        conflict={Boolean(state.meta[abstract.id]?.conflict)}
                         note={state.meta[abstract.id]?.note || ''}
                         expanded={Boolean(expanded[abstract.id])}
                         showReasonError={showReasonErrors}
                         onToggle={() => setExpanded((prev) => ({ ...prev, [abstract.id]: !prev[abstract.id] }))}
-                        onConflict={(cardId) =>
-                          update((prev) => ({
-                            ...prev,
-                            meta: { ...prev.meta, [cardId]: { ...prev.meta[cardId], conflict: !prev.meta[cardId].conflict } }
-                          }))
-                        }
                         onNote={(cardId, value) =>
                           update((prev) => ({
                             ...prev,
@@ -883,14 +781,28 @@ export default function QddReviewPage() {
               )}
               {copyStatus === 'copied' && <p className="text-xs text-cyan-200">Copied.</p>}
               {copyStatus === 'failed' && <p className="text-xs text-white">Could not copy. Select the email instead.</p>}
+              <div>
+                <label htmlFor="reviewer-initials" className="text-xs text-white/70">
+                  Reviewer initials (optional)
+                </label>
+                <input
+                  id="reviewer-initials"
+                  type="text"
+                  value={state.reviewerInitials}
+                  maxLength={40}
+                  autoComplete="off"
+                  onChange={(event) =>
+                    update((prev) => ({ ...prev, reviewerInitials: event.target.value.slice(0, 40) }))
+                  }
+                  className="mt-1 min-h-11 w-full rounded-sm border border-white/20 bg-[#0B1629] px-2 text-sm text-white sm:max-w-xs"
+                />
+              </div>
               <div className="flex flex-col gap-2 sm:flex-row">
                 <a
-                  href={state.reviewerName.trim() ? mailto.href : undefined}
-                  className={`inline-flex min-h-11 items-center justify-center rounded-sm bg-cyan-400 px-4 text-center text-sm font-bold text-[#0B1629] ${
-                    state.reviewerName.trim() ? 'hover:bg-cyan-300' : 'pointer-events-none opacity-40'
-                  }`}
+                  href={mailto.href}
+                  className="inline-flex min-h-11 items-center justify-center rounded-sm bg-cyan-400 px-4 text-center text-sm font-bold text-[#0B1629] hover:bg-cyan-300"
                   onClick={(event) => {
-                    if (!state.reviewerName.trim() || !ensureReasons()) event.preventDefault()
+                    if (!ensureReasons()) event.preventDefault()
                   }}
                 >
                   Email my ranking
@@ -898,8 +810,7 @@ export default function QddReviewPage() {
                 <button
                   type="button"
                   onClick={onCopy}
-                  disabled={!state.reviewerName.trim()}
-                  className="min-h-11 rounded-sm border border-white/30 px-4 text-sm font-bold text-white disabled:opacity-40"
+                  className="min-h-11 rounded-sm border border-white/30 px-4 text-sm font-bold text-white"
                 >
                   Copy ranking
                 </button>
@@ -907,7 +818,7 @@ export default function QddReviewPage() {
                   <button
                     type="button"
                     onClick={sendRanking}
-                    disabled={!state.reviewerName.trim() || submitStatus === 'sending'}
+                    disabled={submitStatus === 'sending'}
                     className="min-h-11 rounded-sm border border-white/30 px-4 text-sm font-bold text-white disabled:opacity-40"
                   >
                     {submitStatus === 'sending' ? 'Sending…' : 'Submit ranking'}
@@ -920,8 +831,6 @@ export default function QddReviewPage() {
               </div>
             </div>
           </div>
-        </>
-      )}
     </div>
   )
 }
