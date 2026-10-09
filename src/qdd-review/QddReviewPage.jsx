@@ -23,6 +23,7 @@ import { ChevronDown, GripVertical } from 'lucide-react'
 import reviewData from '../data/qdd-abstracts-review.json'
 import { scriptUrl, themeFor, TALK_TARGET } from './config.js'
 import { buildRankingPayload, missingRejectReasons } from './formatRanking.js'
+import { postRanking } from './submitRanking.js'
 import {
   decideProposal,
   loadState,
@@ -525,25 +526,8 @@ export default function QddReviewPage() {
     setSubmitStatus('sending')
     setSubmitMessage('')
     try {
-      const response = await fetch(uploadUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify(payload)
-      })
-      if (response.type === 'opaque') {
-        setSubmitStatus('sent')
-        return
-      }
-      const text = await response.text()
-      let body = null
-      try {
-        body = JSON.parse(text)
-      } catch {
-        body = null
-      }
-      if (!response.ok || (body && body.ok === false)) {
-        throw new Error(SUBMIT_ERROR)
-      }
+      const received = await postRanking(uploadUrl, payload)
+      if (!received) throw new Error(SUBMIT_ERROR)
       setSubmitStatus('sent')
     } catch {
       setSubmitStatus('error')
