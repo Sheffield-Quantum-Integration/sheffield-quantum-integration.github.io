@@ -5,7 +5,6 @@ export const STORAGE_KEY = 'qdd-committee-ranking-v2'
 const NOTE_LIMIT = 240
 const COMMENT_LIMIT = 200
 const REASON_LIMIT = 200
-const INITIALS_LIMIT = 40
 
 const OPEN_BY_DEFAULT = new Set(['Epitaxy / III–V emitters', 'Colloidal / soft-matter'])
 
@@ -153,8 +152,7 @@ export function reconcile(saved, data) {
   }
 
   return {
-    reviewerInitials:
-      typeof saved.reviewerInitials === 'string' ? saved.reviewerInitials.slice(0, INITIALS_LIMIT) : '',
+    reviewerInitials: '',
     ranked,
     meta,
     posters,

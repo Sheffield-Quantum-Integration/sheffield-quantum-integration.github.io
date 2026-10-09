@@ -558,8 +558,8 @@ export default function QddReviewPage() {
           <ul className="mt-2 list-disc space-y-1.5 pl-5 text-sm leading-snug text-white/75">
             <li>Choose 3 contributed talks for each session from the Talk and Either requests.</li>
             <li>
-              Drag a talk to reorder it. Your top 3, above the line, are your picks. Click a title to read the abstract.
-              Use the session menu if a talk fits better elsewhere, and add a note if you want.
+              Drag a talk to reorder it. Top three per session are picks. Click a title to read the abstract. Use the
+              session menu if a talk fits better elsewhere, and add a note if you want.
             </li>
             <li>
               Maxim Makhonin&apos;s talk starts in Colour centres, with Confirm this session already selected. Choose Keep
