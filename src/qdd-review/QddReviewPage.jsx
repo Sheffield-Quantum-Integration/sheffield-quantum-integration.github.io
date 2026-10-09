@@ -554,20 +554,9 @@ export default function QddReviewPage() {
       </header>
       <div className="mx-auto flex max-w-3xl flex-col gap-3 px-4 py-3">
         <section className="border border-white/10 bg-white/[0.03] px-4 py-3" aria-label="How to rank">
-          <h2 className="text-sm font-bold text-white">How to rank</h2>
-          <ul className="mt-2 list-disc space-y-1.5 pl-5 text-sm leading-snug text-white/75">
-            <li>Choose 3 contributed talks for each session from the Talk and Either requests.</li>
-            <li>
-              Drag a talk to reorder it. Top three per session are picks. Click a title to read the abstract. Use the
-              session menu if a talk fits better elsewhere, and add a note if you want.
-            </li>
-            <li>
-              Maxim Makhonin&apos;s talk starts in Colour centres, with Confirm this session already selected. Choose Keep
-              in original session if it should stay in Optics.
-            </li>
-            <li>Posters are accepted unless you click Reject. Add a short reason only if you reject one.</li>
-            <li>Your progress is saved automatically in this browser. Initials are optional. Press Submit once when you are finished.</li>
-          </ul>
+          <p className="text-sm leading-snug text-white/75">
+            Drag a talk to reorder it. Top three per session are picks. Click a title to read the abstract.
+          </p>
           {saveError && (
             <p className="mt-2 text-xs text-white" role="alert">
               Your ranking could not be saved in this browser.
