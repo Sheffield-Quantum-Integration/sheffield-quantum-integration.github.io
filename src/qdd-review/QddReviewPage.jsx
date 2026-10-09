@@ -204,7 +204,7 @@ function RankCard({
       data-testid={`card-${abstract.id}`}
       data-above-cut={aboveCut ? 'true' : 'false'}
       data-decision={proposal ? decision || 'unanswered' : undefined}
-      className={`border border-white/10 border-l-4 ${theme.border} ${
+      className={`scroll-mb-56 border border-white/10 border-l-4 sm:scroll-mb-40 ${theme.border} ${
         aboveCut ? 'bg-white/[0.06]' : 'bg-white/[0.03]'
       } ${conflict ? 'opacity-60' : ''}`}
     >
@@ -333,7 +333,7 @@ function PosterCard({ abstract, accept, reason, conflict, note, expanded, showRe
     <article
       id={`card-${abstract.id}`}
       data-testid={`card-${abstract.id}`}
-      className={`border border-white/10 bg-white/[0.03] ${conflict ? 'opacity-60' : ''}`}
+      className={`scroll-mb-56 border border-white/10 bg-white/[0.03] sm:scroll-mb-40 ${conflict ? 'opacity-60' : ''}`}
     >
       <div className="p-2.5 sm:p-3">
         <div className="flex flex-wrap items-center gap-2">
@@ -678,7 +678,7 @@ export default function QddReviewPage() {
         </div>
       ) : (
         <>
-          <main className="mx-auto flex max-w-3xl flex-col gap-4 px-4 py-4 pb-40">
+          <main className="mx-auto flex max-w-3xl flex-col gap-4 px-4 py-4 pb-64 sm:pb-40">
             <DndContext
               sensors={sensors}
               collisionDetection={collisionDetection}
