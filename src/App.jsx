@@ -191,6 +191,36 @@ const normalizePathname = (pathname = '/') => {
   return withoutTrailingSlash || '/'
 }
 
+const safeSpaUrl = (value) => {
+  if (typeof value !== 'string' || !value.startsWith('/') || value.startsWith('//') || value.startsWith('/\\')) return ''
+  if (value.includes('://') || value.includes('\\')) return ''
+  return value
+}
+
+const decodeSpaSearch = (search = '') => {
+  if (search[1] !== '/') return ''
+  return search
+    .slice(1)
+    .split('&')
+    .map((segment) => segment.replace(/~and~/g, '&'))
+    .join('?')
+}
+
+/** Path to route, including a GitHub Pages ?/ redirect the history rewrite has not applied yet. */
+const resolveSpaPathname = () => {
+  if (typeof window === 'undefined') return '/'
+  const hinted = safeSpaUrl(window.__sqilSpaPath)
+  if (window.__sqilSpaPath) delete window.__sqilSpaPath
+  const fromQuery = safeSpaUrl(decodeSpaSearch(window.location.search))
+  const nextUrl = hinted || fromQuery
+  if (!nextUrl) return window.location.pathname
+  const pathname = nextUrl.split(/[?#]/)[0] || '/'
+  if (`${window.location.pathname}${window.location.search}${window.location.hash}` !== nextUrl) {
+    window.history.replaceState(null, '', nextUrl)
+  }
+  return pathname
+}
+
 const pageIdForPathname = (pathname = '/') => {
   const normalized = normalizePathname(pathname)
   // Unlisted committee page. Do not add this path to nav, footer, sitemap, or robots.txt.
@@ -1478,7 +1508,7 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
 
 export default function App() {
   const [activePage, setActivePage] = useState(() =>
-    typeof window === 'undefined' ? 'home' : pageIdForPathname(window.location.pathname)
+    typeof window === 'undefined' ? 'home' : pageIdForPathname(resolveSpaPathname())
   )
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -1514,7 +1544,7 @@ export default function App() {
 
   useEffect(() => {
     const syncRouteFromLocation = () => {
-      const nextPageId = pageIdForPathname(window.location.pathname)
+      const nextPageId = pageIdForPathname(resolveSpaPathname())
       const normalizedPath = pathForPageId(nextPageId)
 
       if (window.location.pathname !== normalizedPath) {

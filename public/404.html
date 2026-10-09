@@ -9,6 +9,14 @@
       // If this repository is ever served from a subpath, change pathSegmentsToKeep to 1.
       const pathSegmentsToKeep = 0
       const l = window.location
+      // Remember the path before redirecting. Some browsers drop a long ?/ query
+      // and land on /. index.html reads this and restores the deep link.
+      const returnPath = l.pathname + l.search + l.hash
+      if (returnPath !== '/' && returnPath.startsWith('/') && !returnPath.startsWith('//')) {
+        try {
+          sessionStorage.setItem('sqil-spa-return', returnPath)
+        } catch (error) {}
+      }
 
       l.replace(
         `${l.protocol}//${l.hostname}${l.port ? `:${l.port}` : ''}${
