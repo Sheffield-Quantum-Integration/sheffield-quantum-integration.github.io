@@ -52,9 +52,6 @@ const ALL_ROUTES = [...NAV_LINKS, ...EXTRA_ROUTES]
 const QDD_MAILING_LIST_URL =
   'https://docs.google.com/forms/d/e/1FAIpQLSdTm2wRqOoPqcdbOg5bcXDN9eU3bgNP61kCot0ukSE5FBayog/viewform'
 
-const QDD_ABSTRACT_FORM_URL =
-  'https://docs.google.com/forms/d/e/1FAIpQLSclsqLGQUJE-EVDyP3EuD5-Me3Ugsh1aJFXHTZCbYJpS5pErA/viewform'
-
 const QDD_DELEGATE_SHOP_URL =
   'https://onlineshop.shef.ac.uk/conferences-and-events/faculty-of-engineering/electronic-electrical-engineering/quantum-dot-day-2026'
 
@@ -177,7 +174,7 @@ const PAGE_META = {
   'quantum-dot-day': {
     title: 'Quantum Dot Day | 26 November 2026',
     description:
-      'Thursday 26 November 2026 at Sheffield Town Hall. Abstracts close 8 October. Registration open. Invited speakers: Fei Ding, Helena Knowles, Sandrine Ithurria and Tim Schröder.',
+      'Thursday 26 November 2026 at Sheffield Town Hall. Abstracts are closed. Registration open. Invited speakers: Fei Ding, Helena Knowles, Sandrine Ithurria and Tim Schröder.',
     image: '/assets/quantum-dot-day.jpg'
   }
 }
@@ -1107,30 +1104,16 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
             <p className="text-base">Sheffield Town Hall, Sheffield</p>
           </div>
           <div className="flex flex-col items-start gap-3">
-            <div className="flex flex-col gap-3 sm:flex-row">
-              {QDD_SHOP_LIVE ? (
-                <a
-                  href={QDD_DELEGATE_SHOP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center rounded-sm bg-cyan-500 px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-[#0B1629] transition-all duration-300 hover:bg-cyan-300 hover:shadow-[0_0_28px_rgba(34,211,238,0.35)]"
-                >
-                  Register
-                </a>
-              ) : null}
+            {QDD_SHOP_LIVE ? (
               <a
-                href={QDD_ABSTRACT_FORM_URL}
+                href={QDD_DELEGATE_SHOP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={
-                  QDD_SHOP_LIVE
-                    ? 'inline-flex items-center justify-center rounded-sm border border-cyan-400/70 px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-cyan-200 transition-all duration-300 hover:border-cyan-300 hover:text-white'
-                    : 'inline-flex items-center justify-center rounded-sm bg-cyan-500 px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-[#0B1629] transition-all duration-300 hover:bg-cyan-300 hover:shadow-[0_0_28px_rgba(34,211,238,0.35)]'
-                }
+                className="inline-flex items-center justify-center rounded-sm bg-cyan-500 px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-[#0B1629] transition-all duration-300 hover:bg-cyan-300 hover:shadow-[0_0_28px_rgba(34,211,238,0.35)]"
               >
-                Submit an abstract
+                Register
               </a>
-            </div>
+            ) : null}
             <a
               href={QDD_MAILING_LIST_URL}
               target="_blank"
@@ -1265,18 +1248,11 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
         <h2 className="mb-6 text-xl font-bold tracking-tight text-white md:text-2xl">
           Contributed talks and posters
         </h2>
-        <p className="mb-6 text-sm leading-relaxed text-white/60 md:text-base">
-          Abstracts are open for contributed talks and posters. Deadline{' '}
-          <strong className="font-semibold text-white">Thursday 8 October 2026</strong>.
+        <p className="text-sm leading-relaxed text-white/60 md:text-base">
+          Abstracts for contributed talks and posters closed on{' '}
+          <strong className="font-semibold text-white">Thursday 8 October 2026</strong>. Registration
+          remains open.
         </p>
-        <a
-          href={QDD_ABSTRACT_FORM_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center rounded-sm bg-cyan-500 px-6 py-3 text-sm font-bold uppercase tracking-wider text-[#0B1629] transition-all duration-300 hover:bg-cyan-300 hover:shadow-[0_0_28px_rgba(34,211,238,0.35)]"
-        >
-          Submit an abstract
-        </a>
       </div>
     </section>
 
