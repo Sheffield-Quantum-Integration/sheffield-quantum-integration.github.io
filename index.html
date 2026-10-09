@@ -53,16 +53,33 @@
     </script>
     <script>
       ;(function (location) {
+        const safeReturn = (value) => {
+          if (!value || value[0] !== '/' || value.indexOf('//') === 0 || value.indexOf('/\\') === 0) return ''
+          if (value.indexOf('://') !== -1 || value.indexOf('\\') !== -1) return ''
+          return value
+        }
+        let stored = ''
+        try {
+          stored = sessionStorage.getItem('sqil-spa-return') || ''
+          sessionStorage.removeItem('sqil-spa-return')
+        } catch (error) {}
+        let restored = ''
         if (location.search[1] === '/') {
           const decoded = location.search
             .slice(1)
             .split('&')
             .map((segment) => segment.replace(/~and~/g, '&'))
             .join('?')
-
-          window.history.replaceState(null, '', location.pathname.slice(0, -1) + decoded + location.hash)
+          restored = safeReturn(location.pathname.slice(0, -1) + decoded + location.hash)
+        } else if (location.pathname === '/') {
+          restored = safeReturn(stored)
         }
-        if (location.pathname.indexOf('/qdd-review-') === 0) {
+        if (restored) {
+          window.__sqilSpaPath = restored
+          window.history.replaceState(null, '', restored)
+        }
+        const routedPath = restored ? restored.split(/[?#]/)[0] : location.pathname
+        if (routedPath.indexOf('/qdd-review-') === 0) {
           const robots = document.querySelector('meta[name="robots"]')
           if (robots) robots.setAttribute('content', 'noindex,nofollow')
         }
