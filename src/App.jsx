@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
+import QddReviewPage from './qdd-review/QddReviewPage.jsx'
+import { QDD_REVIEW_PAGE_ID, QDD_REVIEW_PATH } from './qdd-review/config.js'
 import fallbackContent from './data/content-fallback.json'
 import {
   Menu,
@@ -176,6 +178,11 @@ const PAGE_META = {
     description:
       'Thursday 26 November 2026 at Sheffield Town Hall. Abstracts are closed. Registration open. Invited speakers: Fei Ding, Helena Knowles, Sandrine Ithurria and Tim Schröder.',
     image: '/assets/quantum-dot-day.jpg'
+  },
+  'qdd-review': {
+    title: 'QDD committee ranking',
+    description: 'Unlisted Quantum Dot Day committee ranking page.',
+    robots: 'noindex,nofollow'
   }
 }
 
@@ -186,11 +193,16 @@ const normalizePathname = (pathname = '/') => {
 
 const pageIdForPathname = (pathname = '/') => {
   const normalized = normalizePathname(pathname)
+  // Unlisted committee page. Do not add this path to nav, footer, sitemap, or robots.txt.
+  if (normalized === QDD_REVIEW_PATH) return QDD_REVIEW_PAGE_ID
   if (PATH_ALIASES[normalized]) return PATH_ALIASES[normalized]
   return ALL_ROUTES.find((link) => link.path === normalized)?.id || 'home'
 }
 
-const pathForPageId = (pageId = 'home') => ALL_ROUTES.find((link) => link.id === pageId)?.path || '/'
+const pathForPageId = (pageId = 'home') => {
+  if (pageId === QDD_REVIEW_PAGE_ID) return QDD_REVIEW_PATH
+  return ALL_ROUTES.find((link) => link.id === pageId)?.path || '/'
+}
 
 const upsertMetaByName = (name, content) => {
   let tag = document.querySelector(`meta[name="${name}"]`)
@@ -1570,7 +1582,7 @@ export default function App() {
   const joinTeamTarget = rawJoinTeamTarget === 'opportunities' && !hasOpportunities ? 'contact' : rawJoinTeamTarget
   const getPathForPage = (pageId) => pathForPageId(pageId)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const currentMeta = PAGE_META[activePage] || PAGE_META.home
     const pagePath = pathForPageId(activePage)
     const absoluteUrl = `${SITE_ORIGIN}${pagePath}`
@@ -1580,6 +1592,7 @@ export default function App() {
 
     document.title = currentMeta.title
     upsertMetaByName('description', currentMeta.description)
+    upsertMetaByName('robots', currentMeta.robots || 'index,follow')
     upsertMetaByName('twitter:title', currentMeta.title)
     upsertMetaByName('twitter:description', currentMeta.description)
     upsertMetaByProperty('og:title', currentMeta.title)
@@ -1630,12 +1643,14 @@ export default function App() {
             onInternalLinkClick={onInternalLinkClick}
           />
         )
+      case QDD_REVIEW_PAGE_ID:
+        return <QddReviewPage />
       default:
         return <PlaceholderView title={NAV_LINKS.find((link) => link.id === activePage)?.label || 'Coming Soon'} />
     }
   }
 
-  const isEventMicrosite = activePage === 'quantum-dot-day'
+  const isEventMicrosite = activePage === 'quantum-dot-day' || activePage === QDD_REVIEW_PAGE_ID
 
   return (
     <div

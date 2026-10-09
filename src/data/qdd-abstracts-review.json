@@ -1,0 +1,337 @@
+{
+ "event": "Quantum Dot Day 2026",
+ "sessions": [
+  "Epitaxy / III–V emitters",
+  "Colour centres / defects",
+  "Colloidal / soft-matter",
+  "Optics / integration / devices"
+ ],
+ "talkTargets": {
+  "Epitaxy / III–V emitters": 3,
+  "Colour centres / defects": 2,
+  "Colloidal / soft-matter": 3,
+  "Optics / integration / devices": 4
+ },
+ "talkSlotsTotal": 12,
+ "abstracts": [
+  {
+   "id": "A01",
+   "presenter": "Chunyu Zhao",
+   "institution": "University of Cambridge",
+   "coauthors": "Zeki S. Pehlivan, University of Cambridge\nXin Liu,University of Cambridge\nGunnar Kusch,University of Cambridge\nMenno J. Kappers, University of Cambridge\nRachel A. Oliver,University of Cambridge",
+   "title": "Polarised Cathodoluminescence Properties of InGaN Quantum Dots Grown by Modified Droplet Epitaxy",
+   "abstract": "InGaN quantum dots (QDs) are highly promising for quantum photonics at accessible temperatures due to their large exciton binding energies. Polarised photons are a crucial resource for the application of single photon sources in quantum cryptography and polarised emission has previously been demonstrated using non-polar m-plane and a-plane InGaN QDs. However, conventional polar c-plane InGaN QDs have a symmetric in-plane geometry and are hence expected to emit unpolarised light. Here we demonstrate that c-plane InGaN QDs can exhibit substantial polarisation anisotropy by leveraging preferential nucleation along template step edges. The InGaN QDs are grown on a terraced GaN template with a root mean square roughness (Rq) of 0.2 nm using a modified droplet epitaxy method. In this method, nitrogen annealing forms In/Ga droplets, which are then converted to QDs by ammonia exposure. The QDs are observed to nucleate along GaN step edges. Low-temperature (10K) cathodoluminescence (CL) spectra taken on capped samples reveal sharp emission lines with a full width at half maximum (FWHM) down to 5 meV. Polarised CL measurements at 80K reveal that emission is typically polarised parallel to the dominant step edge direction. Individual emission peaks exhibit a degree of linear polarisation as high as 88%. Spatial fluctuations in emission energy and polarisation are also observed, pointing to local variations in QD morphology or indium composition. By demonstrating a route to achieve polarised emission in c-plane geometries, these results advance the integration of c-plane InGaN QDs into quantum photonic applications at practically accessible cryogenic temperatures.",
+   "preference": "Contributed talk",
+   "badge": "TALK",
+   "session": "Epitaxy / III–V emitters"
+  },
+  {
+   "id": "A02",
+   "presenter": "Christopher Broderick",
+   "institution": "School of Physics and Tyndall National Institute, University College Cork, Ireland",
+   "coauthors": "Tommy Murphy, Tyndall National Institute and School of Physics, University College Cork, Ireland\nEoin P. O'Reilly, Tyndall National Institute and School of Physics, University College Cork, Ireland",
+   "title": "The QUantum Dot Open-source Simulator (QUDOS)",
+   "abstract": "Quantum dots (QDs) represent a frontier of semiconductor research, with emerging applications spanning classical, quantum and topological photonics, high-efficiency photovoltaics, and spin-photon interfaces. Accurate simulation of QD electronic structure is essential to inform growth and characterisation, and underpin engineering of enhanced properties for QD-based devices. A combination of physical transparency and computational efficiency has established the multi-band k.p method as the de facto standard framework to simulate QD properties. We present the QUantum Dot Open-source Simulator, QUDOS: a robust, flexible and numerically efficient code that computes epitaxial QD electronic structure via an 8-band k.p Hamiltonian, including spin-orbit coupling, strain, and piezoelectric effects. QUDOS employs a semi-analytical plane-wave expansion method that allows the QD strain fields, piezoelectric potential, applied electric field, and Hamiltonian matrix to be evaluated analytically in reciprocal space. By supporting a variety of QD shapes, which can be arbitrarily positioned, oriented, and combined in a user-defined calculational supercell, QUDOS can treat nanostructures ranging from simple single QDs to complex morphologies including QD molecules, superlattices, QD-in-a-well systems, and beyond. Computational efficiency is delivered by leveraging high-performance open-source eigensolver and fast Fourier transform routines, which mitigate numerical bottlenecks by respectively accelerating exact Hamiltonian diagonalisation and evaluation of reciprocal-space convolutions. Amongst QUDOS's outputs are the single-particle QD eigenstate energies and wave functions, in addition to optical (momentum) and Coulomb (direct and exchange) matrix elements between QD eigenstates. This provides the quantities required to establish predictive semi-classical or many-body calculations of QD properties, to underpin fundamental theoretical analysis and practical device design.",
+   "preference": "Contributed talk",
+   "badge": "TALK",
+   "session": "Epitaxy / III–V emitters"
+  },
+  {
+   "id": "A03",
+   "presenter": "Peter Matthews",
+   "institution": "Keele University",
+   "coauthors": "Ashleigh Cartlidge, Keele University\nQasim Ibraheeme, Keele University\nMartin Hollamby, Keele University\nLauren Matthews, ISIS Muon and Neutron Source",
+   "title": "InProving QDs: Controlling the size and emission quality of InP",
+   "abstract": "Indium phosphide is the most studied of the colloidal III-V QDs, with significant attention focused on the phosphorus source and/or reaction conditions to improve QD quality. Comparatively limited attention has been directed toward controlling the reactivity of the indium precursor. In this study we introduce an approach that utilizes recyclable triarylphosphine adducts of indium(III) chloride to selectively prepare InP QDs with absorption profiles spanning 419-620 nm. This control is achieved through careful choice of the triarylphosphine ligand, which changes the nature of the nucleation profile from continuous to burst.\n\nThe performance of InP QDs is often hindered by unpredictable surface chemistry, most notably trap sites and dangling bonds which inhibit radiative recombination, and consequently, impedes the photoluminescent quantum yield (PLQY). Typically, in a bid to improve their emissive properties,various post-synthetic modification strategies, including shelling, ligand exchange and/or HF-based surface etching are implemented. In this paper, a novel approach is presented in which purified myristate-capped InP QDs are treated at room temperature with PCl3. Across a range of PCl3 treatments, it was determined through a combination of SANS/SAXS measurements that with increasing PCl3 addition, the troublesome organic shell is removed, enabling a more uniform adhesion of the ZnS shell to the inorganic core. As a result of this, the PLQY was observed to increase from 5% with no treatment, up to 70% with treatment, therefore establishing a HF-free alternative to surface passivation and improved emission.",
+   "preference": "Contributed talk",
+   "badge": "TALK",
+   "session": "Colloidal / soft-matter"
+  },
+  {
+   "id": "A04",
+   "presenter": "Guoliang Zhou",
+   "institution": "Department of Electronic and Electrical Engineering, The University of Sheffield",
+   "coauthors": "Elisa M. Sala — Department of Electronic and Electrical Engineering, The University of Sheffield; EPSRC National Epitaxy Facility, The University of Sheffield\nYoung In Na — Department of Electronic and Electrical Engineering, The University of Sheffield; EPSRC National Epitaxy Facility, The University of Sheffield\nPaul Fry — Department of Electronic and Electrical Engineering, The University of Sheffield; EPSRC National Epitaxy Facility, The University of Sheffield\nDominic J. Hallett — School of Mathematical and Physical Sciences, The University of Sheffield\nAlistair J. Brash — School of Mathematical and Physical Sciences, The University of Sheffield\nL. R. Wilson — School of Mathematical and Physical Sciences, The University of Sheffield\nJon Heffernan — Department of Electronic and Electrical Engineering, The University of Sheffield; EPSRC National Epitaxy Facility, The University of Sheffield",
+   "title": "Site-control of InAs quantum dots on InP by droplet epitaxy in MOVPE",
+   "abstract": "We investigate the site-controlled growth of InAs/InP quantum dots (QDs) fabricated by droplet epitaxy (DE) in metal-organic vapour phase epitaxy (MOVPE) [1]. InAs/InP QDs emit at ~1.55 µm, within the telecom C-band where optical signals experience minimal attenuation [2], making them ideal single-photon emitters (SPEs) for applications in quantum communication and quantum information technologies. Droplet epitaxy relies on the formation of metallic droplets which are subsequently crystallized into uniform and symmetric QDs, potentially reducing fine-structure splitting (FSS). To achieve deterministic positioning of QDs, substrate pre-patterning techniques have been developed to enable site-controlled growth, allowing low dot densities and scalability for quantum photonic devices.\n\nIn this work, the process of fabricating nanohole arrays using electron beam lithography (EBL) and novel nanoimprint lithography (NIL) were explored. Subsequent DE growth in MOVPE produced QDs localized within the nanoholes. Samples are characterized by atomic force microscopy (AFM), which reveals physical site control of Indium droplets and QDs on a nano-scale along with their morphological properties. Micro-photoluminescence (µPL) imaging and spectroscopy respectively provide occupancy and linewidth analysis.\n\nHere, we demonstrate nanoscale, deterministic site-controlled InAs/InP QDs emitting in the telecom C-band. Using the DE method in MOVPE, we achieved one QD per site, with an occupancy rate as high as 83%, and narrow linewidths of 50 µeV or less for over 60% of the measured QDs - indicating this approach is highly suitable for quantum nanophotonic applications [3].",
+   "preference": "Either",
+   "badge": "EITHER",
+   "session": "Epitaxy / III–V emitters"
+  },
+  {
+   "id": "A05",
+   "presenter": "Savvas Germanis",
+   "institution": "School of Mathematical and Physical Sciences, University of Sheffield, UK",
+   "coauthors": "X. Chen, School of Mathematical and Physical Sciences, University of Sheffield, UK\nH. Siampour, School of Mathematics and Physics, Queen’s University Belfast, UK\nR. Dost, School of Mathematics and Physics, Queen’s University Belfast, UK\nN. J. Martin, School of Mathematical and Physical Sciences, University of Sheffield, UK\nD. J. Hallett, School of Mathematical and Physical Sciences, University of Sheffield, UK\nI. Farrer, EPSRC National Epitaxy Facility, University of Sheffield, UK\nA. K. Verma, EPSRC National Epitaxy Facility, University of Sheffield, UK\nM. S. Skolnick, School of Mathematics and Physics, Queen’s University Belfast, UK\nL. R. Wilson, School of Mathematics and Physics, Queen’s University Belfast, UK\nA. M. Fox, School of Mathematics and Physics, Queen’s University Belfast, UK",
+   "title": "Electrical Control of Chiral Emission from a Single InAs Quantum Dot in a Glide-Plane Photonic Crystal Waveguide.",
+   "abstract": "Chiral light-matter interaction in nanophotonic waveguides enables spin-dependent directional emission from single quantum emitters [1]. Glide-plane photonic crystal waveguides support locally circularly polarised guided modes, giving rise to spin-momentum locking and asymmetric coupling of quantum dot excitons to counter-propagating modes [2].\nWe demonstrate electrical control of chiral emission from a single InAs quantum dot embedded in a slow-light glide-plane photonic crystal waveguide. The quantum dot is integrated in a p-i-n diode structure, allowing tuning of the exciton transition via the quantum-confined Stark effect. As the emission wavelength is swept across the slow-light bandwidth, the exciton lifetime is strongly modified and the directional emission contrast evolves markedly, exhibiting a clear sign inversion.\nThe reversible control of emission directionality from a single quantum emitter using an external electric field provides a practical route toward tuneable chiral interfaces in integrated quantum photonic devices and underscores the potential of slow-light glide-plane waveguides for scalable on-chip quantum technologies. \nReferences:\n[1] P. Lodahl, S. Mahmoodian, and S. Stobbe, Rev. Mod. Phys. 87, 347 (2015).\n[2] S. Germanis, X. Chen, R. Dost, D. J. Hallett, E. Clarke, P. K. Patil, M. S. Skolnick, L. R.Wilson, H. Siampour and A. M. Fox, Optica 12, 1689 (2025).",
+   "preference": "Either",
+   "badge": "EITHER",
+   "session": "Optics / integration / devices"
+  },
+  {
+   "id": "A06",
+   "presenter": "Benyam Dejen",
+   "institution": "University of Cambridge",
+   "coauthors": "Ahmed M. Hassanen: Cavendish Laboratory, University of Cambridge, Cambridge, United Kingdom; Department of Engineering Science, University of Oxford, Oxford, United Kingdom\nZhe Xian Koong: Cavendish Laboratory, University of Cambridge, Cambridge, United Kingdom\nYusuf Karlı: Cavendish Laboratory, University of Cambridge, Cambridge, United Kingdom Christian Schimpf: Cavendish Laboratory, University of Cambridge, Cambridge, United Kingdom\nBrendan Mackey: Cavendish Laboratory, University of Cambridge, Cambridge, United Kingdom; Department of Mechanical Engineering, University of Victoria, Victoria, Canada\nAilton J. Garcia Jr: Institute of Semiconductor and Solid-State Physics, Johannes Kepler University Linz, Linz, Austria\nMelina Peter: Institute of Semiconductor and Solid-State Physics, Johannes Kepler University Linz, Linz, Austria\nArmando Rastelli: Institute of Semiconductor and Solid-State Physics, Johannes Kepler University Linz, Linz, Austria\nMete Atatüre: Cavendish Laboratory, University of Cambridge, Cambridge, United Kingdom\nDorian Gangloff: Cavendish Laboratory, University of Cambridge, Cambridge, United Kingdom",
+   "title": "Towards single-shot readout of a cavity-coupled quantum dot qubit",
+   "abstract": "Quantum dots (QDs) coupled to open-microcavities are the best single-photon source to-date, enabling source efficiencies of ~70% [1], above the threshold for linear optical quantum computation with near-perfect indistinguishability and transform-limited linewidth. Recent methods [2, 3] to cool the local nuclear-spin ensemble have extended the electron-spin coherence (T2*) by nearly two-orders-of-magnitude. Moreover, the reduced strain inhomogeneity in lattice-matched droplet etched GaAs/AlGaAs QDs yields longer electronic memory time under dynamical decoupling [4]. Together, these have enabled SWAP operations between the electron and nuclear-spin register [5], and the realisation of a long-lived quantum memory. By coupling such a system with the photonic advantages of a tuneable open-microcavity, a node which combines all the required elements for quantum information processing applications such as cluster state generation [6], quantum networking [7] and distributed quantum computation [8], can be created.\n\nAn essential capability for these applications is high-fidelity, single-shot readout of a quantum-controlled electron-spin (i.e. a qubit). This requires the mapping of the spin state onto a macroscopic interpretable classical signal, such as photon counts, with a sufficient signal-to-noise ratio to determine the spin-state in a single measurement. The combination of cyclic transitions in the Faraday configuration and high collection efficiency of an open-microcavity has enabled single-shot readout [9], however the requisite combination with qubit-control [10] and quantum memory is outstanding. We present our progress towards this goal.\n\n[1]\tDing, X., Guo, YP., Xu, MC. et al. High-efficiency single-photon source above the loss-tolerant threshold for efficient linear optical quantum computing. Nat Photon 19, 387–391 (2025).\n[2]\tGangloff, D. A. et al. Quantum interface of an electron and a nuclear ensemble. Science 364, 62-66 (2019).\n[3]\tJackson, D. et al. Optimal Purification of a Spin Ensemble by Quantum-Algorithmic Feedback Phys. Rev. X 12, 031014.\n[4]\tZaporski, L., Shofer, N., Bodey, J.H. et al. Ideal refocusing of an optically active spin qubit under strong hyperfine interactions. Nat Nanotechnol 18, 257–263 (2023).\n[5]\tAppel, M.H., Ghorbal, A., Shofer, N. et al. A many-body quantum register for a spin qubit. Nat. Phys. 21, 368–373 (2025).\n[6]\tMichaels, Cathryn P., et al. Multidimensional cluster states using a single spin-photon interface coupled strongly to an intrinsic nuclear register. Quantum 5 (2021): 565.\n[7]\tChildress, Lilian, et al. Fault-tolerant quantum repeaters with minimal physical resources and implementations based on single-photon emitters. Phys. Rev. A 72, 052330.\n[8]\tY.-C. Wei et al. Universal distributed blind quantum computing with solid-state qubits. Science 388, 509-513 (2025).\n[9]\tAntonadis, Nadia O., et al. Cavuty-enhanced single-shot readout of a quantum dot spin within 3 nanoseconds. Nat Commun 14, 3977 (2023).\n[10]\tKoong, Z.X., et al. Coherent Control of Quantum-Dot Spins with Cyclic Optical Transitions. Nat Commun 17, 7917 (2026).",
+   "preference": "Poster",
+   "badge": "POSTER",
+   "session": "Epitaxy / III–V emitters"
+  },
+  {
+   "id": "A07",
+   "presenter": "Sruthi Raj Sreeraj",
+   "institution": "University of Manchester",
+   "coauthors": "Prof. David Binks and Prof. David Lewis",
+   "title": "Nanocrystals Doped by Single Rare Earth Ions for Quantum Memories and Repeaters",
+   "abstract": "Nanocrystals offer an attractive platform for spin–photon interfaces by combining useful optical properties with a substrate-free nanoscale positioning. Here, we report the synthesis of Er³⁺-doped yttrium oxide (Y₂O₃) nanocrystals using a combined sol–gel method with a molecular-seeding approach. Well-defined erbium-doped yttrium clusters were synthesised, and mass spectrometry and single-crystal X-ray diffraction results showed strong evidence that they contained, on average, one Er ion per cluster. These clusters were then used as molecular seeds for the incorporation of individual Er³⁺ ions into Y₂O₃ nanocrystals. The resulting doped nanocrystals showed a stable and sharp photoluminescence in the 1.5–1.6 µm telecommunications wavelength range, and electron paramagnetic resonance spectroscopy confirmed the presence of Er³⁺ ions. Morphological and structural characterisation of the nanocrystals was performed using Transmission electron microscopy, X-ray diffraction and Raman spectroscopy. Sharp spectral features observed during Raman measurements and identified as Er³⁺ photoluminescence based on their strong agreement with the PL spectrum of Er-doped Y₂O₃. These results highlight the potential of molecular seeding approach for producing optically active rare-earth-doped nanocrystals and provide a basis for controlling the size of the nanocrystals towards the quantum-confinement regime.",
+   "preference": "Contributed talk",
+   "badge": "TALK",
+   "session": "Colloidal / soft-matter"
+  },
+  {
+   "id": "A08",
+   "presenter": "Nicolas Laurand",
+   "institution": "Institute of Photonics, Department of Physics, University of Strathclyde, Glasgow, UK",
+   "coauthors": "Pedro U. Alves (Institute of Photonics, Department of Physics, University of Strathclyde, Glasgow, UK)\nCharlotte J. Eling (Institute of Photonics, Department of Physics, University of Strathclyde, Glasgow, UK)",
+   "title": "Beyond Individual Quantum Dots: Self-Assembled Supraparticles for Lasing, Sensing, and Integrated Photonics",
+   "abstract": "Self-assembled supraparticles of colloidal quantum dots (CQDs) are an emerging photonic platform in which the gain medium and optical resonator are integrated within a single solution-processed structure. Dense packing of CQDs within microspherical supraparticles supports resonant modes, enabling compact microlasers without complex nanofabrication. Following a brief introduction to the operating principles of CQD-SP microlasers, this presentation will highlight three research directions pursued in our group.\n\nFirst, we will discuss the integration of individual CQD supraparticle lasers with photonic circuitry through micro-transfer printing, enabling deterministic placement and coupling of self-assembled lasers to on-chip waveguides, an important step towards integrated colloidal photonics [1].\n\nSecond, we will present the functionalisation of supraparticles for optical sensing and biosensing applications [2,3]. Their optical confinement, accessible surface area, and wavelength-selective emission make them attractive platforms for chemical and biological sensing.\n\nFinally, we will show how ligand exchange and multi-component CQD and nanocrystal blends can be used to engineer optical gain, energy-transfer pathways, and lasing characteristics, leading to reduced thresholds and new operating regimes, including multicolour and multiexcitonic lasing [4].\n\nNL acknowledges the Leverhulme Trust for the Research Leadership Award RL 2019 038\n\n[1] P. U. Alves, et al. ACS Appl. Opt. Mater. 24; 1 (11): 1836–1846 (2023). https://doi.org/10.1021/acsaom.3c00312\n[2] C. J. Eling, et al. ACS Appl. Nano Mater.; 7 (8): 9159–9166 (2024). https://doi.org/10.1021/acsanm.4c00668 \n[3] B. K. Charlton et al. International Journal of Molecular Sciences, 24(19), 14416 (2023). https://doi.org/10.3390/ijms241914416 \n[4] P. U. Alves, N. Laurand. ACS Photonics; 13 (3): 739–744 (2026). https://doi.org/10.1021/acsphotonics.5c02304",
+   "preference": "Either",
+   "badge": "EITHER",
+   "session": "Colloidal / soft-matter"
+  },
+  {
+   "id": "A09",
+   "presenter": "Rohin Bardhan",
+   "institution": "The University of Manchester",
+   "coauthors": "Dr. Joel Loh, Photon Science Institute, The University of Manchester; Prof. David Binks, Photon Science Institute, The University of Manchester",
+   "title": "A Photonic Structure for a Colloidal Quantum Dot based Quantum Information Device",
+   "abstract": "Colloidal quantum dots (CQDs) are promising platforms for quantum information technologies owing to their size-tunable band gaps, strong exchange interactions with dopants, and large optical cross-sections. Doping CQDs with individual atoms or ions also provides optically addressable spin manifolds suitable for photonic quantum information processing. Furthermore, integrating CQDs with photonic structures offers a route to further enhance their optical interaction with these spin states. Recent advances in the nano-positioning and integration of CQDs provide promising opportunities for the realization of solid-state quantum information devices. In this work, we present preliminary three-dimensional finite-difference time-domain (3D-FDTD) simulations of a photonic structure intended to enhance the optical cross-section of a doped CQD, providing an initial step towards the development of CQD-based quantum memory devices.",
+   "preference": "Poster",
+   "badge": "POSTER",
+   "session": "Optics / integration / devices"
+  },
+  {
+   "id": "A10",
+   "presenter": "Alfie Broughton",
+   "institution": "Cardiff University",
+   "coauthors": "Harry E. Dyte - Cardiff University\nMiguel Alvarez Perez - Cardiff University\nMicheal T. M. Woodley - Bath University \nLeah R. Murphy - Bath University \nMateusz  Olszewski - Bath University\nAlex O.C Davis - Bath University \nAnthony J. Bennett - Cardiff University",
+   "title": "Single-photon frequency combs for quantum networking using a single mode photonic crystal fibre",
+   "abstract": "Frequency combs have applications in many areas of research from sensing to time keeping. We present a method to create frequency combs in the single-photon regime using a single mode photonic crystal fibre (PCF) with a Ge-doped core. This fibre has been engineered for phase matching through a combination of normal and anomalous dispersion for the InAs quantum dot (QD) wavelength region (920 nm – 925 nm) and for the telecoms C-band. This allows for frequency conversion of photons from a 923nm quantum dot transition via Bragg-scattering four-wave mixing driven by two strong C-band pumps lasers, where a cascade of conversion events forms a comb with regularly spaced intervals. We demonstrate single-photon frequency combs with total conversion efficiencies > 95%. Using a pair of unbalanced Mach-Zehnder interferometers we probe the relative phase of a generated qubit, which has undergone frequency conversion, through single-photon interference observing visibilities > 0.9. A Hanbury-Brown Twiss setup confirms these are single-photon frequency combs under both resonant and non-resonant excitation of a QD. Comparing the frequency combs to the unconverted source signal demonstrates the process conserves both phase coherence and single-photon purity. These single-photon frequency combs can be used for quantum sensing as well as functioning as frequency bin qudits.",
+   "preference": "Contributed talk",
+   "badge": "TALK",
+   "session": "Optics / integration / devices"
+  },
+  {
+   "id": "A11",
+   "presenter": "Sion Meredith",
+   "institution": "University of Manchester",
+   "coauthors": "Thomas Elliott, University of Manchester\nHarry Miller, University of Manchester\nOliver Dudgeon, University of Edinburgh\nWojciech Bukalski, University College London\nJake Iles-Smith, University of Sheffield\nAlistair Brash, University of Sheffield",
+   "title": "Efficient optimisation of multi-parameter quantum control protocols for strongly-coupled systems",
+   "abstract": "We present a pulse-optimization framework combining automatic differentiation with the non-Markovian uniTEMPO algorithm to combat phonon-induced decoherence in semiconductor quantum dots. Focusing on single- and bi-exciton generation, we optimize multi-pulse excitation schemes using Swing-UP of a Quantum EmmiteR (SUPER) and Floquet-engineered Two-Photon Excitation (FTPE). By leveraging adiabatic rapid passage (ARP) within parameter regimes accessible to current ultrafast lasers, our optimized pulse shapes achieve high preparation fidelities while dynamically mitigating non-Markovian bath interactions. The resulting protocols significantly outperform standard resonant $\\pi$-pulses and two-photon driving, maintaining superior fidelity at elevated temperatures where phonon sidebands typically degrade optical coherence.",
+   "preference": "Either",
+   "badge": "EITHER",
+   "session": "Epitaxy / III–V emitters"
+  },
+  {
+   "id": "A12",
+   "presenter": "Charlotte Eling",
+   "institution": "University of Strathclyde",
+   "coauthors": "Hannah J. Serrage, School of Biological Sciences, Faculty of Biology Medicine and Health, The University of Manchester\nA. J. McBain, Division of Pharmacy and Optometry, School of Health Sciences, Faculty of Biology, Medicine and Health, The University of Manchester\nC. O’Neill, School of Biological Sciences, Faculty of Biology Medicine and Health, The University of Manchester\nN. Laurand, Institute of Photonics, Department of Physics, SUPA, University of Strathclyde, Glasgow",
+   "title": "A Quantum Dot-Based Platform for Optical Detection and Photocatalytic Elimination of Wound Pathogens",
+   "abstract": "Colloidal quantum dots (QDs) are used in biomedical applications due to their high photoluminescence quantum yields and readily tuneable surface chemistry, making them excellent candidates for biosensing platforms. Semiconductor QDs can also function as efficient photocatalysts, converting visible light into reactive oxygen species capable of degrading organic pollutants and inactivating microorganisms.\n\nBy combining optical sensing and photocatalytic disinfection, we propose a QD-based material capable of detecting bacterial presence and disinfecting contaminated environments. This multifunctional technology could be integrated into wound dressings to enable next-generation smart wound care. As the need for alternatives to conventional antibiotic treatments grows, such materials offer the potential to monitor and treat chronic wound infections. Here, we present the development of AgInS₂/ZnS QDs as a sensing and disinfection platform.\n\nWe demonstrate that these QDs can detect Pseudomonas aeruginosa, a bacterial pathogen associated with chronic wound infections. By monitoring QD photoluminescence, we detect the redox-active virulence factor pyocyanin produced by P. aeruginosa. The sensor exhibits a limit of detection of 4.3 μM and a sensitivity of 16 counts/μM, providing performance comparable to electrochemical sensing approaches while avoiding electrode-tissue interfaces that promote inflammation and compromise long-term signal stability.\n\nIn addition, we show that AgInS₂/ZnS QDs exert no significant cytotoxic effects on primary human epidermal keratinocytes, while enhancing the phototoxicity of light against P. aeruginosa in a wavelength-, light intensity-, and QD dose-dependent manner, highlighting their potential as a sensing and antimicrobial platform for smart wound dressings.\n\nWe acknowledge support from EPSRC for the Health Technologies Connectivity Award UKRI827.",
+   "preference": "Either",
+   "badge": "EITHER",
+   "session": "Colloidal / soft-matter"
+  },
+  {
+   "id": "A13",
+   "presenter": "Elisa M Sala",
+   "institution": "The University of Sheffield",
+   "coauthors": "Elisa M Sala, \nYoung In Na, \nRaja S.R.Gajjela, \nEdoardo G. Banfi, \nGuoliang Zhou, \nPaul M. Koenraad, \nJon Heffernan",
+   "title": "Exploring the MOVPE growth of Droplet Epitaxy InAs/InP Quantum Dots for Quantum Photonic Applications",
+   "abstract": "We study the Droplet Epitaxy (DE) in Metal Organic Vapour Phase Epitaxy (MOVPE) of InAs/InP quantum dots (QDs) for applications in quantum photonics at the telecom C-band. Among III-V QDs, InAs/InP are very attractive as high-performance single and entangled photon sources. Recently, the Purcell enhancement of single photons at the C-band from such InAs DE QDs has been reported, alongside the first demonstration of both Stark tuning and charge state control of individual QDs. Moreover, spin lifetime improvement of one order of magnitude compared to conventional MBE-grown Stranski-Krastanov (SK) QDs has been demonstrated. Here, we investigate their growth dynamics in MOVPE on different surfaces and present detailed morphological and optical characterizations, revealing bright single-dot emission ranging from the O- to the L-band, covering the C-band, with resolution-limited spectral linewidths as low as 25 ueV, confirming their excellent optical quality. Controlling the QD formation and morphology during growth is fundamental for tuning their size, shape, symmetry, and thus fine-structure splitting (FSS), a key parameter for achieving a higher entanglement degree. MOVPE of DE InAs/InP QDs has been also recently employed by us to successfully localize QDs, decoupling the QD nucleation from strain, in contrast to the traditional Stranski-Krastanov method. Finally, we present preliminary results on local droplet etching (LDE) studies on bare InP by using Indium droplets for the first time in MOVPE. Our studies explore the flexibility of the droplet epitaxy in the MOVPE environment for the large-scale fabrication of a broad range of high-quality nanostructures for quantum photonics.",
+   "preference": "Contributed talk",
+   "badge": "TALK",
+   "session": "Epitaxy / III–V emitters"
+  },
+  {
+   "id": "A14",
+   "presenter": "Jack Wall",
+   "institution": "The University of Sheffield",
+   "coauthors": "Joe Smith, University of Sheffield\nMaxim Makhonin, The University of Sheffield",
+   "title": "The Transistion into Industrial-Standard NV Centre Thermometers",
+   "abstract": "Nitrogen-vacancy (NV) centres in diamond have demonstrated excellent potential for highly precise, practical nanoscale thermometry. However, integrating these sensors into metrological frameworks suitable for industrial and physical measurements is complicated by environmental interference from factors such as crystal strain, ambient pressure, background magnetic fields, and local thermal gradients. To enable reliable absolute temperature measurements, we present a rigorous methodology for the calibration of fibre-coupled NV centre probes traceable to the International Temperature Scale of 1990 (ITS-90).\n\nWe explore the metrological robustness of continuous-wave (CW) NV thermometry techniques and produce a comprehensive uncertainty budget. Fluorescence is measured using a 100 MHz bandwidth shot-noise-limited APD, utilizing a high-temporal-resolution ADC of 5 GSps for an effective 16-bit resolution. The experimental setup employs a highly stable isothermal cavity enhanced with an internal copper mount to maximize thermal stability and uniformity. Temperature validation is performed using a platinum resistance thermometer (PRT) directly calibrated to ITS-90 (ISO 17025).\n\nWe present a detailed error budget identifying the traceability of the reference PRT, alongside the thermal gradients and lag between the PRT and NV sensor, as the dominant uncertainties. This work demonstrates a projected absolute uncertainty within 50 mK, providing a critical framework for bridging high-precision quantum thermometry techniques with classical metrological standards.",
+   "preference": "Poster",
+   "badge": "POSTER",
+   "session": "Colour centres / defects"
+  },
+  {
+   "id": "A15",
+   "presenter": "Christian Maddox",
+   "institution": "University of Manchester",
+   "coauthors": "Atta Ul Haq, University of Manchester\nAli Kosari, University of Manchester\nAlexander Eggeman, University of Manchester\nDavid Lewis, University of Manchester\nDavid Binks, University of Manchester",
+   "title": "Silver Source Injection Approach to Synthesis of Five-Metal (AgInGaMnZn)S Quantum Dots",
+   "abstract": "Metal sulfide quantum dots containing five or more species of metal are rarely reported in literature, with most synthesised via ion exchange or the decomposition of a combined precursor in a one-pot synthesis. These approaches render altering chemical makeup and stoichiometric ratios between batches difficult and hinders development of multinary and high-entropy quantum dots.\n\nIn this work, we present a versatile adaption of an under-applied silver source injection technique as an alternative method to synthesize five-metal (AgInGaMnZn)S nanocrystals. The aim of this method is the separation of the nucleation stage from the remainder of the synthesis, allowing greater size control whilst mitigating reactivity differences between precursors to minimise the formation of unwanted byproducts.\n \nCurrent literature understanding of the mechanism is limited but indicates Ag2S seed particles, shelled with a mixed metal sulfide, form prior to the alloying step of the final product; thus, an investigation into the nucleation, growth and alloying stages has been carried out to increase understanding of this process. Powder XRD and high-resolution STEM-EDX data demonstrates that the elemental mixing and crystallinity of the particles produced remains high despite compositional complexity; and show that the target crystal structure is maintained throughout the addition of more metals. Optoelectronic measurements have also been taken to probe how the inclusion of different elemental species affects the properties of the dots.\n\nThis work demonstrates a facile pathway by which high-entropy quantum dots containing less toxic or expensive elements can be synthesised and developed.",
+   "preference": "Either",
+   "badge": "EITHER",
+   "session": "Colloidal / soft-matter"
+  },
+  {
+   "id": "A16",
+   "presenter": "Sri Datta Aneesh Chodavarapu",
+   "institution": "Cardiff University",
+   "coauthors": "Chandra Kant, \nBenxuan Li,\nBo Hou",
+   "title": "Inkjet Printed Colloidal Quantum Dot Opto-electronics for Visible Light Communication and Optical Interconnects applications",
+   "abstract": "We report the first lithography-free, inkjet-printed electroluminescent colloidal quantum dot light-emitting diode (QLED) visible light communication (VLC) system. Colloidal quantum dots (QDs) offer spectrally tunable, narrowband emission with high colour purity and are fully compatible with low-cost, solution-processed fabrication, making them highly attractive for data communication applications. Owing to their high luminance, low turn-on voltage, narrow emission linewidths, and wide modulation bandwidths, QLEDs emerge as compelling candidates for real-time photonic wireless communication. Herein, a direct printing strategy was employed to fabricate the emissive QDs layer and electron injection layer, enabling precise device patterning on both flexible polymer substrates and conventional glass.\nCompared to conventional spin-coating, inkjet printing significantly reduces material waste and offers compatibility with large-area, flexible, and pixelated device manufacturing. Key process parameters, including ink viscosity, surface tension, withdrawal speed, and solvent dispersibility, were systematically optimized to achieve uniform film thickness and morphology, ensuring efficient charge injection and stable device operation.\nThe fabricated devices exhibited >80,000 cd m⁻², a current efficiency of 21.5 cd A⁻¹, external quantum efficiency (EQE) of 5%, and a low   voltage of 2.5 V, narrow emission (FWHM ~21nm), and reliable signal transmission over a frequency range of 1 Hz to 50 kHz, with minor attenuation at higher frequencies due to emitter and receiver bandwidth limitations. To validate practical applicability, an Arduino-based optical communication system was developed. Text messages were encoded using pulse-width modulation, transmitted through the QLED, detected by a photodetector, and decoded in real time.\nThis work demonstrates the potential of inkjet-printed QLEDs as emitters for real-time audio and data transmission, highlighting their promise for scalable, low-cost, and flexible optical emitters and narrow linewidth optical interconnects.",
+   "preference": "Contributed talk",
+   "badge": "TALK",
+   "session": "Colloidal / soft-matter"
+  },
+  {
+   "id": "A17",
+   "presenter": "Mateusz Salamon",
+   "institution": "The University of Manchester",
+   "coauthors": "Oliver Dudgeon, The University of Edinburgh\nAhsan Nazir, The University of Manchester\nJake Iles-Smith, University of Sheffield",
+   "title": "Influence of Phonon Interactions on Frequency-Filtered Multi-Photon Correlations from Quantum Dots",
+   "abstract": "Correlation functions of the electromagnetic field are fundamental in describing the optical properties of quantum emitters, including the emission spectrum and second-order coherence. Typically, these correlation functions are calculated using the Markovian quantum regression theorem (QRT). Yet, the QRT is known to fail for solid-state quantum emitters, such as semiconductor quantum dots (QDs), where the system interacts with a phonon environment of the host lattice.\nIn our recent work we have overcome this issue by introducing a unified framework to calculate frequency-resolved N-photon spectra of solid-state quantum emitters based on the sensor method. We apply our framework to a model of a resonantly driven QD and show that it accurately captures phonon-induced features in the emission spectrum, such as the phonon sideband. Crucially, this is achieved with only a Markovian master equation description of the vibrational environment. Moreover, our approach provides a tractable description of phonon effects on higher-order correlations. As a demonstration, we have calculated for the first time the frequency-resolved two-photon spectrum of a QD including vibrational interactions, which reveals a rich phonon-induced structure. We find that photons emitted via the phonon sideband inherit second-order coherence properties of the Mollow triplet. Our work opens new pathways to explore phonon influence on the emission properties of solid-state quantum emitters. Further extensions to the method, including the computation of time-dependent spectra from pulsed excitation, will also be presented.",
+   "preference": "Contributed talk",
+   "badge": "TALK",
+   "session": "Epitaxy / III–V emitters"
+  },
+  {
+   "id": "A18",
+   "presenter": "Toby Rawlings",
+   "institution": "University of Sheffield",
+   "coauthors": "Catherine L. Phillips, University of Sheffield\nJake Iles-Smith, University of Sheffield\nPhilip J. Poole, National Research Council Canada\nDan Dalacu, National Research Council Canada\nAlistair J. Brash, University of Sheffield",
+   "title": "Resonant Photon Correlation Noise Spectroscopy of Single Quantum Emitters",
+   "abstract": "Fluctuations in the local environment of solid-state quantum emitters (QEs) result in linewidth broadening known as spectral diffusion (SD). Current measurement techniques for SD face critical trade-offs, being limited in either time resolution [1] or spectral sensitivity [2].\nHere, we introduce an alternative method termed Resonant Photon Correlation Noise Spectroscopy (RPCNS). By combining second-order detection with continuous-wave resonant excitation, this technique resolves complex noise processes as photon bunching in the second-order correlation function (g(2)(τ)), simultaneously achieving high spectral sensitivity and temporal resolution. While previous works have observed photon bunching from resonantly excited QEs [3], we introduce a new theoretical framework based on a stochastic master equation, allowing full reconstruction of the underlying noise dynamics. Secondly, we map the RPCNS results directly to the indistinguishability, enabling the prediction of its full time-evolution.\nWe apply this technique to study InAs/InP nanowire QDs [4], observing significant linewidth narrowing when weak above-band excitation is applied (Fig.1(a)), consistent with the stabilisation of charge traps. Complex noise dynamics spanning five orders-of-magnitude are revealed, fully reproduced by the theory model (Fig.1(b)). We perform Hong-Ou-Mandel indistinguishability measurements, which demonstrate excellent agreement with a direct normalisation of the RPCNS data (Fig.1(c)). Our results establish RPCNS as a highly sensitive technique, applicable to both fundamental research and efficient device characterisation for quantum technologies.\n\n[1] A. Kuhlmann et al., Nature Physics 9,570-575 (2013)\n[2] G. Sallen et al., Nature Photonics 4,696-6399 (2010)\n[3] C. Fournier et al., Phys. Rev. B 107,195304 (2023)\n[4] P. Laferrière et al., Scientific Reports 12,6376 (2022)",
+   "preference": "Poster",
+   "badge": "POSTER",
+   "session": "Epitaxy / III–V emitters"
+  },
+  {
+   "id": "A19",
+   "presenter": "Dmitry Krizhanovskii",
+   "institution": "The University of Sheffield",
+   "coauthors": "Fedor A. Benimestsky, (1) Paul M. Walker, (1) Anthony Ellul, (1) Oleksandr Kyriienko, (1) Aristide Lemaître, (2) Martina Morassi, (2) Tommi Isoniemi, (1) Maurice S. Skolnick, (1) Jason M. Smith, (3) Jacqueline Bloch, (2) Sylvain Ravets, (2) \n1. School of Mathematical and Physics Sciences, The University of Sheffield, Sheffield, UK\n2. Université Paris-Saclay, CNRS, Centre de Nanosciences et de Nanotechnologies (C2N), Palaiseau, France\n3. Department of Materials, University of Oxford, Oxford OX1 3PH, United Kingdom",
+   "title": "Giant few-photon nonlinear phase modulation enabled by polariton Feshbach resonance in semiconductor microcavities",
+   "abstract": "Strong Kerr-like photon-photon interactions at the single-particle level can enhance quantum optical processing [1] and machine learning applications. One approach to achieve these interactions is by coupling photons which are tightly confined in optical cavities, or ‘photonic dots’, to two-dimensional excitons in quantum wells (QW) to form exciton-polaritons. These quasi-particles are superpositions of photon and exciton and inherit giant interactions from their excitonic part. Meanwhile, the photonic degree of freedom enables deterministic control over the placement and resonant frequency of the ‘polaritonic dots’.\n\nIn this work, we present recent experimental measurements of single-particle interactions in a tunable polariton microcavity. We achieve cross-phase modulation of 240 mrad per particle [2], in the same order of magnitude as the 600 – 800 mrad achieved using semiconductor InGaAs quantum dots [1]. Using the tunability of our cavity, we investigate how the interaction strength varies with detuning between the polariton and the QW exciton frequencies. We find a strongly enhanced interaction near a resonance with the biexciton states (Feshbach resonance). We find that the interaction magnitude and its strong frequency dependence can be fit with a model of polaritons coupled to biexcitons, using parameters consistent with previously published values. These results suggest that polariton interactions can be significantly enhanced by coupling to biexcitons even at the single-particle level, and may explain the observed polariton quantum correlations [3].\n\n[1] K. H. Nielsen et al., Nature Photonics 16:11397 (2025) \n[2] F. A. Benimetskiy et al., arXiv: 2510.04789 (2026)\n[3] L. Scarpelli et al. Nature Physics 20, 214–218 (2024)",
+   "preference": "Contributed talk",
+   "badge": "TALK",
+   "session": "Optics / integration / devices"
+  },
+  {
+   "id": "A20",
+   "presenter": "Valdemar Bille-Lauridsen",
+   "institution": "Techincal University of Denmark",
+   "coauthors": "Valdemar Bille-Lauridsen, Technical University of Denmark \nMeng Xiong, Technical University of Denmark \nElizaveta Semenova, Technical University of Denmark \nKresten Yvind, Technical University of Denmark \nJesper Mørk, Technical University of Denmark",
+   "title": "Lithographically defined quantum-dot-scale active regions in InP nanocavities",
+   "abstract": "Shrinking semiconductor lasers toward the nanoscale requires precise spatial overlap between the optical cavity and an increasingly small gain region. Self-assembled quantum dots (QDs) provide excellent emission properties, but their stochastic nucleation limits spatial alignment, fabrication yield, and scalability [1]. Buried heterostructures (BHs) provide a good alternative by combining lithographic control of the active region with three-dimensional carrier confinement. \n\nHere, we demonstrate lasing from an InP photonic-crystal nanobeam cavity incorporating a BH with an estimated lateral footprint of approximately 107 × 107 nm², the smallest laterally confined BH active region reported to lase. Despite the large surface-to-volume ratio and etching through the active region during cavity etching, the devices exhibit a clear lasing threshold and narrow linewidth under optical pumping. Al₂O₃ surface passivation and strong optical confinement in the high-Q nanobeam cavity enable this performance. By systematically varying the BH size, we show how the lasing threshold depends on active-region volume, pump overlap, and optical confinement, in agreement with rate-equation modelling. \n\nWe further demonstrate BH structures with lateral dimensions down to approximately 40 × 40 nm², placing them in the size regime of other telecom quantum dots [3]. This provides a promising route towards deterministic emitters for quantum-photonic devices, with precise lithographic control over active-region size and position. \n\nReferences: \n\n[1] Sapienza, L. et al., Nature Communications, 6, 7833 (2015) \n\n[2] Dimopoulos, E. et al., Optica, 10, 973 (2023) \n\n[3] Zhang, Z, et al. Scientific Reports 2, 477 (2012)",
+   "preference": "Contributed talk",
+   "badge": "TALK",
+   "session": "Epitaxy / III–V emitters"
+  },
+  {
+   "id": "A21",
+   "presenter": "Robert Dimitrov",
+   "institution": "Cardiff University",
+   "coauthors": "Dr Bo Hou - Cardiff University",
+   "title": "Elemental Doping of InP Colloidal Quantum Dots:  A Step Towards Room-Temperature Ferromagnetism in Quantum Dots",
+   "abstract": "Dilute magnetic semiconductors, in which transition-metal dopants add spin order to a semiconductor host, have long been pursued for spintronics, but ferromagnetic order that survives to room temperature remains rare and depends on how strongly the magnetic ions couple through the host anions.[1] Room-temperature ferromagnetism was recently reported for Cr³⁺-doped InP colloidal quantum dots (QDs),[2] yet it is not known whether other dopants can do the same in this cadmium-free platform. In this talk, I will discuss our work extending this approach beyond chromium to other dopants with ferromagnetic potential. Each dopant is studied as a concentration series, at nominal levels from 50% to 300% relative to indium, alongside an undoped control. The QDs are grown by hot injection using the aminophosphine route [3], in which the corresponding metal acetylacetonate replaces the chromium precursor, so that the dopant is the only variable. I will focus on how the dopant and its concentration control incorporation, oxidation state, nanocrystal quality and the magnetic response across each series. I will review how X-ray diffraction, X-ray photoelectron spectroscopy and electron microscopy, together with magnetometry against field and temperature and chromium reference batches, can be combined to separate intrinsic ferromagnetism from oxide or phosphide impurities. Finally, I will discuss how these QDs can serve as the active layer of magnetically addressable memristors,[4] where the dots are chosen for their magnetic rather than their optical properties, with the ultimate aim of using these devices in neuromorphic computing.",
+   "preference": "Either",
+   "badge": "EITHER",
+   "session": "Colloidal / soft-matter"
+  },
+  {
+   "id": "A22",
+   "presenter": "Maxim Makhonin",
+   "institution": "University of Sheffield",
+   "coauthors": "Anatoliy Antill, University of Sheffield\nAgnethe Olsen, RobQuant Ltd\nJoe Smith, University of Sheffield",
+   "title": "NV Centres Photoluminescence Enhancement in diamond by confined excitation in a Heterogeneously Integrated Planar DBR Cavity",
+   "abstract": "NV centres in diamond are known to be one of the strongest candidates for small fields sensing applications. Their use in magnetoencephalograms for brain scans is currently limited by the need of applying high power green lasers (>1W, which is too high for safe biological applications). Here we aim to significantly reduce the power needed for such technologies by creating an integrated device with embedded diamond enriched by NV centres for sensing in an optical cavity optimised for the pump laser.\n\nOur cavity designed by TMM and numerical simulations in Tidy3D FDTD is made of planar DBRs of heterogeneously deposited layers of SiO2 / Si3Nx with a bespoke recipe [1] for PECVD deposition of low photoluminescence Si3Nx. By stacking two DBR mirrors we created an open cavity with a bottom mirror on a SiO2 substrate with 20 pairs DBR (high reflectivity >99% in the green part of the spectrum) and varied the number of pairs on diamond samples for the top mirror. The small wedge in the diamond sample had to be corrected by rotating the sample to create an optimised cavity. Furthermore, to enhance the confinement of the pumping laser we fill the cavity with high refractive index optical material (oil/ gel) and observe further improvement up to 13 times compared to bare diamond. \n\nIn achieving an order of magnitude improvement in optical efficiency, this work aims to build a scalable, CMOS-compatible low power solution for quantum sensing via NV centres.\n\n[1] J. Smith, et al., “Single photon emission and single spin coherence of a nitrogen vacancy center encapsulated in silicon nitride,” APL, v 116, 13, 2020, doi: https://doi.org/10.1063/5.0002709.",
+   "preference": "Contributed talk",
+   "badge": "TALK",
+   "session": "Optics / integration / devices"
+  },
+  {
+   "id": "A23",
+   "presenter": "Alex Thomas",
+   "institution": "University of Bristol",
+   "coauthors": "David Dlaka\nAndrew B Young\nRuth Oulton\nPetros Androvitsaneas\nEdmund Harbord",
+   "title": "Partially Etched Pillars",
+   "abstract": "We report on simulation work on low Q quantum dot micropillar cavities, resonant at ~1300 nm. These pillar designs are to act as deterministic single photon sources. These pillars tend to be made using lithography techniques (etching). We completed sets of simulations on various designs of such micropillars. We found that not fully etching the structures does not significantly reduce the efficiency of the pillar design, nor significantly reduce the quality of the output. Specifically, we found that all of our pillar designs are largely robust against changes, as long as ~60 % of the bottom DBR has been etched. This appears to also be true when the diameter of the pillar is varied. Limiting the etch has the benefit of improving the mechanical stability of the micropillars.",
+   "preference": "Poster",
+   "badge": "POSTER",
+   "session": "Epitaxy / III–V emitters"
+  },
+  {
+   "id": "A24",
+   "presenter": "William Marsden",
+   "institution": "University of Sheffield",
+   "coauthors": "Luke Brunswick, University of Sheffield\nNic Mullin, University of Sheffield\nAkshay Verma, University of Sheffield\nEdmund Clarke, University of Sheffield\nNicholas. J. Bailey, University of Sheffield\nOscar J. Palma Chaundler, University of Sheffield\nLuke Wilson, University of Sheffield\nAlistair J. Brash, University of Sheffield\nImad I. Faruque, University of Sheffield",
+   "title": "Spatial and spectral characterisation of low density GaAs/AlGaAs multi-quantum dot sites grown by local-droplet epitaxy",
+   "abstract": "GaAs/AlGaAs quantum dots have garnered significant interest due to their high spatial symmetry, low fine-structure splitting, exceptionally short radiative lifetimes and spectral overlap with the D lines of Rubidium atoms for quantum memory applications. In this work, we employed a modified local droplet epitaxy (LDE) growth procedure in which a steady As pressure was maintained during the deposition of Al and subsequent nanohole etching. This produces low-density nanoholes which are highly asymmetric along one crystal axis. Upon infilling these nanoholes with GaAs, we observed that they host four spectrally distinct quantum dots, contrasting the typical single emitter per nanohole. \n\nTo understand and verify the nature of these multi-quantum dot sites, we carried out an in-depth characterisation process. High-resolution AFM was used to compare the morphology of the unfilled and filled nanoholes, while a combination of spectrally filtered PL imaging and high resolution 2D μPL scans of individual nanoholes were used to demonstrate that every nanohole hosts multiple spatially distinct quantum dot families. Finally, we compare the properties of the different emitter families through a series of measurements of the fine-structure splitting, power dependence and radiative lifetimes. Based on these measurements we form a complete picture of the multi-quantum dot sites and discuss the mechanisms behind their formation.",
+   "preference": "Either",
+   "badge": "EITHER",
+   "session": "Epitaxy / III–V emitters"
+  },
+  {
+   "id": "A25",
+   "presenter": "Anne-Sophie Korotov",
+   "institution": "University of Oxford",
+   "coauthors": "Eugenio Picheo, Gareth S. Jones, Jason M. Smith",
+   "title": "Scalable fabrication of microlenses in diamond membranes for efficient photonic interfaces in quantum networks",
+   "abstract": "The nitrogen-vacancy (NV-) centre in diamond is a leading candidate for building scalable quantum networks due to its long spin-coherence times and readily available optical initialisation and readout. However, it suffers from low emission of coherent photons necessary to build entangled states. As a result, to date state-of-the-art quantum networks built upon NV- suffer from slow entanglement generation rates. [1], [2] To mitigate this, the NV- can be placed in an optical microcavity, resonant with its zero-phonon line (ZPL). This modifies the optical density of states and can enhance the efficiency of networked entanglement generation. Up to now, a common approach has been to use open-access microcavities, where two highly-reflective mirrors are placed above and below the emitter and tuned onto resonance by adjusting the cavity length with a piezoelectric actuator to one mirror.  This configuration is unstable and difficult to scale. Here we present an alternative microcavity structure consisting of a planar-convex diamond microlens structure, onto which the mirrors can be directly deposited. We develop a scalable fabrication method using grayscale photolithography and inductively-coupled plasma reactive ion etching. This allows for the fabrication of large microlens arrays onto a single diamond membrane. Finally, we present progress towards coupling laser written deterministically fabricated NV- arrays to these monolithic cavity structures. \n[1]\tH. Bernien et al., “Heralded entanglement between solid-state qubits separated by three metres,” Nature, vol. 497, no. 7447, pp. 86–90, Apr. 2013, doi: 10.1038/nature12016.\n[2]\tM. Pompili et al., “Experimental demonstration of entanglement delivery using a quantum network stack,” npj Quantum Information 2022 8:1, vol. 8, no. 1, pp. 121-, Oct. 2022, doi: 10.1038/s41534-022-00631-2.",
+   "preference": "Contributed talk",
+   "badge": "TALK",
+   "session": "Colour centres / defects"
+  },
+  {
+   "id": "A26",
+   "presenter": "Kieran Ramaswami",
+   "institution": "University of Manchester",
+   "coauthors": "Mihir Athavale, University of Manchester\nJacob Wakley, Cardiff University\nMaddison Coke, University of Manchester\nMason Adshead, University of Manchester\nAnthony Bennet, Cardiff University\nRichard Curry, University of Manchester\nPatrick Parkinson, University of Manchester",
+   "title": "Generation and high-throughput down-selection of lead-vacancy centres in nanodiamonds for non-classical emitters",
+   "abstract": "Lead-vacancy (PbV) centres are promising for diamond quantum technologies. Their ~4 THz ground-state splitting, the largest among Group-IV colour centres, should allow spin coherence at higher temperatures than SiV, GeV or SnV. However, forming optically active PbVs has typically required high-pressure, high-temperature (HPHT) annealing. Here, we form PbVs in 100 nm nanodiamonds (nDs) by 30 keV Pb implantation followed by rapid thermal annealing at 1000 °C in argon. Using an automated micro-photoluminescence system, we characterised ~400 nDs across four implantation doses. Up to ~20% of implanted nDs show a PbV zero-phonon line at 552 nm, with >4σ significance relative to an unimplanted reference. The PbV emission lifetime is 4.4 ± 0.1 ns. Several nDs show strongly polarised emission and a dependence on the polarisation of the excitation source. Continuous-wave and pulsed g(2) measurements confirm room-temperature antibunching, with g(2)(0) = 0.56 ± 0.03 without background subtraction. An initial study suggests that polarised emission correlates with non-classical behaviour (3 of 5 polarised vs 0 of 3 unpolarised nDs), offering a potential fast, low-cost pre-screen before time-consuming correlation measurements. Pb-implanted nDs therefore offer a scalable route to heavy Group-IV quantum emitters, compatible with pick-and-place integration into photonic structures.",
+   "preference": "Contributed talk",
+   "badge": "TALK",
+   "session": "Colour centres / defects"
+  },
+  {
+   "id": "A27",
+   "presenter": "Angelos Seizas",
+   "institution": "Cardiff University",
+   "coauthors": "",
+   "title": "Symmetry-resolved phonon-mediated dark-to-bright exciton transitions in wurtzite CdSe quantum dots",
+   "abstract": "Symmetry considerations governing transitions within the fine structure of band-edge excitons are largely neglected. We present a framework that derives the selection rules for dark-to-bright transitions by combining $C_{6v}$ point-group symmetry with mirror-parity conservation in colloidal CdSe quantum dots with wurtzite structure.\nThis group-theoretical analysis reveals multiple constrains such as the forbiddance of the dominant $A_1$ Fröhlich phonon channel for the $\\ket{ \\pm 1^L } \\rightarrow \\ket{ \\pm 1}$ transition, forcing activation through weaker deformation-potential pathways. We embed these symmetry-resolved transition rates into a Liouvillian master equation to evaluate the quantum yield, which is then subsequently mapped across the exchange-splitting parameter space for a range of temperatures, offering a prospective predictive tool for optimising the quantum yield of colloidal emitters.",
+   "preference": "Poster",
+   "badge": "POSTER",
+   "session": "Colloidal / soft-matter"
+  },
+  {
+   "id": "A28",
+   "presenter": "Renesa Dasgupta",
+   "institution": "King's College London",
+   "coauthors": "Renesa Dasgupta,1 Kanik Chelani, 1 Jonathan Shapey2 and Graeme J. Stasiuk1\n1)\tImaging Chemistry and Biology, School of Biomedical Engineering and Imaging Sciences, King's College London, St Thomas’ Hospital, London SE1 7EH\n2)\tSurgical and Interventional Engineering, School of Biomedical Engineering and Imaging Sciences, King's College London, St Thomas’ Hospital, London SE1 7EH",
+   "title": "Engineering gold-based quantum dots for image guided surgery in glioblastoma",
+   "abstract": "Glioblastoma is the fastest growing and most aggressive type of cancerous brain tumour with median survival rate of 15 months. The primary therapy is surgery, but tumour is frequently left behind because it is very difficult to delineate healthy tissue from the tumour. Current intraoperative imaging in neurosurgery relies on nonspecific molecular dyes which fails to delineate all tumour boundaries and leads to strong tissue scattering, autofluorescence, photobleaching and low signal. Quantum dots (QDs) are known for their excellent photostability, and high photoluminescence quantum yields (PLQY) compared to molecular dyes. This project aims to develop a series of gold-based quantum dots functionalised with various ligands for targeted delivery for glioblastoma, with a unique emission profile in the near infrared region (NIR). NIR-II Ag2S QDs (λem = 1195 nm) were synthesized and alloyed with gold to tune their emission profile in NIR-I region (λem = 670 to 815 nm).[1] Furthermore, enhanced PLQYs up to 23% and long emission lifetimes up to 4.2 µs were found for Au-alloyed Ag2S QDs. These NIR-I emitting AgAuS QDs hold strong potential to improve intraoperative imaging, resulting in more precise and effective surgical interventions. These QDs will be functionalised with tumour specific target ligand which will allow the surgeon to better delineate healthy tissue from tumour, reducing the effects of tissue autofluorescence and ensuring for safer, more precise surgery. \n\n[1] K. Chelani, T. W. Price, V. Gonçalves, I. Çaha, F. L. Deepak, R. T. M. de Rosales, J. Gallo, and G. J. Stasiuk, Small, 2025, DOI: 10.1002/smll.202505308",
+   "preference": "Poster",
+   "badge": "POSTER",
+   "session": "Colloidal / soft-matter"
+  },
+  {
+   "id": "A29",
+   "presenter": "Anatoliy Antill",
+   "institution": "University of Sheffield",
+   "coauthors": "Anatoliy Antill, Maxim Makhonin, Agnethe Seim Olsen and Joe A. Smith",
+   "title": "NV Center Enhancement Using a Heterogeneously Integrated Planar-Planar DBR Cavity",
+   "abstract": "Diamond Nitrogen Vacancy (NV) centres have shown promise in quantum sensing\napplications; however, they need high power green laser excitation (> 1 W at 532 nm\nwavelength) for sensitive operations, which limits their application for biological sensing.\nHere, we propose a solution: a photonic cavity formed by integrating SiO_2/SiN_x\nDistributed Bragg Reflectors (DBRs) on both sides of a bulk diamond substrate, enhancing\nNV excitation without hindering signal collection efficiency.\nThe DBR is designed to achieve high reflectance and trapping at 532 nm, and high\ntransmittance across the NV centre’s photoluminescence band.\nThe DBRs are optimised using the Transfer Matrix Method and Tidy3D FDTD simulations.\nBy optimising the NH_3 concentration for SiN_x PECVD deposition , we fabricated up to 20-\nlayer pair heterogeneous DBR stacks, achieving ~99% reflectance at 532 nm while\nmaintaining high transmittance across the NV centre spectrum.\nInitial experimental measurements of the fabricated cavity demonstrate a ~14 times\nphotoluminescence enhancement compared to bare diamond. With these results, we can\nsignificantly reduce the inbound laser power while maintaining the high sensitivity necessary\nfor sensing applications, such as magnetoencephalography (MEG). This work aims to build\na scalable, CMOS-compatible low power solution for quantum sensing via NV centres.",
+   "preference": "Poster",
+   "badge": "POSTER",
+   "session": "Optics / integration / devices"
+  }
+ ]
+}

@@ -62,6 +62,10 @@
 
           window.history.replaceState(null, '', location.pathname.slice(0, -1) + decoded + location.hash)
         }
+        if (location.pathname.indexOf('/qdd-review-') === 0) {
+          const robots = document.querySelector('meta[name="robots"]')
+          if (robots) robots.setAttribute('content', 'noindex,nofollow')
+        }
       })(window.location)
     </script>
   </head>
