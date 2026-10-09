@@ -787,6 +787,11 @@ export default function QddReviewPage() {
                   className="mt-1 min-h-11 w-full rounded-sm border border-white/20 bg-[#0B1629] px-2 text-sm text-white sm:max-w-xs"
                 />
               </div>
+              {submitStatus === 'sending' && (
+                <p className="text-sm font-semibold text-white" role="status">
+                  Sending data to sheet… please wait…
+                </p>
+              )}
               <div className="flex flex-col gap-2 sm:flex-row">
                 {uploadUrl ? (
                   <button
