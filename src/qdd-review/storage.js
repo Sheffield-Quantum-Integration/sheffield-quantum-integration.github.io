@@ -7,8 +7,25 @@ const COMMENT_LIMIT = 200
 const REASON_LIMIT = 200
 const INITIALS_LIMIT = 40
 
+const OPEN_BY_DEFAULT = new Set(['Epitaxy / III–V emitters', 'Colloidal / soft-matter'])
+
 export function proposedMoveFor(id) {
   return PROPOSED_MOVES.find((item) => item.id === id) || null
+}
+
+export function defaultOpenPanels(sessions) {
+  return Object.fromEntries(sessions.map((session) => [session, OPEN_BY_DEFAULT.has(session)]))
+}
+
+function openPanelsFromSaved(saved, data) {
+  const defaults = defaultOpenPanels(data.sessions)
+  if (!saved || !saved.openPanels || typeof saved.openPanels !== 'object') return defaults
+  const openPanels = {}
+  for (const session of data.sessions) {
+    openPanels[session] =
+      typeof saved.openPanels[session] === 'boolean' ? saved.openPanels[session] : defaults[session]
+  }
+  return openPanels
 }
 
 function abstractMap(data) {
@@ -31,7 +48,7 @@ export function createInitialState(data) {
     if (!data.sessions.includes(proposal.proposedSession)) {
       throw new Error(`Unknown proposed session for ${proposal.id}`)
     }
-    proposals[proposal.id] = { decision: null, comment: '' }
+    proposals[proposal.id] = { decision: 'confirm', comment: '' }
   }
 
   for (const abs of data.abstracts) {
@@ -51,7 +68,15 @@ export function createInitialState(data) {
     ranked[proposedMoveFor(abs.id).proposedSession].push(abs.id)
   }
 
-  return { reviewerInitials: '', ranked, meta, posters, proposals }
+  return {
+    reviewerInitials: '',
+    ranked,
+    meta,
+    posters,
+    proposals,
+    openPanels: defaultOpenPanels(data.sessions),
+    postersOpen: true
+  }
 }
 
 export function sessionOf(ranked, id) {
@@ -120,6 +145,7 @@ export function reconcile(saved, data) {
       (decision === 'confirm' && current === proposal.proposedSession) ||
       (decision === 'original' && current === original)
     if (!consistent) decision = null
+    if (!decision && current === proposal.proposedSession) decision = 'confirm'
     proposals[proposal.id] = {
       decision,
       comment: typeof prev.comment === 'string' ? prev.comment.slice(0, COMMENT_LIMIT) : ''
@@ -132,7 +158,9 @@ export function reconcile(saved, data) {
     ranked,
     meta,
     posters,
-    proposals
+    proposals,
+    openPanels: openPanelsFromSaved(saved, data),
+    postersOpen: typeof saved.postersOpen === 'boolean' ? saved.postersOpen : true
   }
 }
 
