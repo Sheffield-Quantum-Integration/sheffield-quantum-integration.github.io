@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import {
   DndContext,
   DragOverlay,
@@ -22,12 +22,7 @@ import { CSS } from '@dnd-kit/utilities'
 import { ChevronDown, GripVertical } from 'lucide-react'
 import reviewData from '../data/qdd-abstracts-review.json'
 import { scriptUrl, themeFor, TALK_TARGET } from './config.js'
-import {
-  buildMailto,
-  buildRankingPayload,
-  formatSubmissionDocument,
-  missingRejectReasons
-} from './formatRanking.js'
+import { buildRankingPayload, missingRejectReasons } from './formatRanking.js'
 import {
   decideProposal,
   loadState,
@@ -46,12 +41,11 @@ const BADGE_CLASS = {
 function countsLabel(data) {
   const tally = { TALK: 0, EITHER: 0, POSTER: 0 }
   for (const abs of data.abstracts) tally[abs.badge] = (tally[abs.badge] || 0) + 1
-  return `${data.abstracts.length}: ${tally.TALK} Talk / ${tally.EITHER} Either / ${tally.POSTER} Poster`
+  return `${data.abstracts.length} abstracts: ${tally.TALK} talks, ${tally.EITHER} either, ${tally.POSTER} posters`
 }
 
-function guideLabel(data) {
-  return `${data.sessions.length * TALK_TARGET} contributed talk slots, ${TALK_TARGET} in each session.`
-}
+const SUBMIT_ERROR =
+  'Could not send your ranking. Please try again, or contact Joe at joe.a.smith@sheffield.ac.uk.'
 
 function isContainerId(id) {
   return String(id).startsWith('drop:')
@@ -66,31 +60,6 @@ function collisionDetection(args) {
   const cardsByCenter = centerHits.filter((hit) => !isContainerId(hit.id))
   if (cardsByCenter.length > 0) return cardsByCenter
   return centerHits
-}
-
-async function copyText(text) {
-  try {
-    await navigator.clipboard.writeText(text)
-    return true
-  } catch {
-    try {
-      const area = document.createElement('textarea')
-      area.value = text
-      area.setAttribute('readonly', '')
-      area.style.position = 'fixed'
-      area.style.top = '0'
-      area.style.left = '0'
-      area.style.opacity = '0'
-      document.body.appendChild(area)
-      area.focus()
-      area.select()
-      const ok = document.execCommand('copy')
-      document.body.removeChild(area)
-      return ok
-    } catch {
-      return false
-    }
-  }
 }
 
 function Badge({ badge }) {
@@ -121,11 +90,11 @@ function CutLine({ target, session }) {
     <div
       className="flex items-center gap-3 py-1.5"
       role="separator"
-      aria-label={`Talk cut after ${target} in ${session}`}
+      aria-label={`Your top ${target} above this line`}
       data-testid={`talk-cut-${session}`}
     >
       <div className="h-px flex-1 bg-white/80" />
-      <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-white">Talk cut · {target}</span>
+      <span className="text-[11px] font-semibold text-white">Your top {target} above this line</span>
       <div className="h-px flex-1 bg-white/80" />
     </div>
   )
@@ -144,7 +113,7 @@ function ExpandedBody({ abstract }) {
     <div className="border-t border-white/10 px-3 py-3">
       <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/40">Co-authors</p>
       {authors.length === 0 ? (
-        <p className="mt-1 text-sm text-white/55">No co-authors listed.</p>
+        <p className="mt-1 text-sm text-white/55">None listed.</p>
       ) : (
         <ul className="mt-1 space-y-1">
           {authors.map((line) => (
@@ -184,6 +153,7 @@ function RankCard({
   onDecide,
   onComment
 }) {
+  const press = useRef(null)
   const { attributes, listeners, setNodeRef, setActivatorNodeRef, transform, transition, isDragging } = useSortable({
     id: abstract.id
   })
@@ -192,6 +162,13 @@ function RankCard({
     transform: CSS.Transform.toString(transform),
     transition,
     opacity: isDragging ? 0.35 : undefined
+  }
+  const toggleIfClick = () => {
+    if (press.current?.moved) {
+      press.current = null
+      return
+    }
+    onToggle()
   }
 
   return (
@@ -202,36 +179,51 @@ function RankCard({
       data-testid={`card-${abstract.id}`}
       data-above-cut={aboveCut ? 'true' : 'false'}
       data-decision={proposal ? decision || 'unanswered' : undefined}
-      className={`scroll-mb-80 border border-white/10 border-l-4 sm:scroll-mb-52 ${theme.border} ${
+      className={`scroll-mb-56 border border-white/10 border-l-4 sm:scroll-mb-40 ${theme.border} ${
         aboveCut ? 'bg-white/[0.06]' : 'bg-white/[0.03]'
       }`}
     >
-      <div className="flex items-start gap-2 p-2.5 sm:p-3">
-        <button
-          type="button"
-          ref={setActivatorNodeRef}
-          className="mt-0.5 flex h-11 w-11 shrink-0 cursor-grab items-center justify-center rounded-sm border border-white/10 text-white/50 touch-none active:cursor-grabbing"
-          aria-label={`Drag to rank ${abstract.id}. On a touch screen, press and hold.`}
+      <div
+        ref={setActivatorNodeRef}
+        className="flex cursor-grab items-start gap-2 p-2.5 active:cursor-grabbing sm:p-3"
+        {...attributes}
+        {...listeners}
+        aria-expanded={expanded}
+        onPointerDown={(event) => {
+          press.current = { x: event.clientX, y: event.clientY, moved: false }
+        }}
+        onPointerMove={(event) => {
+          if (!press.current) return
+          const dx = Math.abs(event.clientX - press.current.x)
+          const dy = Math.abs(event.clientY - press.current.y)
+          if (Math.hypot(dx, dy) > 6) press.current.moved = true
+        }}
+        onClick={toggleIfClick}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter') {
+            event.preventDefault()
+            onToggle()
+            return
+          }
+          listeners.onKeyDown?.(event)
+        }}
+      >
+        <span
+          className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-sm border border-white/10 text-white/50 touch-none"
+          aria-hidden="true"
           data-testid={`handle-${abstract.id}`}
-          {...attributes}
-          {...listeners}
         >
-          <GripVertical className="h-4 w-4" aria-hidden="true" />
-        </button>
+          <GripVertical className="h-4 w-4" />
+        </span>
         <div className="w-7 shrink-0 pt-2 text-center text-sm font-bold tabular-nums text-white">{position}</div>
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
             <span className="font-mono text-xs text-white/45">{abstract.id}</span>
             <Badge badge={abstract.badge} />
           </div>
-          <button
-            type="button"
-            className={`mt-1 text-left text-sm font-semibold text-white ${expanded ? '' : 'line-clamp-2'}`}
-            aria-expanded={expanded}
-            onClick={onToggle}
-          >
+          <p className={`mt-1 text-left text-sm font-semibold text-white ${expanded ? '' : 'line-clamp-2'}`}>
             {abstract.title}
-          </button>
+          </p>
           <p className="mt-0.5 text-xs text-white/50">
             {abstract.presenter}
             <span className="text-white/30"> · </span>
@@ -240,7 +232,12 @@ function RankCard({
         </div>
       </div>
 
-      <div className="flex flex-col gap-2 px-2.5 pb-2.5 sm:flex-row sm:flex-wrap sm:items-center sm:px-3">
+      <div
+        className="flex flex-col gap-2 px-2.5 pb-2.5 sm:flex-row sm:flex-wrap sm:items-center sm:px-3"
+        onPointerDown={(event) => event.stopPropagation()}
+        onMouseDown={(event) => event.stopPropagation()}
+        onTouchStart={(event) => event.stopPropagation()}
+      >
         <label className="sr-only" htmlFor={`session-${abstract.id}`}>
           Session for {abstract.id}
         </label>
@@ -260,15 +257,20 @@ function RankCard({
           type="text"
           value={note}
           maxLength={240}
-          placeholder="Note"
-          aria-label={`Note for ${abstract.id}`}
+          placeholder="Optional note"
+          aria-label={`Optional note for ${abstract.id}`}
           onChange={(event) => onNote(abstract.id, event.target.value)}
           className="min-h-11 w-full flex-1 rounded-sm border border-white/20 bg-[#0B1629] px-2 text-sm text-white placeholder:text-white/30 sm:min-w-[12rem]"
         />
       </div>
 
       {proposal && (
-        <div className="mx-2.5 mb-2.5 border-t border-white/10 px-0.5 pt-2 sm:mx-3">
+        <div
+          className="mx-2.5 mb-2.5 border-t border-white/10 px-0.5 pt-2 sm:mx-3"
+          onPointerDown={(event) => event.stopPropagation()}
+        onMouseDown={(event) => event.stopPropagation()}
+        onTouchStart={(event) => event.stopPropagation()}
+        >
           <p className="inline-flex rounded-sm border border-white/25 bg-white/5 px-2 py-1 text-[11px] font-semibold text-white/80">
             {proposal.tag}
           </p>
@@ -291,14 +293,14 @@ function RankCard({
             </button>
           </div>
           <label className="mt-2 block text-[11px] font-semibold uppercase tracking-[0.14em] text-white/40" htmlFor={`comment-${abstract.id}`}>
-            Comment
+            Comment (optional)
           </label>
           <input
             id={`comment-${abstract.id}`}
             type="text"
             value={comment}
             maxLength={200}
-            placeholder="Short comment on this move"
+            placeholder="Optional comment"
             onChange={(event) => onComment(abstract.id, event.target.value)}
             className="mt-1 min-h-11 w-full rounded-sm border border-white/20 bg-[#0B1629] px-2 text-sm text-white placeholder:text-white/30"
           />
@@ -316,7 +318,7 @@ function PosterCard({ abstract, accept, reason, note, expanded, showReasonError,
     <article
       id={`card-${abstract.id}`}
       data-testid={`card-${abstract.id}`}
-      className="scroll-mb-80 border border-white/10 bg-white/[0.03] sm:scroll-mb-52"
+      className="scroll-mb-56 border border-white/10 bg-white/[0.03] sm:scroll-mb-40"
     >
       <div className="p-2.5 sm:p-3">
         <div className="flex flex-wrap items-center gap-2">
@@ -361,8 +363,8 @@ function PosterCard({ abstract, accept, reason, note, expanded, showReasonError,
           type="text"
           value={note}
           maxLength={240}
-          placeholder="Note"
-          aria-label={`Note for ${abstract.id}`}
+          placeholder="Optional note"
+          aria-label={`Optional note for ${abstract.id}`}
           onChange={(event) => onNote(abstract.id, event.target.value)}
           className="min-h-11 w-full flex-1 rounded-sm border border-white/20 bg-[#0B1629] px-2 text-sm text-white placeholder:text-white/30 sm:min-w-[12rem]"
         />
@@ -377,7 +379,7 @@ function PosterCard({ abstract, accept, reason, note, expanded, showReasonError,
             type="text"
             value={reason}
             maxLength={200}
-            placeholder="Short reason for rejecting"
+            placeholder="Please say why you are rejecting this poster"
             aria-invalid={showReasonError && reasonMissing}
             onChange={(event) => onReason(abstract.id, event.target.value)}
             className={`mt-1 min-h-11 w-full rounded-sm border bg-[#0B1629] px-2 text-sm text-white placeholder:text-white/30 ${
@@ -385,7 +387,7 @@ function PosterCard({ abstract, accept, reason, note, expanded, showReasonError,
             }`}
           />
           {showReasonError && reasonMissing && (
-            <p className="mt-1 text-xs text-white/70">Add a short reason for this rejection.</p>
+            <p className="mt-1 text-xs text-white/70">Please add a short reason.</p>
           )}
         </div>
       )}
@@ -405,7 +407,7 @@ function RankedList({ session, ids, children }) {
         }`}
       >
         {ids.length === 0 && (
-          <p className="px-1 py-3 text-xs text-white/40">No talk or either abstracts in this session. Drag one here.</p>
+          <p className="px-1 py-3 text-xs text-white/40">No talks in this session yet. Drag one here if it fits better.</p>
         )}
         {children}
       </div>
@@ -430,20 +432,15 @@ function OverlayCard({ abstract, session }) {
 export default function QddReviewPage() {
   const [state, setState] = useState(() => loadState(reviewData))
   const [saveError, setSaveError] = useState(false)
-  const [openPanels, setOpenPanels] = useState(() =>
-    Object.fromEntries(reviewData.sessions.map((session) => [session, true]))
-  )
-  const [postersOpen, setPostersOpen] = useState(true)
   const [expanded, setExpanded] = useState({})
   const [activeId, setActiveId] = useState(null)
   const [showReasonErrors, setShowReasonErrors] = useState(false)
-  const [copyStatus, setCopyStatus] = useState('')
   const [submitStatus, setSubmitStatus] = useState('')
   const [submitMessage, setSubmitMessage] = useState('')
 
   const sensors = useSensors(
     useSensor(MouseSensor, { activationConstraint: { distance: 6 } }),
-    useSensor(TouchSensor, { activationConstraint: { delay: 180, tolerance: 8 } }),
+    useSensor(TouchSensor, { activationConstraint: { delay: 200, tolerance: 8 } }),
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
   )
 
@@ -454,20 +451,21 @@ export default function QddReviewPage() {
   const byId = useMemo(() => Object.fromEntries(reviewData.abstracts.map((abs) => [abs.id, abs])), [])
   const posters = useMemo(() => reviewData.abstracts.filter((abs) => abs.badge === 'POSTER'), [])
   const payload = useMemo(() => buildRankingPayload(reviewData, state), [state])
-  const mailto = useMemo(() => buildMailto({ payload }), [payload])
   const uploadUrl = scriptUrl()
   const headerCounts = countsLabel(reviewData)
-  const guide = guideLabel(reviewData)
+  const postersOpen = state.postersOpen !== false
 
   const update = (recipe) => {
     setSubmitStatus('')
     setSubmitMessage('')
-    setCopyStatus('')
     setState(recipe)
   }
 
   const revealSession = (session) => {
-    setOpenPanels((prev) => ({ ...prev, [session]: true }))
+    setState((prev) => {
+      if (prev.openPanels?.[session]) return prev
+      return { ...prev, openPanels: { ...prev.openPanels, [session]: true } }
+    })
   }
 
   const scrollCard = (id) => {
@@ -544,19 +542,13 @@ export default function QddReviewPage() {
         body = null
       }
       if (!response.ok || (body && body.ok === false)) {
-        throw new Error((body && body.error) || 'The sheet did not accept the ranking')
+        throw new Error(SUBMIT_ERROR)
       }
       setSubmitStatus('sent')
-    } catch (error) {
+    } catch {
       setSubmitStatus('error')
-      setSubmitMessage(error instanceof Error ? error.message : 'Could not send. Use Copy ranking instead.')
+      setSubmitMessage(SUBMIT_ERROR)
     }
-  }
-
-  const onCopy = async () => {
-    if (!ensureReasons()) return
-    const ok = await copyText(formatSubmissionDocument(payload))
-    setCopyStatus(ok ? 'copied' : 'failed')
   }
 
   const activeAbstract = activeId ? byId[activeId] : null
@@ -568,10 +560,7 @@ export default function QddReviewPage() {
         <div className="mx-auto flex max-w-3xl flex-col gap-2 px-4 py-3">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <div>
-              <a href="/" className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/40 hover:text-cyan-300">
-                SQIL
-              </a>
-              <h1 className="text-lg font-bold tracking-tight text-white">QDD 2026 committee ranking</h1>
+              <h1 className="text-lg font-bold tracking-tight text-white">Quantum Dot Day 2026 Committee Ranking</h1>
             </div>
           </div>
           <p className="text-sm font-semibold text-white" data-testid="header-counts">
@@ -579,10 +568,30 @@ export default function QddReviewPage() {
           </p>
         </div>
       </header>
-      <div className="mx-auto flex max-w-3xl flex-col gap-2 px-4 py-3">
-        <p className="text-xs leading-relaxed text-white/60">{guide}</p>
+      <div className="mx-auto flex max-w-3xl flex-col gap-3 px-4 py-3">
+        <section className="border border-white/10 bg-white/[0.03] px-4 py-3" aria-label="How to rank">
+          <h2 className="text-sm font-bold text-white">How to rank</h2>
+          <ul className="mt-2 list-disc space-y-1.5 pl-5 text-sm leading-snug text-white/75">
+            <li>Choose 3 contributed talks for each session from the Talk and Either requests.</li>
+            <li>
+              Drag a talk to reorder it. Your top 3, above the line, are your picks. Click a title to read the abstract.
+              Use the session menu if a talk fits better elsewhere, and add a note if you want.
+            </li>
+            <li>
+              Maxim Makhonin&apos;s talk starts in Colour centres, with Confirm this session already selected. Choose Keep
+              in original session if it should stay in Optics.
+            </li>
+            <li>Posters are accepted unless you click Reject. Add a short reason only if you reject one.</li>
+            <li>Your progress is saved automatically in this browser. Initials are optional. Press Submit once when you are finished.</li>
+          </ul>
+          {saveError && (
+            <p className="mt-2 text-xs text-white" role="alert">
+              Your ranking could not be saved in this browser.
+            </p>
+          )}
+        </section>
         <div className="flex flex-wrap items-center gap-2 text-[11px] text-white/50">
-          <span className="font-semibold uppercase tracking-[0.14em]">Preference</span>
+          <span className="font-semibold uppercase tracking-[0.14em]">Request</span>
           <Badge badge="TALK" />
           <Badge badge="EITHER" />
           <Badge badge="POSTER" />
@@ -591,14 +600,9 @@ export default function QddReviewPage() {
             <ThemeDot key={session} session={session} />
           ))}
         </div>
-        <p className="text-[11px] text-white/40">
-          {saveError ? 'Could not save on this device.' : 'Saved on this device. Only your ranking is stored here.'}
-          <span className="mx-1 text-white/20">·</span>
-          Drag the handle to rank. On a phone, press and hold the handle.
-        </p>
       </div>
 
-      <main className="mx-auto flex max-w-3xl flex-col gap-4 px-4 py-4 pb-80 sm:pb-52">
+      <main className="mx-auto flex max-w-3xl flex-col gap-4 px-4 py-4 pb-56 sm:pb-40">
             <DndContext
               sensors={sensors}
               collisionDetection={collisionDetection}
@@ -610,7 +614,7 @@ export default function QddReviewPage() {
                 const theme = themeFor(session)
                 const ids = state.ranked[session] || []
                 const target = TALK_TARGET
-                const open = openPanels[session] !== false
+                const open = state.openPanels?.[session] !== false
                 let cutPlaced = false
                 const cards = []
                 const placeCut = () => {
@@ -667,7 +671,6 @@ export default function QddReviewPage() {
                   )
                 })
                 placeCut()
-                const above = Math.min(ids.length, target)
 
                 return (
                   <section key={session} className="border border-white/10" data-testid={`session-${theme.label}`}>
@@ -675,12 +678,20 @@ export default function QddReviewPage() {
                       type="button"
                       className={`flex w-full items-center justify-between gap-3 border-l-4 px-3 py-3 text-left ${theme.border} ${theme.headerBg}`}
                       aria-expanded={open}
-                      onClick={() => setOpenPanels((prev) => ({ ...prev, [session]: !open }))}
+                      onClick={() =>
+                        setState((prev) => ({
+                          ...prev,
+                          openPanels: {
+                            ...prev.openPanels,
+                            [session]: prev.openPanels?.[session] === false
+                          }
+                        }))
+                      }
                     >
                       <span>
                         <span className="block text-sm font-bold text-white">{session}</span>
                         <span className="mt-0.5 block text-[11px] text-white/55">
-                          {ids.length} to rank · target {target} · {above} above cut
+                          {ids.length} to rank · {target} to choose · Drag and drop talks and click to expand abstract
                         </span>
                       </span>
                       <ChevronDown className={`h-4 w-4 shrink-0 text-white/50 transition-transform ${open ? 'rotate-180' : ''}`} />
@@ -705,12 +716,12 @@ export default function QddReviewPage() {
                 type="button"
                 className="flex w-full items-center justify-between gap-3 border-l-4 border-l-white/40 bg-white/5 px-3 py-3 text-left"
                 aria-expanded={postersOpen}
-                onClick={() => setPostersOpen((prev) => !prev)}
+                onClick={() => setState((prev) => ({ ...prev, postersOpen: prev.postersOpen === false }))}
               >
                 <span>
                   <span className="block text-sm font-bold text-white">Poster session</span>
                   <span className="mt-0.5 block text-[11px] text-white/55">
-                    {posters.length} posters · accept or reject · theme tag is informational
+                    {posters.length} posters · accepted unless you reject one · colour shows the submitted theme
                   </span>
                 </span>
                 <ChevronDown className={`h-4 w-4 shrink-0 text-white/50 transition-transform ${postersOpen ? 'rotate-180' : ''}`} />
@@ -765,22 +776,17 @@ export default function QddReviewPage() {
             <div className="mx-auto flex max-w-3xl flex-col gap-2 px-4 py-3">
               {showReasonErrors && missingRejectReasons(payload).length > 0 && (
                 <p className="text-xs text-white" role="alert">
-                  Add a short reason for each rejected poster before sending.
+                  Please add a short reason for each poster you reject, then press Submit again.
                 </p>
               )}
-              {mailto.truncated && (
-                <p className="text-xs text-white/60">
-                  Email is shortened to fit. Use Copy ranking for the full text and JSON.
-                </p>
+              {submitStatus === 'sent' && (
+                <p className="text-sm font-semibold text-cyan-200">Thanks — your ranking has been received.</p>
               )}
-              {submitStatus === 'sent' && <p className="text-xs text-cyan-200">Ranking sent.</p>}
               {submitStatus === 'error' && (
-                <p className="text-xs text-white" role="alert">
-                  {submitMessage} Use Copy ranking if it did not arrive.
+                <p className="text-sm text-white" role="alert">
+                  {submitMessage}
                 </p>
               )}
-              {copyStatus === 'copied' && <p className="text-xs text-cyan-200">Copied.</p>}
-              {copyStatus === 'failed' && <p className="text-xs text-white">Could not copy. Select the email instead.</p>}
               <div>
                 <label htmlFor="reviewer-initials" className="text-xs text-white/70">
                   Reviewer initials (optional)
@@ -798,36 +804,16 @@ export default function QddReviewPage() {
                 />
               </div>
               <div className="flex flex-col gap-2 sm:flex-row">
-                <a
-                  href={mailto.href}
-                  className="inline-flex min-h-11 items-center justify-center rounded-sm bg-cyan-400 px-4 text-center text-sm font-bold text-[#0B1629] hover:bg-cyan-300"
-                  onClick={(event) => {
-                    if (!ensureReasons()) event.preventDefault()
-                  }}
-                >
-                  Email my ranking
-                </a>
-                <button
-                  type="button"
-                  onClick={onCopy}
-                  className="min-h-11 rounded-sm border border-white/30 px-4 text-sm font-bold text-white"
-                >
-                  Copy ranking
-                </button>
                 {uploadUrl ? (
                   <button
                     type="button"
                     onClick={sendRanking}
                     disabled={submitStatus === 'sending'}
-                    className="min-h-11 rounded-sm border border-white/30 px-4 text-sm font-bold text-white disabled:opacity-40"
+                    className="min-h-11 rounded-sm bg-cyan-400 px-4 text-sm font-bold text-[#0B1629] hover:bg-cyan-300 disabled:opacity-40"
                   >
-                    {submitStatus === 'sending' ? 'Sending…' : 'Submit ranking'}
+                    {submitStatus === 'sending' ? 'Sending…' : 'Submit'}
                   </button>
-                ) : (
-                  <p className="flex min-h-11 items-center text-xs text-white/55">
-                    Sheet upload is not configured yet. Email or copy your ranking.
-                  </p>
-                )}
+                ) : null}
               </div>
             </div>
           </div>

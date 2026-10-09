@@ -7,7 +7,7 @@ export const QDD_REVIEW_PAGE_ID = 'qdd-review'
  * Apps Script web app URL (the /exec URL).
  * Leave empty until the collector is deployed — the submit button stays hidden.
  */
-export const QDD_REVIEW_SCRIPT_URL = ''
+export const QDD_REVIEW_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxskX2JUOu0RDhXac38aUi3T_iDAqITP_qVPZQYzUt8lCEE2evSce7nbcaAiraU30c/exec'
 
 export const QDD_REVIEW_EMAIL = 'joe.a.smith@sheffield.ac.uk'
 

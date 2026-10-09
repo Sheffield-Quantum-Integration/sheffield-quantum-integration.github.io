@@ -180,8 +180,8 @@ const PAGE_META = {
     image: '/assets/quantum-dot-day.jpg'
   },
   'qdd-review': {
-    title: 'QDD committee ranking',
-    description: 'Unlisted Quantum Dot Day committee ranking page.',
+    title: 'Quantum Dot Day 2026 Committee Ranking',
+    description: 'Choose contributed talks for Quantum Dot Day 2026.',
     robots: 'noindex,nofollow'
   }
 }
