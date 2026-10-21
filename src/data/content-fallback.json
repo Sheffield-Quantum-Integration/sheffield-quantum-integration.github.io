@@ -1,60 +1,128 @@
 {
   "hero": {
-    "title": "Sheffield Quantum",
-    "highlight": "Integration Lab",
-    "subtitle": "From Atom-like Systems to Scalable Devices.",
-    "badge": "Stage 9",
-    "backgroundImage": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2000&auto=format&fit=crop",
-    "primaryCta": { "label": "Explore Our Research", "target": "research" },
-    "secondaryCta": { "label": "Join The Team", "target": "opportunities" }
+    "title": "Sheffield Quantum Integration Lab",
+    "strapline": "Taking diamond quantum sensors from the physics lab to the chip.",
+    "about": "SQIL asks whether atom-like defects in solids, such as nitrogen-vacancy (NV) centres in diamond, can be controlled at scale with the tools of the semiconductor industry: photonic circuits and cavities, multi-layer microwave electronics, and robotic field control.",
+    "image": {
+      "src": "/assets/hero-imec-chip-5x-1400.jpg",
+      "srcSet": "/assets/hero-imec-chip-5x-800.jpg 800w, /assets/hero-imec-chip-5x-1400.jpg 1400w",
+      "sizes": "(min-width: 1024px) 560px, calc(100vw - 48px)",
+      "width": 1400,
+      "height": 1200,
+      "alt": "Silicon-nitride photonic chip fabricated at IMEC, optical micrograph",
+      "caption": "A silicon-nitride photonic chip fabricated at IMEC (optical micrograph, acquired at 5× magnification). Waveguides like these route light to and from arrays of diamond quantum sensors."
+    },
+    "primaryCta": { "label": "Opportunities", "openLabel": "PhD opportunity", "target": "opportunities" },
+    "secondaryCta": { "label": "Research", "target": "research" }
   },
   "home": {
-    "introHeading": "Engineering scalable quantum technologies.",
-    "introParagraphs": [
-      "Welcome to SQIL at the University of Sheffield. We are a new research group focused on creating useful applications from physics experiments by injecting advanced engineering technologies.",
-      "Our core mission is to answer whether single atom-like defects in solids can be controlled at scale. We borrow tools from existing semiconductor processing, combining silicon photonics, microwave electronics, and robotics to build robust scalable quantum systems."
-    ],
-    "pillarsTitle": "Research Pillars"
+    "recruitmentBanner": {
+      "opportunityId": "dla-2027-photonics-quantum-sensors",
+      "heading": "PhD opportunity — EPSRC DLA funding competition",
+      "text": "Photonics for the scale up of quantum sensors, October 2027 entry.",
+      "linkLabel": "Project details"
+    },
+    "headlineResult": {
+      "heading": "Headline result",
+      "text": "With colleagues at the University of Bristol, in 2026 we reported an eight-sensor photonic-integrated NV array with simultaneous, independent readout, used to localise a microscale magnetic tip (Weng, Rarity, Balram & Smith, Nature Communications 17, 6185). Our fellowship target is a 64-pixel array.",
+      "linkLabel": "Read the paper in Nature Communications",
+      "url": "https://www.nature.com/articles/s41467-026-73701-0"
+    },
+    "themesHeading": "Research themes",
+    "peopleHeading": "The team",
+    "peopleLinkLabel": "Meet the team",
+    "publicationsHeading": "Recent publications",
+    "publicationsLinkLabel": "All publications",
+    "newsHeading": "News",
+    "newsLinkLabel": "All news",
+    "contactHeading": "Get in touch"
   },
-  "pillars": [
-    { "id": "photonics", "title": "Silicon Photonics", "icon": "zap", "desc": "Embedding atom-like systems in photonic nanocavities." },
-    { "id": "electronics", "title": "Microwave Electronics", "icon": "cpu", "desc": "Scalable control using multi-layer silicon electronics." },
-    { "id": "quantum", "title": "Spin Physics", "icon": "atom", "desc": "Spin-photon interfaces for quantum computing networks." },
-    { "id": "robotics", "title": "Robotics & Sensing", "icon": "bot", "desc": "High-resolution sensing aligning large vector fields." }
-  ],
-  "stats": [
-    { "label": "Active prototypes", "value": "6" },
-    { "label": "Industry partners", "value": "8" },
-    { "label": "Journal features", "value": "34" }
-  ],
   "researchPage": {
     "intro": "We put photonics and electronics front and centre: with useful applications in adding spins to photonic quantum computing and networks, but also for more near-term implications for high resolution quantum sensing.",
+    "recruitmentNote": "Applications are open for an October 2027 PhD project through the EPSRC Doctoral Landscape Award funding competition.",
+    "recruitmentLinkLabel": "PhD opportunity details",
     "sections": [
       {
-        "title": "Integrated Photonics",
+        "id": "photonic-nv-sensor-arrays",
+        "title": "Photonic-integrated NV sensor arrays",
         "icon": "zap",
-        "image": "/assets/photonic%20_chip.jpg",
-        "body": "We design new photonic nanocavities and demonstrate compatibility with silicon photonics. Recent work has looked at embedding atom-like systems directly into these scalable photonic circuits.",
+        "label": "Flagship theme",
+        "summary": "Diamond NV sensors read out through on-chip silicon-nitride waveguides: an eight-sensor array demonstrated with Bristol colleagues, and a 64-pixel array as our target.",
+        "body": "We integrate nitrogen-vacancy (NV) centre sensors in diamond with silicon-nitride photonic chips, so that light is routed to and from each sensor through on-chip waveguides instead of bulk microscope optics. With colleagues at the University of Bristol we demonstrated an eight-sensor array with simultaneous, independent readout, used to localise a microscale magnetic tip (Nature Communications, 2026). Our fellowship aims to scale this to a 64-pixel array. In Sheffield we have built a photonic chip rig that couples multi-channel fibre arrays to on-chip waveguides. See Opportunities for related PhD opportunities. We are also applying chip-integrated quantum sensors to track magnetically labelled microbes, in an ARIA-funded seed project with the Bates Lab.",
+        "image": {
+          "src": "/assets/theme1-fibre-array-sheffield-rig-1200.jpg",
+          "srcSet": "/assets/theme1-fibre-array-sheffield-rig-800.jpg 800w, /assets/theme1-fibre-array-sheffield-rig-1200.jpg 1200w",
+          "sizes": "(min-width: 1024px) 540px, calc(100vw - 48px)",
+          "width": 1200,
+          "height": 900,
+          "alt": "Fibre array aligned to a photonic chip on the SQIL rig in Sheffield",
+          "caption": "An eight-channel fibre array aligned to a photonic chip on the SQIL rig in Sheffield (photo)."
+        },
+        "links": [
+          { "label": "Nature Communications (2026)", "url": "https://www.nature.com/articles/s41467-026-73701-0" },
+          { "label": "PhD opportunities", "target": "opportunities" },
+          { "label": "Bates Lab news", "url": "https://www.bateslab.uk/news" }
+        ],
         "direction": "default"
       },
       {
-        "title": "Scalable Electronics",
-        "icon": "cpu",
-        "image": "https://images.unsplash.com/photo-1592659762303-90081d34b277?q=80&w=2000&auto=format&fit=crop",
-        "body": "Engineering applied to spins through scalable microwave control using multi-layer silicon electronics. We borrow techniques from classical semiconductor processing to control quantum defects at scale.",
+        "id": "cavity-enhanced-diamond-sensors",
+        "title": "Cavity-enhanced diamond sensors",
+        "icon": "atom",
+        "summary": "Bulk diamond inside silicon-nitride/silica Bragg-mirror cavities made in Sheffield's cleanroom, aiming to cut the laser power NV sensors need.",
+        "body": "We place bulk diamond inside planar optical cavities made from silicon-nitride/silica Bragg mirrors (DBRs), deposited by PECVD in Sheffield's cleanroom. The aim is to raise NV excitation efficiency so sensors need less laser power. This work is with RobQuant Ltd, and results are being prepared for publication.",
+        "image": {
+          "src": "/assets/theme2-dbr-pecvd-1200.jpg",
+          "srcSet": "/assets/theme2-dbr-pecvd-800.jpg 800w, /assets/theme2-dbr-pecvd-1200.jpg 1200w",
+          "sizes": "(min-width: 1024px) 540px, calc(100vw - 48px)",
+          "width": 1200,
+          "height": 675,
+          "alt": "Distributed Bragg reflector sample in the PECVD chamber in Sheffield’s cleanroom",
+          "caption": "A silicon-nitride/silica Bragg mirror (DBR) sample after PECVD deposition in Sheffield’s cleanroom (photo)."
+        },
         "direction": "reverse"
       },
       {
-        "title": "Robotics & Sensing",
+        "id": "scalable-control-and-readout",
+        "title": "Scalable control and readout",
+        "icon": "cpu",
+        "summary": "Electronics for operating many spin sensors at once, from crosstalk-mitigated microelectronic control to FPGA-based ODMR readout.",
+        "body": "Reading out many spin sensors at once needs electronics that scale. With colleagues at the University of Bristol, we reported crosstalk-mitigated microelectronic control of spins (Physical Review Applied, 2026). We also develop FPGA-based optically detected magnetic resonance (ODMR) control and readout, and NV thermometry with a traceable calibration chain.",
+        "links": [
+          { "label": "Physical Review Applied (2026)", "url": "https://doi.org/10.1103/stgn-ysxr" }
+        ]
+      },
+      {
+        "id": "robotic-vector-field-alignment",
+        "title": "Robotic vector-field alignment",
         "icon": "bot",
-        "image": "/assets/robot.jpg",
+        "label": "Established capability",
+        "summary": "Custom-built robotics that align large vector fields for spin-based quantum sensors.",
         "body": "Advancing quantum sensing by aligning large vector fields with custom-built robotics. We build large-scale confocal microscopes to automate the characterization of quantum devices.",
+        "image": {
+          "src": "/assets/robot.jpg",
+          "width": 948,
+          "height": 594,
+          "alt": "Illustration of a robotic arm positioning a magnet over an optical sensor setup",
+          "caption": "Illustration of robotic vector-field alignment for a spin-based quantum sensor (Advanced Science, 2024)."
+        },
+        "links": [
+          { "label": "Advanced Science (2024)", "url": "https://onlinelibrary.wiley.com/doi/full/10.1002/advs.202304449" }
+        ],
         "direction": "default"
       }
-    ]
+    ],
+    "methods": {
+      "heading": "Methods",
+      "items": [
+        "Cleanroom fabrication (PECVD, electron-beam lithography, rapid thermal annealing)",
+        "Photonic design and simulation",
+        "Custom confocal and fibre-array rigs"
+      ]
+    }
   },
   "facilitiesPage": {
-    "intro": "Explore our shared fabrication and characterization facilities, including the National Epitaxy Facility cleanroom.",
+    "intro": "Explore our fabrication and characterisation facilities, including the National Epitaxy Facility cleanroom.",
     "tour": {
       "title": "Cleanroom Virtual Tour",
       "url": "https://my.matterport.com/show/?m=hQUAs2chnds&hl=1",
@@ -63,29 +131,32 @@
   },
   "peoplePage": {
     "pi": {
-      "name": "Dr. Joe Smith",
+      "name": "Dr Joe A. Smith",
       "role": "Principal Investigator",
-      "photo": "/assets/JoeSmith_headshot_Oct2025.jpg",
-      "bio": "Joe joined the University of Sheffield as a Lecturer in 2025. He leads SQIL, focusing on scalable control of solid-state quantum defects.",
+      "photo": "/assets/people/joe-smith-448.jpg",
+      "photoWidth": 448,
+      "photoHeight": 673,
+      "thumbnail": "/assets/people/joe-smith-256.jpg",
+      "bio": "Joe joined the University of Sheffield in 2025, where he holds a five-year £1.6M EPSRC Quantum Technologies Career Acceleration Fellowship and is Lecturer in Quantum Technologies in the School of Electrical and Electronic Engineering. He leads SQIL, focusing on scalable control of solid-state quantum defects.",
       "timeline": [
-        "2025 - Present: Lecturer, University of Sheffield",
+        "2025 - Present: Lecturer in Quantum Technologies and EPSRC Quantum Technologies Career Acceleration Fellow, University of Sheffield",
         "2020 - 2025: Postdoctoral Researcher, University of Bristol",
         "2020: PhD in Quantum Engineering, University of Bristol",
         "2015: Kennedy Scholar, MIT",
         "2014: MEng Electronic Engineering with Nanotechnology, UCL"
       ],
       "socials": {
-        "twitter": "#",
+        "staffProfile": "https://sheffield.ac.uk/eee/people/academic-staff/joe-smith",
+        "orcid": "https://orcid.org/0000-0003-2546-6969",
         "linkedin": "https://www.linkedin.com/in/joesmio/"
       }
     },
     "members": [
       {
-        "name": "Maxim Makhonin",
+        "name": "Dr Maxim Makhonin",
         "role": "Postdoctoral Researcher",
         "group": "Postdocs",
-        "photo": "/assets/maxim.jpg",
-        "photoPosition": "62% 30%"
+        "photo": "/assets/people/maxim-256.jpg"
       },
       {
         "name": "Dr Teymour Talha-Dean",
@@ -94,35 +165,35 @@
       },
       {
         "name": "Anatoliy Antill",
-        "role": "Graduate Student",
-        "group": "Graduate Students",
-        "photo": "/assets/anatoliy.jpg"
-      },
-      {
-        "name": "Hao-Cheng Weng",
-        "role": "Graduate Student",
-        "group": "Graduate Students",
-        "note": "With Krishna Balram (University of Bristol)"
+        "role": "PhD Student",
+        "group": "PhD Students",
+        "photo": "/assets/people/anatoliy-256.jpg"
       },
       {
         "name": "Jack Wall",
-        "role": "Graduate Student",
-        "group": "Graduate Students",
+        "role": "PhD Student",
+        "group": "PhD Students",
         "note": "with Matthew Hobbs",
-        "photo": "/assets/jack.jpeg",
-        "photoPosition": "72% 38%"
+        "photo": "/assets/people/jack-256.jpg"
+      }
+    ],
+    "collaboratorsHeading": "Visitors & collaborators",
+    "collaboratorsIntro": "Researchers from partner institutions who visit or work closely with the group.",
+    "collaborators": [
+      {
+        "name": "Hao-Cheng Weng",
+        "affiliation": "University of Bristol",
+        "photo": "/assets/people/hao-cheng-256.jpg"
       },
       {
         "name": "Kimy Jaimes",
-        "group": "Visitors",
-        "note": "University of New Brunswick",
-        "photo": "/assets/kimy.jpeg",
-        "photoPosition": "50% 30%"
+        "affiliation": "University of New Brunswick",
+        "photo": "/assets/people/kimy-256.jpg"
       },
       {
-        "name": "Agnethe Seim Olsen",
-        "group": "Visitors",
-        "note": "RobQuant"
+        "name": "Dr Agnethe Seim Olsen",
+        "affiliation": "RobQuant Ltd",
+        "photo": "/assets/people/agnethe-256.jpg"
       }
     ],
     "alumni": [
@@ -136,37 +207,65 @@
       },
       {
         "name": "Angela Stephen",
-        "destination": "Seagate"
+        "destination": "Senior Process Engineer, Seagate Technology"
       },
       {
         "name": "Molly Thomas",
-        "destination": "UCL"
+        "destination": "Postdoctoral Researcher with James Seddon at UCL"
       },
       {
         "name": "Vivek Tiwari"
       }
-    ],
-    "placeholders": []
+    ]
   },
   "opportunitiesPage": {
-    "intro": "We post PhD studentships and postdoctoral roles here when available. For other enquiries, please get in touch.",
-    "items": []
+    "intro": "We post PhD studentships and postdoctoral roles here. Applications are open for an October 2027 PhD project through the EPSRC Doctoral Landscape Award funding competition.",
+    "closedIntro": "We post PhD studentships and postdoctoral roles here.",
+    "contactCta": { "label": "Contact Joe before applying", "target": "contact" },
+    "items": [
+      {
+        "id": "dla-2027-photonics-quantum-sensors",
+        "label": "PhD opportunity — EPSRC DLA funding competition",
+        "title": "PhD opportunity: Photonics for the scale up of quantum sensors (S3.5-ELE-Smith)",
+        "type": "EPSRC Doctoral Landscape Award funding competition, October 2027 entry",
+        "location": "University of Sheffield, School of Electrical and Electronic Engineering",
+        "deadline": "17:00 GMT, 13 January 2027",
+        "deadlineAt": "2027-01-13T17:00:00Z",
+        "description": "Help build towards a 64-pixel diamond quantum sensor array on silicon photonics. The project aims to deposit diamond lithographically in micron-scale regions to form a spin-based sensor array, and to route each pixel's signal through silicon photonic waveguides. It builds on an eight-sensor photonic-integrated array demonstrated with colleagues at the University of Bristol (Nature Communications, 2026). You will work across photonic device simulation and design, cleanroom nanofabrication, device testing and proof-of-principle quantum sensing experiments. The project is underpinned by a five-year £1.6M EPSRC Quantum Technologies Career Acceleration Fellowship.\n\nSupervisors: Dr Joe A. Smith and Dr Kristian Groom.\nFunding is awarded by competition. Successful awards cover full tuition fees and a maintenance stipend at the applicable UKRI rate for 3.5 years, plus a research grant. Most DLA studentships go to candidates who qualify for Home fee status; see the current eligibility guidance.\n\nPlease get in touch before applying. Applications go through the EPSRC DLA application form (select this project).",
+        "applyUrl": "https://www.findaphd.com/phds/project/photonics-for-the-scale-up-of-quantum-sensors-s3-5-ele-smith/?p199196",
+        "secondaryLabel": "EPSRC DLA: how to apply",
+        "secondaryUrl": "https://www.sheffield.ac.uk/postgraduate/phd/scholarships/science-engineering",
+        "image": {
+          "src": "/assets/theme1-fibre-array-sheffield-rig-1200.jpg",
+          "srcSet": "/assets/theme1-fibre-array-sheffield-rig-800.jpg 800w, /assets/theme1-fibre-array-sheffield-rig-1200.jpg 1200w",
+          "sizes": "(min-width: 1024px) 352px, calc(100vw - 48px)",
+          "width": 1200,
+          "height": 900,
+          "alt": "Fibre array aligned to a photonic chip on the SQIL rig in Sheffield",
+          "caption": "An eight-channel fibre array aligned to a photonic chip on the SQIL rig in Sheffield (photo)."
+        }
+      }
+    ]
   },
   "contactPage": {
     "intro": "We are always looking for motivated students and collaborators. Reach out if you are interested in joining the lab or discussing research.",
-    "address": "School of Electronic and Electrical Engineering\nUniversity of Sheffield\nMappin Street, Sheffield, S1 3JD, UK",
+    "note": "Prospective PhD students: please get in touch with Joe before applying.",
+    "address": "School of Electrical and Electronic Engineering\nUniversity of Sheffield\nSir Frederick Mappin Building, Mappin Street, Sheffield, S1 3JD, UK",
+    "staffProfile": "https://sheffield.ac.uk/eee/people/academic-staff/joe-smith",
+    "orcid": "https://orcid.org/0000-0003-2546-6969",
     "linkedin": "https://www.linkedin.com/in/joesmio/"
   },
   "footer": {
-    "blurb": "Sheffield Quantum Integration Lab (SQIL).\nSchool of Electronic and Electrical Engineering.",
+    "blurb": "Sheffield Quantum Integration Lab (SQIL).\nSchool of Electrical and Electronic Engineering.",
     "logo": "/assets/logo-white.png",
+    "logoUrl": "https://www.sheffield.ac.uk/eee",
+    "imageNotice": "Images and figures © Sheffield Quantum Integration Lab / University of Sheffield unless otherwise credited. Please contact us before reusing them.",
     "links": [
       { "label": "Research Projects", "target": "research" },
       { "label": "Publications", "target": "publications" },
-      { "label": "Join the Lab (PhD/Postdoc)", "target": "opportunities" }
+      { "label": "Join the Lab (PhD/Postdoc)", "openLabel": "PhD opportunity: applications open", "target": "opportunities" }
     ],
     "socials": {
-      "twitter": "#",
       "linkedin": "https://www.linkedin.com/in/joesmio/"
     }
   }
