@@ -21,6 +21,9 @@
       "url": "/qdd",
       "pageId": "quantum-dot-day",
       "image": "/assets/quantum-dot-day.jpg",
+      "imageAlt": "Quantum Dot Day — Sheffield Town Hall with a quantum network overlay",
+      "imageWidth": 2050,
+      "imageHeight": 890,
       "tags": ["Event", "Quantum Dot Day"]
     },
     {
