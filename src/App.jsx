@@ -1,14 +1,22 @@
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import QddReviewPage from './qdd-review/QddReviewPage.jsx'
 import { QDD_REVIEW_PAGE_ID, QDD_REVIEW_PATH } from './qdd-review/config.js'
 import fallbackContent from './data/content-fallback.json'
+import {
+  NAV_LINKS,
+  NOT_FOUND_PAGE_ID,
+  PAGE_META as PUBLIC_PAGE_META,
+  PUBLIC_ROUTES,
+  normalizePathname,
+  pageIdForPublicPath,
+  resolvePageMeta
+} from './site/routes.js'
 import {
   Menu,
   X,
   Atom,
   Cpu,
   Zap,
-  Construction,
   ChevronRight,
   ArrowUpRight,
   Mail,
@@ -25,31 +33,7 @@ const iconMap = {
   bot: Bot
 }
 
-const SITE_ORIGIN =
-  typeof window !== 'undefined' ? window.location.origin : 'https://sqil.shef.ac.uk'
-
-const NAV_LINKS = [
-  { id: 'home', label: 'Home', path: '/' },
-  { id: 'research', label: 'Research', path: '/research' },
-  { id: 'people', label: 'People', path: '/people' },
-  { id: 'publications', label: 'Publications', path: '/publications' },
-  { id: 'facilities', label: 'Facilities', path: '/facilities' },
-  { id: 'news', label: 'News & Events', path: '/news' },
-  { id: 'opportunities', label: 'Opportunities', path: '/opportunities' },
-  { id: 'contact', label: 'Contact', path: '/contact' }
-]
-
-/** Routes kept out of the main nav (e.g. event microsites). */
-const EXTRA_ROUTES = [
-  { id: 'quantum-dot-day', label: 'Quantum Dot Day', path: '/qdd' }
-]
-
-/** Old paths that should resolve to an existing page id (canonical path comes from EXTRA_ROUTES / NAV_LINKS). */
-const PATH_ALIASES = {
-  '/quantum-dot-day': 'quantum-dot-day'
-}
-
-const ALL_ROUTES = [...NAV_LINKS, ...EXTRA_ROUTES]
+const ALL_ROUTES = PUBLIC_ROUTES
 
 const QDD_MAILING_LIST_URL =
   'https://docs.google.com/forms/d/e/1FAIpQLSdTm2wRqOoPqcdbOg5bcXDN9eU3bgNP61kCot0ukSE5FBayog/viewform'
@@ -133,62 +117,12 @@ const QDD_SECTION_NAV = [
 ]
 
 const PAGE_META = {
-  home: {
-    title: 'Sheffield Quantum Integration Lab (SQIL)',
-    description:
-      'SQIL at the University of Sheffield: scalable quantum technologies using silicon photonics, microwave electronics, spin physics, and robotics.'
-  },
-  research: {
-    title: 'Research | SQIL',
-    description:
-      'Research at SQIL spans silicon photonics, scalable microwave electronics, spin-photon interfaces, and robotics for quantum sensing.'
-  },
-  people: {
-    title: 'People | SQIL',
-    description:
-      'Meet the SQIL team: principal investigator, researchers, students, visitors, and alumni.'
-  },
-  publications: {
-    title: 'Publications | SQIL',
-    description:
-      'Publications and preprints from SQIL, including work on quantum photonics, electronics, and sensing.'
-  },
-  facilities: {
-    title: 'Facilities | SQIL',
-    description:
-      'Explore facilities used by SQIL, including fabrication and characterisation infrastructure.'
-  },
-  news: {
-    title: 'News & Events | SQIL',
-    description:
-      'Latest news, events, and announcements from SQIL.'
-  },
-  opportunities: {
-    title: 'Opportunities | SQIL',
-    description:
-      'Current PhD studentship and postdoctoral opportunities at SQIL.'
-  },
-  contact: {
-    title: 'Contact | SQIL',
-    description:
-      'Contact SQIL at the University of Sheffield for collaborations and student opportunities.'
-  },
-  'quantum-dot-day': {
-    title: 'Quantum Dot Day | 26 November 2026',
-    description:
-      'Thursday 26 November 2026 at Sheffield Town Hall. Abstracts are closed. Registration open. Invited speakers: Fei Ding, Helena Knowles, Sandrine Ithurria and Tim Schröder.',
-    image: '/assets/quantum-dot-day.jpg'
-  },
-  'qdd-review': {
+  ...PUBLIC_PAGE_META,
+  [QDD_REVIEW_PAGE_ID]: {
     title: 'Quantum Dot Day 2026 Committee Ranking',
     description: 'Choose contributed talks for Quantum Dot Day 2026.',
     robots: 'noindex,nofollow'
   }
-}
-
-const normalizePathname = (pathname = '/') => {
-  const withoutTrailingSlash = pathname.replace(/\/+$/, '')
-  return withoutTrailingSlash || '/'
 }
 
 const safeSpaUrl = (value) => {
@@ -225,8 +159,7 @@ const pageIdForPathname = (pathname = '/') => {
   const normalized = normalizePathname(pathname)
   // Unlisted committee page. Do not add this path to nav, footer, sitemap, or robots.txt.
   if (normalized === QDD_REVIEW_PATH) return QDD_REVIEW_PAGE_ID
-  if (PATH_ALIASES[normalized]) return PATH_ALIASES[normalized]
-  return ALL_ROUTES.find((link) => link.path === normalized)?.id || 'home'
+  return pageIdForPublicPath(normalized) || NOT_FOUND_PAGE_ID
 }
 
 const pathForPageId = (pageId = 'home') => {
@@ -234,34 +167,67 @@ const pathForPageId = (pageId = 'home') => {
   return ALL_ROUTES.find((link) => link.id === pageId)?.path || '/'
 }
 
-const upsertMetaByName = (name, content) => {
-  let tag = document.querySelector(`meta[name="${name}"]`)
+const setHeadTag = (selector, create, attribute, value) => {
+  let tag = document.head.querySelector(selector)
+  if (value == null) {
+    tag?.remove()
+    return
+  }
   if (!tag) {
-    tag = document.createElement('meta')
-    tag.setAttribute('name', name)
+    tag = create()
     document.head.appendChild(tag)
   }
-  tag.setAttribute('content', content)
+  tag.setAttribute(attribute, value)
 }
 
-const upsertMetaByProperty = (property, content) => {
-  let tag = document.querySelector(`meta[property="${property}"]`)
-  if (!tag) {
-    tag = document.createElement('meta')
-    tag.setAttribute('property', property)
-    document.head.appendChild(tag)
-  }
-  tag.setAttribute('content', content)
+const setMetaName = (name, content) =>
+  setHeadTag(`meta[name="${name}"]`, () => Object.assign(document.createElement('meta'), { name }), 'content', content)
+
+const setMetaProperty = (property, content) =>
+  setHeadTag(
+    `meta[property="${property}"]`,
+    () => {
+      const tag = document.createElement('meta')
+      tag.setAttribute('property', property)
+      return tag
+    },
+    'content',
+    content
+  )
+
+const setCanonical = (href) =>
+  setHeadTag('link[rel="canonical"]', () => Object.assign(document.createElement('link'), { rel: 'canonical' }), 'href', href)
+
+const applyPageMeta = (pageId) => {
+  const meta = resolvePageMeta(pageId, PAGE_META)
+  document.title = meta.title
+  setMetaName('description', meta.description)
+  setMetaName('robots', meta.robots)
+  setMetaName('twitter:title', meta.title)
+  setMetaName('twitter:description', meta.description)
+  setMetaName('twitter:image', meta.image.url)
+  setMetaProperty('og:title', meta.title)
+  setMetaProperty('og:description', meta.description)
+  setMetaProperty('og:url', meta.url)
+  setMetaProperty('og:image', meta.image.url)
+  setMetaProperty('og:image:width', String(meta.image.width))
+  setMetaProperty('og:image:height', String(meta.image.height))
+  setMetaProperty('og:image:alt', meta.image.alt)
+  setCanonical(meta.url)
 }
 
-const upsertCanonical = (href) => {
-  let canonical = document.querySelector('link[rel="canonical"]')
-  if (!canonical) {
-    canonical = document.createElement('link')
-    canonical.setAttribute('rel', 'canonical')
-    document.head.appendChild(canonical)
+const scrollToHash = (hash) => {
+  if (!hash || hash === '#') return false
+  let id = hash.slice(1)
+  try {
+    id = decodeURIComponent(id)
+  } catch {
+    // keep the raw fragment
   }
-  canonical.setAttribute('href', href)
+  const target = document.getElementById(id)
+  if (!target) return false
+  target.scrollIntoView({ block: 'start' })
+  return true
 }
 
 const isPlainLeftClick = (event) =>
@@ -1066,11 +1032,31 @@ const NewsView = ({ onInternalLinkClick }) => {
   )
 }
 
-const PlaceholderView = ({ title }) => (
-  <div className="animate-fadeIn flex min-h-screen flex-col items-center bg-[#0a0e17] px-6 pt-32 text-slate-100">
-    <Construction className="mb-6 h-24 w-24 text-amber-500 drop-shadow-[0_0_10px_rgba(251,191,36,0.4)]" />
-    <h1 className="mb-4 text-4xl font-bold text-white">{title}</h1>
-    <p className="max-w-md text-center text-xl text-slate-400">This section is currently under construction. Check back soon for updates from SQIL.</p>
+const NotFoundView = ({ getPathForPage, onInternalLinkClick }) => (
+  <div className="flex min-h-[70vh] flex-col items-start justify-center bg-[#0a0e17] px-6 pt-32 pb-20 text-slate-100">
+    <div className="mx-auto w-full max-w-3xl">
+      <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-amber-400">Error 404</p>
+      <h1 className="mb-4 text-4xl font-bold text-white">Page not found</h1>
+      <p className="mb-8 max-w-xl text-lg text-slate-300">
+        We couldn’t find a page at this address. It may have moved, or the link may be mistyped.
+      </p>
+      <div className="flex flex-wrap gap-3">
+        <a
+          href={getPathForPage('home')}
+          onClick={(event) => onInternalLinkClick(event, 'home')}
+          className="inline-flex items-center rounded-md bg-amber-400 px-5 py-3 font-semibold text-[#0b1220] hover:bg-amber-300"
+        >
+          Go to the home page
+        </a>
+        <a
+          href={getPathForPage('research')}
+          onClick={(event) => onInternalLinkClick(event, 'research')}
+          className="inline-flex items-center rounded-md border border-slate-600 px-5 py-3 font-semibold text-slate-100 hover:border-amber-400 hover:text-amber-300"
+        >
+          Research
+        </a>
+      </div>
+    </div>
   </div>
 )
 
@@ -1507,33 +1493,38 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
 )
 
 export default function App() {
-  const [activePage, setActivePage] = useState(() =>
-    typeof window === 'undefined' ? 'home' : pageIdForPathname(resolveSpaPathname())
-  )
+  const [route, setRoute] = useState(() => ({
+    pageId: typeof window === 'undefined' ? 'home' : pageIdForPathname(resolveSpaPathname()),
+    hash: typeof window === 'undefined' ? '' : window.location.hash,
+    key: 0,
+    source: 'load'
+  }))
+  const activePage = route.pageId
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [logoError, setLogoError] = useState(false)
   const [content, setContent] = useState(fallbackContent)
+  const mainRef = useRef(null)
 
-  const navigateTo = (pageId) => {
+  const navigateTo = (pageId, hash = '') => {
     const nextPageId = ALL_ROUTES.some((link) => link.id === pageId) ? pageId : 'home'
-    const nextPath = pathForPageId(nextPageId)
+    const nextUrl = `${pathForPageId(nextPageId)}${hash}`
 
     if (typeof window !== 'undefined') {
-      const currentPath = normalizePathname(window.location.pathname)
-      if (currentPath !== nextPath) {
-        window.history.pushState({}, '', nextPath)
+      const currentUrl = `${normalizePathname(window.location.pathname)}${window.location.search}${window.location.hash}`
+      if (currentUrl !== nextUrl) {
+        window.history.pushState({}, '', nextUrl)
       }
     }
 
-    setActivePage(nextPageId)
+    setRoute((prev) => ({ pageId: nextPageId, hash, key: prev.key + 1, source: 'push' }))
     setMobileMenuOpen(false)
   }
 
-  const onInternalLinkClick = (event, pageId) => {
+  const onInternalLinkClick = (event, pageId, hash = '') => {
     if (!isPlainLeftClick(event)) return
     event.preventDefault()
-    navigateTo(pageId)
+    navigateTo(pageId, hash)
   }
 
   useEffect(() => {
@@ -1545,13 +1536,16 @@ export default function App() {
   useEffect(() => {
     const syncRouteFromLocation = () => {
       const nextPageId = pageIdForPathname(resolveSpaPathname())
-      const normalizedPath = pathForPageId(nextPageId)
 
-      if (window.location.pathname !== normalizedPath) {
-        window.history.replaceState({}, '', normalizedPath)
+      // Unknown paths keep their URL so the not-found view describes what was requested.
+      if (nextPageId !== NOT_FOUND_PAGE_ID) {
+        const normalizedPath = pathForPageId(nextPageId)
+        if (window.location.pathname !== normalizedPath) {
+          window.history.replaceState({}, '', `${normalizedPath}${window.location.search}${window.location.hash}`)
+        }
       }
 
-      setActivePage(nextPageId)
+      setRoute((prev) => ({ pageId: nextPageId, hash: window.location.hash, key: prev.key + 1, source: 'pop' }))
       setMobileMenuOpen(false)
     }
 
@@ -1561,8 +1555,9 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [activePage])
+    if (!scrollToHash(route.hash)) window.scrollTo(0, 0)
+    if (route.source === 'push') mainRef.current?.focus({ preventScroll: true })
+  }, [route.key])
 
   useEffect(() => {
     let cancelled = false
@@ -1613,23 +1608,7 @@ export default function App() {
   const getPathForPage = (pageId) => pathForPageId(pageId)
 
   useLayoutEffect(() => {
-    const currentMeta = PAGE_META[activePage] || PAGE_META.home
-    const pagePath = pathForPageId(activePage)
-    const absoluteUrl = `${SITE_ORIGIN}${pagePath}`
-    const ogImage = currentMeta.image
-      ? `${SITE_ORIGIN}${currentMeta.image}`
-      : `${SITE_ORIGIN}/assets/sqi-logo.png`
-
-    document.title = currentMeta.title
-    upsertMetaByName('description', currentMeta.description)
-    upsertMetaByName('robots', currentMeta.robots || 'index,follow')
-    upsertMetaByName('twitter:title', currentMeta.title)
-    upsertMetaByName('twitter:description', currentMeta.description)
-    upsertMetaByProperty('og:title', currentMeta.title)
-    upsertMetaByProperty('og:description', currentMeta.description)
-    upsertMetaByProperty('og:url', absoluteUrl)
-    upsertMetaByProperty('og:image', ogImage)
-    upsertCanonical(absoluteUrl)
+    applyPageMeta(activePage)
   }, [activePage])
 
   const renderPage = () => {
@@ -1676,7 +1655,7 @@ export default function App() {
       case QDD_REVIEW_PAGE_ID:
         return <QddReviewPage />
       default:
-        return <PlaceholderView title={NAV_LINKS.find((link) => link.id === activePage)?.label || 'Coming Soon'} />
+        return <NotFoundView getPathForPage={getPathForPage} onInternalLinkClick={onInternalLinkClick} />
     }
   }
 
@@ -1762,7 +1741,9 @@ export default function App() {
       </nav>
       )}
 
-      <main>{renderPage()}</main>
+      <main id="main" ref={mainRef} tabIndex={-1} className="outline-none">
+        {renderPage()}
+      </main>
 
       {!isEventMicrosite && (
       <footer className="border-t border-slate-800 bg-[#050a14] py-12 text-slate-400">
