@@ -1,8 +1,18 @@
 {
   "source": "manual",
   "lastSyncedAt": "2026-07-15T00:00:00.000Z",
-  "count": 1,
+  "count": 4,
   "items": [
+    {
+      "id": "phd-opportunity-dla-2027-photonics-quantum-sensors",
+      "title": "PhD opportunity: photonics for the scale up of quantum sensors",
+      "content": "Applications are open through the EPSRC DLA funding competition (October 2027 entry) for a project aiming to build towards a 64-pixel diamond quantum sensor array on silicon photonics. Deadline 17:00 GMT, 13 January 2027.",
+      "date": "2026-10-19",
+      "url": "/opportunities",
+      "pageId": "opportunities",
+      "linkLabel": "View opportunity",
+      "tags": ["Opportunity", "PhD"]
+    },
     {
       "id": "quantum-dot-day-2026",
       "title": "Quantum Dot Day — 26 November 2026",
@@ -11,7 +21,29 @@
       "url": "/qdd",
       "pageId": "quantum-dot-day",
       "image": "/assets/quantum-dot-day.jpg",
+      "imageAlt": "Quantum Dot Day — Sheffield Town Hall with a quantum network overlay",
+      "imageWidth": 2050,
+      "imageHeight": 890,
       "tags": ["Event", "Quantum Dot Day"]
+    },
+    {
+      "id": "aria-seed-magnetobiotics-2026",
+      "title": "ARIA seed project: quantum sensors for magnetobiotics",
+      "content": "Joe is co-PI with Kieran Bates (Bates Lab) on an ARIA seed project developing chip-integrated quantum sensors to track magnetically labelled microbes.",
+      "date": "2026-06",
+      "datePrecision": "month",
+      "url": "https://www.bateslab.uk/news",
+      "linkLabel": "Bates Lab news",
+      "tags": ["Funding", "ARIA"]
+    },
+    {
+      "id": "nature-communications-sensor-array-2026",
+      "title": "Photonic-integrated quantum sensor array published in Nature Communications",
+      "content": "Our eight-sensor photonic-integrated NV array, with simultaneous, independent readout, is published in Nature Communications, with colleagues at the University of Bristol.",
+      "date": "2026-05-28",
+      "url": "https://www.nature.com/articles/s41467-026-73701-0",
+      "linkLabel": "Read the paper",
+      "tags": ["Publication"]
     }
   ]
 }

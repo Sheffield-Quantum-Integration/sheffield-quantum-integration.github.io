@@ -6,8 +6,10 @@
   "scripts": {
     "predev": "node scripts/prepare-react.mjs",
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/emit-route-html.mjs",
     "preview": "vite preview",
+    "preview:pages": "node scripts/serve-pages.mjs dist 4173",
+    "test": "node --test tests/*.test.mjs",
     "scrape:publications": "node scripts/scrape-publications.mjs",
     "sync:news": "node scripts/sync-linkedin-news.mjs",
     "sync:news:manual": "node scripts/sync-linkedin-news.mjs --manual"
