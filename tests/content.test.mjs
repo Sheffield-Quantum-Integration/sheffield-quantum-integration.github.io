@@ -133,7 +133,7 @@ test('public copy follows the scientific guardrails', () => {
   for (const match of text.matchAll(/£[\d.,]+M?/g)) assert.equal(match[0], '£1.6M')
   for (const sentence of text.split(/(?<=[.!?])\s+|\n/)) {
     if (/\b64\b/.test(sentence)) {
-      assert.match(sentence, /aim|target|towards/i, `64 must read as an aim: ${sentence}`)
+      assert.match(sentence, /aim|target|towards|goal/i, `64 must read as an aim: ${sentence}`)
     }
   }
   for (const entry of [...visibleText(site), ...visibleText(news)].filter((value) => /ARIA/.test(value))) {
