@@ -983,14 +983,6 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
             </a>
           </p>
         </div>
-        <a
-          href={QDD_MAILING_LIST_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-sm text-white/45 underline-offset-4 transition-colors hover:text-cyan-300 hover:underline"
-        >
-          Join the mailing list
-        </a>
       </div>
     </section>
 
