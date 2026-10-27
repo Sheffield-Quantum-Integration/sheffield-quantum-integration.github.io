@@ -752,29 +752,9 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
               ))}
             </ul>
           </div>
-          <div className="mb-8 flex items-start gap-3 text-white/80">
+          <div className="flex items-start gap-3 text-white/80">
             <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-cyan-400" aria-hidden="true" />
             <p className="text-base">Sheffield Town Hall, Sheffield</p>
-          </div>
-          <div className="flex flex-col items-start gap-3">
-            {QDD_SHOP_LIVE ? (
-              <a
-                href={QDD_DELEGATE_SHOP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-sm bg-cyan-500 px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-[#0B1629] transition-all duration-300 hover:bg-cyan-300 hover:shadow-[0_0_28px_rgba(34,211,238,0.35)]"
-              >
-                Register
-              </a>
-            ) : null}
-            <a
-              href={QDD_MAILING_LIST_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-white/45 underline-offset-4 transition-colors hover:text-cyan-300 hover:underline"
-            >
-              Join the mailing list
-            </a>
           </div>
         </div>
 
