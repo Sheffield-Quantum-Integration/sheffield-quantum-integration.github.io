@@ -354,6 +354,10 @@ const QDD_INSTITUTION_COUNT = new Set([
   ...QDD_POSTERS.map((p) => p.institution)
 ]).size
 const qddSessionId = (numeral) => `session-${numeral.toLowerCase()}`
+const qddTalkTitle = (title) => (title && title !== 'Title to be confirmed' ? title : '')
+// One inset for the header, hero, and programme so those blocks share a left edge.
+const QDD_FRAME = 'mx-auto w-full max-w-6xl px-6 sm:px-8'
+const QDD_MEASURE = 'max-w-xl lg:max-w-2xl'
 
 // Soft glowing points of light behind a section. Static when the user prefers reduced motion.
 const QDD_GLOW_POINTS = [
@@ -404,8 +408,8 @@ const QddCountdown = () => {
       <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/50">Starts in</p>
       <div className="flex gap-2" aria-hidden="true">
         {cells.map((cell) => (
-          <div key={cell.label} className="min-w-[4.25rem] rounded-sm border border-white/10 bg-white/[0.04] px-3 py-2 text-center">
-            <span className="block text-2xl font-extrabold tabular-nums text-white md:text-3xl">{cell.value}</span>
+          <div key={cell.label} className="min-w-0 flex-1 rounded-sm border border-white/10 bg-white/[0.04] px-2 py-1.5 text-center">
+            <span className="block text-xl font-semibold tabular-nums text-white">{cell.value}</span>
             <span className="block text-[10px] font-semibold uppercase tracking-[0.16em] text-white/45">{cell.label}</span>
           </div>
         ))}
@@ -472,79 +476,85 @@ const QddProgrammeStyled = () => {
     <section id="programme" ref={sectionRef} className="relative scroll-mt-6 overflow-hidden border-t border-white/10">
       <QddGlowField themes={QDD_SESSIONS} />
 
-      {/* Top band */}
-      <div className="relative border-b border-white/10 bg-gradient-to-br from-cyan-400/[0.08] via-transparent to-fuchsia-400/[0.06] px-6 py-12 md:py-16">
-        <div className="mx-auto grid max-w-5xl gap-10 lg:grid-cols-[1.3fr_1fr] lg:items-end">
-          <div>
-            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan-400/80">Programme</p>
-            <h2 className="mb-4 text-3xl font-extrabold tracking-tight text-white md:text-5xl">
-              One day. Four sessions. <span className="text-cyan-300">Quantum dots and beyond.</span>
-            </h2>
-            <p className="mb-6 max-w-xl text-sm leading-relaxed text-white/65 md:text-base">
-              Invited talks 30 minutes, contributed talks 15 minutes. Posters are up all day.
-            </p>
-            <dl className="grid max-w-lg grid-cols-3 gap-3">
+      {/* Opens on the same inset and a quieter scale than the hero title. */}
+      <div className="relative border-b border-white/10">
+        <div className={`${QDD_FRAME} grid gap-0 py-8 md:grid-cols-[minmax(0,1fr)_19.5rem] md:py-10 lg:grid-cols-[minmax(0,1fr)_23rem] xl:grid-cols-[minmax(0,40rem)_24rem] xl:justify-between`}>
+          <div className="flex max-w-xl flex-col md:max-w-none md:pr-10 lg:pr-16">
+            <div>
+              <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan-400/80">Programme</p>
+              <h2 className="text-[1.5rem] font-bold leading-[1.15] tracking-tight text-white sm:text-[1.7rem] lg:text-[1.85rem]">
+                <span className="block">One day. Four sessions.</span>
+                <span className="mt-1 block text-cyan-300">Quantum dots and beyond.</span>
+              </h2>
+              <p className="mt-4 max-w-md text-sm leading-relaxed text-white/60 md:text-[15px]">
+                Invited talks 30 minutes, contributed talks 15 minutes. Posters are up all day.
+              </p>
+            </div>
+            <div className="hidden min-h-8 flex-1 md:block" aria-hidden="true" />
+            <dl className="mt-6 grid max-w-md grid-cols-3 gap-x-4 border-t border-white/10 pt-4">
               {[
                 { value: QDD_SPEAKER_COUNT, label: 'Speakers', note: `${QDD_INVITED_COUNT} invited` },
                 { value: QDD_POSTERS.length, label: 'Posters', note: 'all day' },
                 { value: QDD_INSTITUTION_COUNT, label: 'Institutions', note: 'UK and Europe' }
               ].map((stat) => (
-                <div key={stat.label} className="rounded-sm border border-white/10 bg-[#0B1629]/70 px-3 py-3">
-                  <dt className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/50">{stat.label}</dt>
-                  <dd className="text-3xl font-extrabold tabular-nums text-white md:text-4xl">{stat.value}</dd>
-                  <dd className="text-[11px] text-white/45">{stat.note}</dd>
+                <div key={stat.label}>
+                  <dt className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/40">{stat.label}</dt>
+                  <dd className="mt-1 text-xl font-semibold tabular-nums tracking-tight text-white">{stat.value}</dd>
+                  <dd className="text-[11px] text-white/40">{stat.note}</dd>
                 </div>
               ))}
             </dl>
           </div>
-          <div className="flex flex-col gap-6 rounded-sm border border-cyan-400/30 bg-[#0B1629]/80 p-6 shadow-[0_0_40px_rgba(34,211,238,0.12)]">
+          <div className="mt-8 border-t border-white/10 pt-6 md:mt-0 md:border-l md:border-t-0 md:pl-8 md:pt-0 lg:pl-10">
             <QddCountdown />
-            <div>
-              <a
-                href={QDD_DELEGATE_SHOP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-sm bg-cyan-500 px-7 py-4 text-sm font-bold uppercase tracking-wider text-[#0B1629] transition-all duration-300 hover:bg-cyan-300 hover:shadow-[0_0_28px_rgba(34,211,238,0.45)]"
-              >
-                Book your ticket
-                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-              </a>
-              <p className="mt-3 text-sm text-white/70">
-                <strong className="font-semibold text-white">£60</strong> student ·{' '}
-                <strong className="font-semibold text-white">£80</strong> standard
-              </p>
-              <p className="text-xs text-white/50">
-                Last booking {QDD_LAST_BOOKING_LABEL}.
-              </p>
-              <a
-                href={QDD_EXHIBITOR_SHOP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-sm border border-white/25 px-7 py-3 text-sm font-bold uppercase tracking-wider text-white transition-colors hover:border-cyan-300 hover:text-cyan-200"
-              >
-                Exhibitors and sponsors
-                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-              </a>
-              <p className="mt-3 text-sm text-white/70">
+            <a
+              href={QDD_DELEGATE_SHOP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-sm bg-cyan-500 px-4 py-3 text-sm font-bold uppercase tracking-wider text-[#0B1629] transition-all duration-300 hover:bg-cyan-300 hover:shadow-[0_0_28px_rgba(34,211,238,0.45)]"
+            >
+              Book your ticket
+              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            </a>
+            <p className="mt-3 text-sm text-white/70">
+              <strong className="font-semibold text-white">£60</strong> student ·{' '}
+              <strong className="font-semibold text-white">£80</strong> standard
+            </p>
+            <p className="text-xs text-white/50">
+              Last booking {QDD_LAST_BOOKING_LABEL}.
+            </p>
+            <a
+              href={QDD_EXHIBITOR_SHOP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-sm border border-white/20 px-4 py-2.5 text-xs font-bold uppercase tracking-[0.14em] text-white transition-colors hover:border-cyan-300 hover:text-cyan-200"
+            >
+              Exhibitors and sponsors
+              <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+            </a>
+            <p className="mt-3 text-sm leading-relaxed text-white/70">
+              <span className="inline-block">
                 Table-top stand <strong className="font-semibold text-white">£300</strong>
-                {' · '}
+              </span>
+              <span className="text-white/30"> · </span>
+              <span className="inline-block">
                 logo only <strong className="font-semibold text-white">£240</strong>
-              </p>
-            </div>
+              </span>
+            </p>
           </div>
         </div>
       </div>
 
       {/* Jump bar: inline, plus a fixed copy while the programme is on screen */}
-      <nav aria-label="Jump to session" ref={inlineBarRef} className="relative border-b border-white/10 bg-[#0B1629]/85 px-6 py-3 backdrop-blur">
-        <div className="mx-auto flex max-w-5xl items-center gap-3">
+      <nav aria-label="Jump to session" ref={inlineBarRef} className="relative border-b border-white/10 bg-[#0B1629]/85 py-3 backdrop-blur">
+        <div className={`${QDD_FRAME} flex items-center gap-3`}>
           <span className="hidden shrink-0 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/45 sm:inline">Jump to session</span>
           <QddJumpLinks />
         </div>
       </nav>
       {showFixedBar ? (
-        <nav aria-label="Jump to session (pinned)" className="fixed inset-x-0 top-0 z-40 border-b border-white/10 bg-[#0B1629]/90 px-6 py-2.5 shadow-lg backdrop-blur">
-          <div className="mx-auto flex max-w-5xl items-center gap-3">
+        <nav aria-label="Jump to session (pinned)" className="fixed inset-x-0 top-0 z-40 border-b border-white/10 bg-[#0B1629]/90 py-2.5 shadow-lg backdrop-blur">
+          <div className={`${QDD_FRAME} flex items-center gap-3`}>
             <span className="hidden shrink-0 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/45 sm:inline">Jump to</span>
             <QddJumpLinks compact />
           </div>
@@ -552,8 +562,8 @@ const QddProgrammeStyled = () => {
       ) : null}
 
       {/* Timeline */}
-      <div className="relative px-6 py-12 md:py-16">
-        <ol className="relative mx-auto max-w-5xl space-y-5 md:pl-28">
+      <div className={`${QDD_FRAME} relative py-12 md:py-16`}>
+        <ol className="relative space-y-5 md:pl-28">
           <span className="absolute bottom-2 left-[5.25rem] top-2 hidden w-px bg-gradient-to-b from-cyan-400/50 via-fuchsia-400/40 to-amber-400/50 md:block" aria-hidden="true" />
           {QDD_PROGRAMME.map((item) => {
             if (item.type === 'break') {
@@ -615,9 +625,9 @@ const QddProgrammeStyled = () => {
                           ) : null}
                         </p>
                         <p className="text-sm text-white/55">{invited.institution}</p>
-                        <p className={`mt-1 text-base md:text-lg ${invited.title === 'Title to be confirmed' ? 'italic text-white/45' : 'text-white/85'}`}>
-                          {invited.title}
-                        </p>
+                        {qddTalkTitle(invited.title) ? (
+                          <p className="mt-1 text-base text-white/85 md:text-lg">{qddTalkTitle(invited.title)}</p>
+                        ) : null}
                       </div>
                     </div>
                     {contributed.length ? (
@@ -628,7 +638,9 @@ const QddProgrammeStyled = () => {
                             <span className="min-w-0">
                               <span className="font-semibold text-white/90">{talk.speaker}</span>
                               <span className="text-white/45"> — {talk.institution}</span>
-                              <span className="block text-white/65">{talk.title}</span>
+                              {qddTalkTitle(talk.title) ? (
+                                <span className="block text-white/65">{qddTalkTitle(talk.title)}</span>
+                              ) : null}
                             </span>
                           </li>
                         ))}
@@ -646,9 +658,9 @@ const QddProgrammeStyled = () => {
 }
 
 const QddPostersStyled = () => (
-  <section id="posters" className="relative scroll-mt-6 overflow-hidden border-t border-white/10 px-6 py-14 md:py-16">
+  <section id="posters" className="relative scroll-mt-6 overflow-hidden border-t border-white/10 py-14 md:py-16">
     <QddGlowField themes={[...QDD_SESSIONS].reverse()} />
-    <div className="relative mx-auto max-w-5xl">
+    <div className={`relative ${QDD_FRAME}`}>
       <div className="mb-8 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
         <div>
           <h2 className="mb-3 text-2xl font-extrabold tracking-tight text-white md:text-3xl">
@@ -702,7 +714,7 @@ const QddPostersStyled = () => (
 const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
   <div className="qdd-page min-h-screen bg-[#0B1629] text-white selection:bg-cyan-400/30 selection:text-white">
     <header className="border-b border-white/5">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+      <div className={`${QDD_FRAME} flex items-center justify-between py-4`}>
         <a
           href={getPathForPage('home')}
           onClick={(event) => onInternalLinkClick(event, 'home')}
@@ -725,9 +737,27 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
     </header>
 
     <section className="relative overflow-hidden">
+      <img
+        src="/assets/quantum-dot-day.jpg"
+        alt="Quantum Dot Day — Sheffield Town Hall with a quantum network overlay"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-[68%_center] qdd-hero-image"
+        width={2050}
+        height={890}
+        decoding="async"
+        fetchPriority="high"
+      />
+      <div
+        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0B1629] from-[12%] via-[#0B1629]/90 via-[58%] to-[#0B1629]/20"
+        aria-hidden="true"
+      />
+      <div className="pointer-events-none absolute inset-0 bg-[#0B1629]/50 lg:bg-transparent" aria-hidden="true" />
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#0B1629] to-transparent"
+        aria-hidden="true"
+      />
       <div className="pointer-events-none absolute inset-0 qdd-atmosphere" aria-hidden="true" />
-      <div className="relative mx-auto grid max-w-6xl items-stretch lg:grid-cols-2">
-        <div className="flex flex-col justify-center px-6 py-10 qdd-hero-copy sm:px-10 lg:py-14 lg:pr-8 lg:pl-12">
+      <div className={`relative ${QDD_FRAME}`}>
+        <div className={`flex flex-col justify-center py-12 qdd-hero-copy sm:py-14 lg:py-16 ${QDD_MEASURE}`}>
           <div className="mb-6 flex flex-wrap items-end gap-x-5 gap-y-2">
             <p className="text-[7.5rem] font-extrabold leading-none tracking-tight text-cyan-400 md:text-[9rem]">
               26
@@ -769,20 +799,6 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
             <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-cyan-400" aria-hidden="true" />
             <p className="text-base">Sheffield Town Hall, Sheffield</p>
           </div>
-        </div>
-
-        <div className="relative h-36 overflow-hidden sm:h-52 lg:h-auto lg:min-h-full">
-          <img
-            src="/assets/quantum-dot-day.jpg"
-            alt="Quantum Dot Day — Sheffield Town Hall with a quantum network overlay"
-            className="absolute inset-0 h-full w-full object-cover object-[center_35%] qdd-hero-image"
-            width={2050}
-            height={890}
-            decoding="async"
-            fetchPriority="high"
-          />
-          <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#0B1629] to-transparent lg:w-32" />
-          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#0B1629] to-transparent lg:hidden" />
         </div>
       </div>
     </section>
@@ -1013,8 +1029,8 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
       </div>
     </section>
 
-    <footer className="border-t border-white/10 bg-[#08101f] px-6 py-7">
-      <div className="mx-auto flex max-w-5xl flex-col items-start justify-between gap-3 text-xs text-white/40 sm:flex-row sm:items-center">
+    <footer className="border-t border-white/10 bg-[#08101f] py-7">
+      <div className={`${QDD_FRAME} flex flex-col items-start justify-between gap-3 text-xs text-white/40 sm:flex-row sm:items-center`}>
         <p>
           University of Sheffield
           <span className="mx-2 text-white/20">·</span>
