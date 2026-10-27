@@ -189,15 +189,15 @@ const QDD_POSTERS = [
 ]
 
 const QDD_SECTION_NAV = [
-  { href: '#invited', label: 'Invited' },
-  { href: '#about', label: 'About' },
-  { href: '#sessions', label: 'Sessions' },
   { href: '#programme', label: 'Programme' },
   { href: '#posters', label: 'Posters' },
+  { href: '#about', label: 'About' },
   { href: '#abstracts', label: 'Abstracts' },
   { href: '#register', label: 'Register' },
   { href: '#committee', label: 'Committee' }
 ]
+
+const QDD_INVITED_URLS = Object.fromEntries(QDD_CONFIRMED_INVITEDS.map((speaker) => [speaker.name, speaker.url]))
 
 const PAGE_META = {
   ...PUBLIC_PAGE_META,
@@ -582,7 +582,18 @@ const QddProgrammeStyled = () => {
                       <span className="w-14 shrink-0 pt-1 text-sm font-semibold tabular-nums text-white/70">{invited.time}</span>
                       <div className="min-w-0">
                         <p className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                          <span className="text-lg font-bold text-white md:text-xl">{invited.speaker}</span>
+                          {QDD_INVITED_URLS[invited.speaker] ? (
+                            <a
+                              href={QDD_INVITED_URLS[invited.speaker]}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-lg font-bold text-white underline-offset-4 transition-colors hover:text-cyan-300 hover:underline md:text-xl"
+                            >
+                              {invited.speaker}
+                            </a>
+                          ) : (
+                            <span className="text-lg font-bold text-white md:text-xl">{invited.speaker}</span>
+                          )}
                           {invited.invited ? (
                             <span className={`rounded-sm px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] ${style.badge}`}>
                               Invited
@@ -701,8 +712,8 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
 
     <section className="relative overflow-hidden">
       <div className="pointer-events-none absolute inset-0 qdd-atmosphere" aria-hidden="true" />
-      <div className="relative mx-auto grid min-h-0 max-w-6xl items-stretch lg:min-h-[calc(100svh-10rem)] lg:grid-cols-2">
-        <div className="flex flex-col justify-center px-6 py-14 qdd-hero-copy sm:px-10 lg:py-20 lg:pr-8 lg:pl-12">
+      <div className="relative mx-auto grid max-w-6xl items-stretch lg:grid-cols-2">
+        <div className="flex flex-col justify-center px-6 py-10 qdd-hero-copy sm:px-10 lg:py-14 lg:pr-8 lg:pl-12">
           <div className="mb-6 flex flex-wrap items-end gap-x-5 gap-y-2">
             <p className="text-[7.5rem] font-extrabold leading-none tracking-tight text-cyan-400 md:text-[9rem]">
               26
@@ -721,27 +732,7 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
             One-day UK meeting on quantum dots and solid-state emitters. Invited talks, contributed
             talks and posters. Sheffield Town Hall.
           </p>
-          <div className="mb-8">
-            <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan-400/80">
-              Invited speakers
-            </p>
-            <ul className="space-y-1.5">
-              {QDD_CONFIRMED_INVITEDS.map((speaker) => (
-                <li key={speaker.name} className="text-base text-white/80 md:text-lg">
-                  <a
-                    href={speaker.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-semibold text-white underline-offset-4 transition-colors hover:text-cyan-300 hover:underline"
-                  >
-                    {speaker.name}
-                  </a>
-                  <span className="text-white/45"> — {speaker.institution}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="mb-10 flex items-start gap-3 text-white/80">
+          <div className="mb-8 flex items-start gap-3 text-white/80">
             <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-cyan-400" aria-hidden="true" />
             <p className="text-base">Sheffield Town Hall, Sheffield</p>
           </div>
@@ -767,7 +758,7 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
           </div>
         </div>
 
-        <div className="relative min-h-[42vh] overflow-hidden lg:min-h-full">
+        <div className="relative h-36 overflow-hidden sm:h-52 lg:h-auto lg:min-h-full">
           <img
             src="/assets/quantum-dot-day.jpg"
             alt="Quantum Dot Day — Sheffield Town Hall with a quantum network overlay"
@@ -783,41 +774,9 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
       </div>
     </section>
 
-    <section id="invited" className="scroll-mt-6 border-t border-white/10 px-6 py-14 md:py-16">
-      <div className="mx-auto max-w-6xl">
-        <h2 className="mb-3 text-xl font-bold tracking-tight text-white md:text-2xl">
-          Invited speakers
-        </h2>
-        <p className="mb-8 max-w-3xl text-sm leading-relaxed text-white/55 md:text-base">
-          Four committee-invited talks are confirmed.
-        </p>
-        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:grid-rows-[auto_auto_auto] lg:gap-x-4 lg:gap-y-0">
-          {QDD_CONFIRMED_INVITEDS.map((speaker) => (
-            <li
-              key={speaker.name}
-              className="flex flex-col border border-white/10 bg-white/[0.03] px-5 py-5 lg:row-span-3 lg:grid lg:grid-rows-subgrid"
-            >
-              <p className="text-[11px] font-semibold uppercase leading-snug tracking-[0.08em] text-cyan-400/80">
-                {speaker.session}
-              </p>
-              <a
-                href={speaker.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group mt-3 inline-flex items-baseline gap-2 text-xl font-semibold tracking-tight text-white transition-colors hover:text-cyan-300 md:text-2xl"
-              >
-                <span>{speaker.name}</span>
-                <ArrowUpRight
-                  className="h-4 w-4 shrink-0 self-center text-cyan-400/80 transition-colors group-hover:text-cyan-300"
-                  aria-hidden="true"
-                />
-              </a>
-              <p className="mt-2 text-sm text-white/50 md:text-base">{speaker.institution}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
+    <QddProgrammeStyled />
+
+    <QddPostersStyled />
 
     <section id="about" className="scroll-mt-6 border-t border-white/10 px-6 py-14 md:py-16">
       <div className="mx-auto max-w-3xl">
@@ -865,29 +824,6 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
         </div>
       </div>
     </section>
-
-    <section id="sessions" className="scroll-mt-6 border-t border-white/10 px-6 py-14 md:py-16">
-      <div className="mx-auto max-w-3xl">
-        <h2 className="mb-6 text-xl font-bold tracking-tight text-white md:text-2xl">Sessions</h2>
-        <ol className="grid gap-3 sm:grid-cols-2">
-          {QDD_SESSIONS.map((session, index) => (
-            <li
-              key={session}
-              className="flex gap-3 border border-white/10 bg-white/[0.03] px-4 py-3.5"
-            >
-              <span className="text-xs font-bold tabular-nums text-cyan-400/80">
-                {String(index + 1).padStart(2, '0')}
-              </span>
-              <span className="text-sm font-medium text-white/80 md:text-base">{session}</span>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </section>
-
-    <QddProgrammeStyled />
-
-    <QddPostersStyled />
 
     <section id="abstracts" className="scroll-mt-6 border-t border-white/10 px-6 py-14 md:py-16">
       <div className="mx-auto max-w-3xl">
