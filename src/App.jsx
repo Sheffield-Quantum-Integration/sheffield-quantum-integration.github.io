@@ -194,7 +194,8 @@ const QDD_SECTION_NAV = [
   { href: '#about', label: 'About' },
   { href: '#abstracts', label: 'Abstracts' },
   { href: '#register', label: 'Register' },
-  { href: '#committee', label: 'Committee' }
+  { href: '#committee', label: 'Committee' },
+  { href: '#sponsors', label: 'Sponsors' }
 ]
 
 const QDD_INVITED_URLS = Object.fromEntries(QDD_CONFIRMED_INVITEDS.map((speaker) => [speaker.name, speaker.url]))
@@ -514,6 +515,20 @@ const QddProgrammeStyled = () => {
               </p>
               <p className="text-xs text-white/50">
                 Last booking {QDD_LAST_BOOKING_LABEL}.
+              </p>
+              <a
+                href={QDD_EXHIBITOR_SHOP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-sm border border-white/25 px-7 py-3 text-sm font-bold uppercase tracking-wider text-white transition-colors hover:border-cyan-300 hover:text-cyan-200"
+              >
+                Exhibitors and sponsors
+                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              </a>
+              <p className="mt-3 text-sm text-white/70">
+                Table-top stand <strong className="font-semibold text-white">£300</strong>
+                {' · '}
+                logo only <strong className="font-semibold text-white">£240</strong>
               </p>
             </div>
           </div>
@@ -916,11 +931,23 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
       </div>
     </section>
 
-    <section aria-labelledby="qdd-sponsors" className="scroll-mt-6 border-t border-white/10 px-6 py-14 md:py-16">
+    <section id="sponsors" aria-labelledby="qdd-sponsors" className="scroll-mt-6 border-t border-white/10 px-6 py-14 md:py-16">
       <div className="mx-auto max-w-3xl">
-        <h2 id="qdd-sponsors" className="mb-8 text-xl font-bold tracking-tight text-white md:text-2xl">
+        <h2 id="qdd-sponsors" className="mb-3 text-xl font-bold tracking-tight text-white md:text-2xl">
           Sponsors
         </h2>
+        <p className="mb-5 max-w-xl text-sm leading-relaxed text-white/60 md:text-base">
+          Sponsorship packages are open.
+        </p>
+        <a
+          href={QDD_EXHIBITOR_SHOP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mb-8 inline-flex items-center justify-center gap-2 rounded-sm border border-cyan-400/70 px-6 py-3 text-sm font-bold uppercase tracking-wider text-cyan-200 transition-all duration-300 hover:border-cyan-300 hover:text-white"
+        >
+          Exhibitors and sponsors
+          <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+        </a>
         <ul className="flex flex-wrap items-center gap-4">
           <li>
             <a
