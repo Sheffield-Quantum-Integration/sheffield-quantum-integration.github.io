@@ -732,6 +732,26 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
             One-day UK meeting on quantum dots and solid-state emitters. Invited talks, contributed
             talks and posters. Sheffield Town Hall.
           </p>
+          <div className="mb-6">
+            <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan-400/80">
+              Invited speakers
+            </p>
+            <ul className="space-y-1.5">
+              {QDD_CONFIRMED_INVITEDS.map((speaker) => (
+                <li key={speaker.name} className="text-base text-white/80 md:text-lg">
+                  <a
+                    href={speaker.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-white underline-offset-4 transition-colors hover:text-cyan-300 hover:underline"
+                  >
+                    {speaker.name}
+                  </a>
+                  <span className="text-white/45"> — {speaker.institution}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
           <div className="mb-8 flex items-start gap-3 text-white/80">
             <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-cyan-400" aria-hidden="true" />
             <p className="text-base">Sheffield Town Hall, Sheffield</p>
