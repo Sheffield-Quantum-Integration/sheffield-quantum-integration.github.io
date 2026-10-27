@@ -480,8 +480,7 @@ const QddProgrammeStyled = () => {
               One day. Four sessions. <span className="text-cyan-300">Quantum dots and beyond.</span>
             </h2>
             <p className="mb-6 max-w-xl text-sm leading-relaxed text-white/65 md:text-base">
-              Thursday 26 November 2026 · Sheffield Town Hall (the reception suite). All times are UK
-              time (GMT). Invited talks 30 minutes, contributed talks 15 minutes. Posters are up all day.
+              Invited talks 30 minutes, contributed talks 15 minutes. Posters are up all day.
             </p>
             <dl className="grid max-w-lg grid-cols-3 gap-3">
               {[
@@ -514,7 +513,7 @@ const QddProgrammeStyled = () => {
                 <strong className="font-semibold text-white">£80</strong> standard
               </p>
               <p className="text-xs text-white/50">
-                Last booking {QDD_LAST_BOOKING_LABEL}. Poster presenters also need a ticket.
+                Last booking {QDD_LAST_BOOKING_LABEL}.
               </p>
             </div>
           </div>
@@ -641,7 +640,7 @@ const QddPostersStyled = () => (
             Posters <span className="text-white/40">({QDD_POSTERS.length})</span>
           </h2>
           <p className="max-w-xl text-sm leading-relaxed text-white/60 md:text-base">
-            On display all day in the reception suite, with time to discuss them over coffee and lunch.
+            On display all day in the conference room.
           </p>
         </div>
         <div className="flex items-center gap-3 rounded-sm border border-amber-400/40 bg-amber-400/10 px-4 py-3">
@@ -729,8 +728,7 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
             Quantum Dot Day
           </h1>
           <p className="mb-6 max-w-md text-base font-light leading-relaxed text-white/70 md:text-lg">
-            One-day UK meeting on quantum dots and solid-state emitters. Invited talks, contributed
-            talks and posters. Sheffield Town Hall.
+            One-day UK meeting on quantum dots and solid-state emitters. Sheffield Town Hall.
           </p>
           <div className="mb-6">
             <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan-400/80">
