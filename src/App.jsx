@@ -143,7 +143,7 @@ const QDD_PROGRAMME = [
     time: '13:50',
     end: '15:05',
     title: 'Colour centres / defects',
-    chair: 'To be confirmed',
+    chair: 'J.P. Hadden (Cardiff University)',
     talks: [
       { time: '13:50', speaker: 'Helena Knowles', institution: 'University of Cambridge', title: 'Title to be confirmed', invited: true },
       { time: '14:20', speaker: 'Anne-Sophie Korotov', institution: 'University of Oxford', title: 'Scalable fabrication of microlenses in diamond membranes for efficient photonic interfaces in quantum networks', invited: false },
