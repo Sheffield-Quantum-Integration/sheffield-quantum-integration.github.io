@@ -49,6 +49,8 @@ const QDD_AEGIQ_URL = 'https://www.aegiq.com'
 
 const QDD_QUANTUM_DESIGN_URL = 'https://www.qd-uki.co.uk'
 
+const QDD_OXFORD_INSTRUMENTS_URL = 'https://www.oxinst.com'
+
 // Official WPM URLs from Sarah (2 Sep) and Joe’s 8 Sep committee mail.
 // Joe confirmed both pages were public again on 14 Sep afternoon.
 const QDD_SHOP_LIVE = true
@@ -999,6 +1001,21 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
                 src="/assets/quantum-design-logo.jpg"
                 alt="Quantum Design"
                 className="h-16 w-auto object-contain"
+              />
+            </a>
+          </li>
+          <li>
+            <a
+              href={QDD_OXFORD_INSTRUMENTS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Oxford Instruments"
+              className="flex h-28 items-center justify-center bg-white px-5"
+            >
+              <img
+                src="/assets/oxford-instruments-logo.jpg"
+                alt="Oxford Instruments"
+                className="h-16 w-auto object-contain sm:h-20"
               />
             </a>
           </li>
