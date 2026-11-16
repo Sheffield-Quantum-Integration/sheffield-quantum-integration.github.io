@@ -28,12 +28,6 @@ import { useNow } from './site/useNow.js'
 
 const ALL_ROUTES = PUBLIC_ROUTES
 
-const QDD_MAILING_LIST_URL =
-  'https://docs.google.com/forms/d/e/1FAIpQLSdTm2wRqOoPqcdbOg5bcXDN9eU3bgNP61kCot0ukSE5FBayog/viewform'
-
-const QDD_DELEGATE_SHOP_URL =
-  'https://onlineshop.shef.ac.uk/conferences-and-events/faculty-of-engineering/electronic-electrical-engineering/quantum-dot-day-2026'
-
 const QDD_EXHIBITOR_SHOP_URL =
   'https://onlineshop.shef.ac.uk/conferences-and-events/faculty-of-engineering/electronic-electrical-engineering/quantum-dot-day-26th-november-2026-sponsorship-packages'
 
@@ -51,9 +45,7 @@ const QDD_QUANTUM_DESIGN_URL = 'https://www.qd-uki.co.uk'
 
 const QDD_OXFORD_INSTRUMENTS_URL = 'https://www.oxinst.com'
 
-// Official WPM URLs from Sarah (2 Sep) and Joe’s 8 Sep committee mail.
-// Joe confirmed both pages were public again on 14 Sep afternoon.
-const QDD_SHOP_LIVE = true
+const QDD_ROBQUANT_URL = 'https://robquant.com'
 
 const QDD_SESSIONS = [
   'Epitaxy / III–V emitters',
@@ -195,7 +187,6 @@ const QDD_SECTION_NAV = [
   { href: '#posters', label: 'Posters' },
   { href: '#about', label: 'About' },
   { href: '#abstracts', label: 'Abstracts' },
-  { href: '#register', label: 'Register' },
   { href: '#committee', label: 'Committee' },
   { href: '#sponsors', label: 'Sponsors' }
 ]
@@ -322,7 +313,6 @@ const isPlainLeftClick = (event) =>
 // ---- Quantum Dot Day 2026: styled programme + posters (styled variant) ----
 const QDD_EVENT_START_MS = Date.UTC(2026, 10, 26, 9, 0, 0) // 26 Nov 2026 09:00 UK (GMT)
 const QDD_EVENT_END_MS = Date.UTC(2026, 10, 26, 17, 0, 0)
-const QDD_LAST_BOOKING_LABEL = 'Friday 13 November'
 
 // Full class strings so Tailwind keeps them. One accent per session theme.
 const QDD_THEME_STYLE = {
@@ -509,22 +499,7 @@ const QddProgrammeStyled = () => {
           </div>
           <div className="mt-8 border-t border-white/10 pt-6 md:mt-0 md:border-l md:border-t-0 md:pl-8 md:pt-0 lg:pl-10">
             <QddCountdown />
-            <a
-              href={QDD_DELEGATE_SHOP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-sm bg-cyan-500 px-4 py-3 text-sm font-bold uppercase tracking-wider text-[#0B1629] transition-all duration-300 hover:bg-cyan-300 hover:shadow-[0_0_28px_rgba(34,211,238,0.45)]"
-            >
-              Book your ticket
-              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-            </a>
-            <p className="mt-3 text-sm text-white/70">
-              <strong className="font-semibold text-white">£60</strong> student ·{' '}
-              <strong className="font-semibold text-white">£80</strong> standard
-            </p>
-            <p className="text-xs text-white/50">
-              Last booking {QDD_LAST_BOOKING_LABEL}.
-            </p>
+            <p className="mt-4 text-sm font-semibold text-white">Registration is closed.</p>
             <a
               href={QDD_EXHIBITOR_SHOP_URL}
               target="_blank"
@@ -864,7 +839,7 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
         <p className="text-sm leading-relaxed text-white/60 md:text-base">
           Abstracts for contributed talks and posters closed on{' '}
           <strong className="font-semibold text-white">Thursday 8 October 2026</strong>. Registration
-          remains open.
+          is closed.
         </p>
       </div>
     </section>
@@ -874,55 +849,9 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
         <h2 className="mb-6 text-xl font-bold tracking-tight text-white md:text-2xl">
           Registration
         </h2>
-        {QDD_SHOP_LIVE ? (
-          <>
-            <p className="mb-4 text-sm leading-relaxed text-white/60 md:text-base">
-              Delegate tickets (standard £80 / student £60) are on the University shop. Last booking
-              Friday 13 November.
-            </p>
-            <div className="flex flex-col items-start gap-3 sm:flex-row">
-              <a
-                href={QDD_DELEGATE_SHOP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-sm bg-cyan-500 px-6 py-3 text-sm font-bold uppercase tracking-wider text-[#0B1629] transition-all duration-300 hover:bg-cyan-300 hover:shadow-[0_0_28px_rgba(34,211,238,0.35)]"
-              >
-                Delegate tickets
-              </a>
-              <a
-                href={QDD_EXHIBITOR_SHOP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-sm border border-cyan-400/70 px-6 py-3 text-sm font-bold uppercase tracking-wider text-cyan-200 transition-all duration-300 hover:border-cyan-300 hover:text-white"
-              >
-                Exhibitors and sponsors
-              </a>
-            </div>
-          </>
-        ) : (
-          <>
-            <p className="mb-4 text-sm leading-relaxed text-white/60 md:text-base">
-              Delegate tickets (standard £80 / student £60) and exhibitor packages will be on the
-              University shop. Last booking Friday 13 November. The shop pages are temporarily
-              unavailable — email{' '}
-              <a
-                href="mailto:joe.a.smith@sheffield.ac.uk"
-                className="text-cyan-200 underline-offset-4 hover:underline"
-              >
-                joe.a.smith@sheffield.ac.uk
-              </a>{' '}
-              if you need to book, or join the mailing list.
-            </p>
-            <a
-              href={QDD_MAILING_LIST_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-sm bg-cyan-500 px-6 py-3 text-sm font-bold uppercase tracking-wider text-[#0B1629] transition-all duration-300 hover:bg-cyan-300 hover:shadow-[0_0_28px_rgba(34,211,238,0.35)]"
-            >
-              Join the mailing list
-            </a>
-          </>
-        )}
+        <p className="text-sm leading-relaxed text-white/60 md:text-base">
+          Registration is closed.
+        </p>
       </div>
     </section>
 
@@ -1017,6 +946,18 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
                 alt="Oxford Instruments"
                 className="h-16 w-auto object-contain sm:h-20"
               />
+            </a>
+          </li>
+          <li>
+            <a
+              href={QDD_ROBQUANT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="RobQuant"
+              className="flex h-28 items-center justify-center gap-3 bg-white px-6"
+            >
+              <img src="/assets/robquant-mark.svg" alt="" className="h-12 w-12" />
+              <span className="text-xl font-bold tracking-tighter text-[#070B1F]">ROBQUANT</span>
             </a>
           </li>
         </ul>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-labelledby="title desc">
+  <title id="title">RobQuant Corelock mark</title>
+  <desc id="desc">A segmented, chamfered chip enclosure protecting a diamond quantum sensing core.</desc>
+  <defs>
+    <linearGradient id="energy" x1="16" y1="16" x2="184" y2="184" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2F6BFF"/>
+      <stop offset="0.55" stop-color="#625BFF"/>
+      <stop offset="1" stop-color="#A855F7"/>
+    </linearGradient>
+    <linearGradient id="core" x1="76" y1="76" x2="124" y2="124" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#E9FDFF"/>
+      <stop offset="1" stop-color="#56E8FF"/>
+    </linearGradient>
+  </defs>
+  <g>
+    <path d="M44 8h44v32H66L40 66v22H8V44L44 8Z" fill="#2F6BFF"/>
+    <path d="M44 8h44v32H66L40 66v22H8V44L44 8Z" transform="rotate(90 100 100)" fill="#6B4EFF"/>
+    <path d="M44 8h44v32H66L40 66v22H8V44L44 8Z" transform="rotate(180 100 100)" fill="#A855F7"/>
+    <path d="M44 8h44v32H66L40 66v22H8V44L44 8Z" transform="rotate(270 100 100)" fill="#6B4EFF"/>
+  </g>
+  <g fill="none" stroke="#56E8FF" stroke-width="8" stroke-linecap="square">
+    <path d="M100 38v31"/>
+    <path d="M162 100h-31"/>
+    <path d="M100 162v-31"/>
+    <path d="M38 100h31"/>
+  </g>
+  <path d="m100 67 33 33-33 33-33-33 33-33Z" fill="#070B1F" stroke="url(#core)" stroke-width="8"/>
+  <path d="m100 84 16 16-16 16-16-16 16-16Z" fill="url(#core)"/>
+</svg>
