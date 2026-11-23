@@ -185,6 +185,7 @@ const QDD_POSTERS = [
 const QDD_SECTION_NAV = [
   { href: '#programme', label: 'Programme' },
   { href: '#posters', label: 'Posters' },
+  { href: '#venue', label: 'Venue' },
   { href: '#about', label: 'About' },
   { href: '#abstracts', label: 'Abstracts' },
   { href: '#committee', label: 'Committee' },
@@ -774,7 +775,7 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
           </div>
           <div className="flex items-start gap-3 text-white/80">
             <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-cyan-400" aria-hidden="true" />
-            <p className="text-base">Sheffield Town Hall, Sheffield</p>
+            <p className="text-base">Sheffield Town Hall, Pinstone Street, Sheffield</p>
           </div>
         </div>
       </div>
@@ -964,14 +965,50 @@ const QuantumDotDayView = ({ getPathForPage, onInternalLinkClick }) => (
       </div>
     </section>
 
-    <section className="border-t border-white/10 px-6 py-14 md:py-16">
+    <section id="venue" aria-labelledby="qdd-venue" className="scroll-mt-6 border-t border-white/10 px-6 py-14 md:py-16">
       <div className="mx-auto flex max-w-3xl flex-col gap-6">
+        <h2 id="qdd-venue" className="text-xl font-bold tracking-tight text-white md:text-2xl">
+          Venue and how to find us
+        </h2>
         <div className="flex items-start gap-3">
           <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-cyan-400" aria-hidden="true" />
           <p className="text-sm leading-relaxed text-white/70 md:text-base">
-            Sheffield Town Hall reception suite, city centre, next to Sheffield station.
+            Sheffield Town Hall, Pinstone Street, Sheffield S1 2HH. Please come in through the{' '}
+            <span className="font-semibold text-white">main entrance on Pinstone Street</span>. We are in{' '}
+            <span className="font-semibold text-white">Reception Rooms A and B</span>. Registration and coffee from
+            09:00; the programme begins with a short welcome at 09:30.
           </p>
         </div>
+        <ul className="space-y-2 pl-8 text-sm leading-relaxed text-white/70 md:text-base">
+          <li>
+            <span className="font-semibold text-white">From Sheffield station:</span> about 10 minutes on foot (700 m),
+            up Howard Street and past the Peace Gardens.
+          </li>
+          <li>
+            <span className="font-semibold text-white">By tram:</span> Cathedral or City Hall stops, about 5 minutes&apos;
+            walk.
+          </li>
+          <li>
+            <span className="font-semibold text-white">By car:</span> Q-Park Charles Street, St Paul&apos;s Place, Sheffield
+            S1 2NA, about 3 minutes&apos; walk.
+          </li>
+        </ul>
+        <figure className="overflow-hidden rounded-lg border border-white/10">
+          <a href="/assets/qdd-how-to-find-us-2x.jpg" target="_blank" rel="noopener noreferrer">
+            <img
+              src="/assets/qdd-how-to-find-us.jpg"
+              srcSet="/assets/qdd-how-to-find-us.jpg 1200w, /assets/qdd-how-to-find-us-2x.jpg 2400w"
+              sizes="(min-width: 768px) 768px, 100vw"
+              alt="Map of Sheffield city centre showing walking routes to the main entrance of Sheffield Town Hall on Pinstone Street from Sheffield station and from Q-Park Charles Street, with the Cathedral and City Hall tram stops"
+              width={1200}
+              height={1532}
+              loading="lazy"
+              decoding="async"
+              className="h-auto w-full"
+            />
+          </a>
+          <figcaption className="px-4 py-2 text-xs text-white/45">Map data © OpenStreetMap contributors.</figcaption>
+        </figure>
         <div className="flex items-start gap-3">
           <Mail className="mt-0.5 h-5 w-5 shrink-0 text-cyan-400" aria-hidden="true" />
           <p className="text-sm leading-relaxed text-white/70 md:text-base">
